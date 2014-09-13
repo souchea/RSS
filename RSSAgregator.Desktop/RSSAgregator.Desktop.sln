@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Desktop", "RSSAgregator.Desktop.csproj", "{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Mobile", "..\RSSAgregator.Mobile\RSSAgregator.Mobile.csproj", "{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RSSAgregator", "RSSAgregator", "{46C11D31-9352-403E-A3D2-0D2347350250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Server", "RSSAgregator.Server\RSSAgregator.Server.csproj", "{DD497FFA-670B-48DC-BA61-C8EA730F56CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|ARM.ActiveCfg = Debug|ARM
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|ARM.Build.0 = Debug|ARM
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|ARM.Deploy.0 = Debug|ARM
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|x86.ActiveCfg = Debug|x86
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|x86.Build.0 = Debug|x86
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Debug|x86.Deploy.0 = Debug|x86
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|ARM.ActiveCfg = Release|ARM
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|ARM.Build.0 = Release|ARM
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|ARM.Deploy.0 = Release|ARM
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|x86.ActiveCfg = Release|x86
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|x86.Build.0 = Release|x86
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941}.Release|x86.Deploy.0 = Release|x86
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC} = {46C11D31-9352-403E-A3D2-0D2347350250}
+		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941} = {46C11D31-9352-403E-A3D2-0D2347350250}
+		{DD497FFA-670B-48DC-BA61-C8EA730F56CC} = {46C11D31-9352-403E-A3D2-0D2347350250}
+	EndGlobalSection
+EndGlobal
