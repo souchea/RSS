@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Desktop", "RSSAgregator.Desktop.csproj", "{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RSSAgregator", "RSSAgregator", "{46C11D31-9352-403E-A3D2-0D2347350250}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Server", "RSSAgregator.Server\RSSAgregator.Server.csproj", "{DD497FFA-670B-48DC-BA61-C8EA730F56CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Web", "RSSAgregator.Web\RSSAgregator.Web.csproj", "{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,14 @@ Global
 		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|ARM.ActiveCfg = Release|Any CPU
 		{DD497FFA-670B-48DC-BA61-C8EA730F56CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,5 +73,6 @@ Global
 		{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC} = {46C11D31-9352-403E-A3D2-0D2347350250}
 		{ADEAD07D-F27F-455A-8ECA-A0DEEE466941} = {46C11D31-9352-403E-A3D2-0D2347350250}
 		{DD497FFA-670B-48DC-BA61-C8EA730F56CC} = {46C11D31-9352-403E-A3D2-0D2347350250}
+		{DB5FDE02-B6DE-4B07-AB4B-831C55CEC9A7} = {46C11D31-9352-403E-A3D2-0D2347350250}
 	EndGlobalSection
 EndGlobal
