@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RSSAgregatorServer_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FeedCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Public" Type="tinyint" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeedSource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Public" Type="tinyint" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Roles" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FacebookId" Type="nvarchar" MaxLength="50" />
+          <Property Name="TwitterId" Type="nvarchar" MaxLength="50" />
+          <Property Name="GoogleId" Type="nvarchar" MaxLength="50" />
+          <Property Name="SignUpDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RSSAgregatorServer_dbModelStoreContainer">
+          <EntitySet Name="FeedCategory" EntityType="Self.FeedCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedSource" EntityType="Self.FeedSource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RSSAgregatorServer_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FeedCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Public" Type="Boolean" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FeedSources" Relationship="RSSAgregatorServer_dbModel.FeedSourceFeedCategory" FromRole="FeedCategory" ToRole="FeedSource" />
+          <NavigationProperty Name="User" Relationship="RSSAgregatorServer_dbModel.FeedCategoryUser" FromRole="FeedCategory" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeedSource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Public" Type="Boolean" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RSSAgregatorServer_dbModel.FeedSourceUser" FromRole="FeedSource" ToRole="User" />
+          <NavigationProperty Name="FeedCategory" Relationship="RSSAgregatorServer_dbModel.FeedSourceFeedCategory" FromRole="FeedSource" ToRole="FeedCategory" />
+          <Property Name="FeedCategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Roles" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FacebookId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SignUpDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FeedSources" Relationship="RSSAgregatorServer_dbModel.FeedSourceUser" FromRole="User" ToRole="FeedSource" />
+          <NavigationProperty Name="FeedCategories" Relationship="RSSAgregatorServer_dbModel.FeedCategoryUser" FromRole="User" ToRole="FeedCategory" />
+        </EntityType>
+        <EntityContainer Name="RSSAgregatorServer_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FeedCategories" EntityType="Self.FeedCategory" />
+          <EntitySet Name="FeedSources" EntityType="Self.FeedSource" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FeedSourceUser" Association="RSSAgregatorServer_dbModel.FeedSourceUser">
+            <End Role="FeedSource" EntitySet="FeedSources" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FeedSourceFeedCategory" Association="RSSAgregatorServer_dbModel.FeedSourceFeedCategory">
+            <End Role="FeedSource" EntitySet="FeedSources" />
+            <End Role="FeedCategory" EntitySet="FeedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FeedCategoryUser" Association="RSSAgregatorServer_dbModel.FeedCategoryUser">
+            <End Role="FeedCategory" EntitySet="FeedCategories" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FeedSourceUser">
+          <End Type="RSSAgregatorServer_dbModel.FeedSource" Role="FeedSource" Multiplicity="*" />
+          <End Type="RSSAgregatorServer_dbModel.User" Role="User" Multiplicity="1" />
+        </Association>
+        <Association Name="FeedSourceFeedCategory">
+          <End Type="RSSAgregatorServer_dbModel.FeedSource" Role="FeedSource" Multiplicity="*" />
+          <End Type="RSSAgregatorServer_dbModel.FeedCategory" Role="FeedCategory" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="FeedCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeedSource">
+              <PropertyRef Name="FeedCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeedCategoryUser">
+          <End Type="RSSAgregatorServer_dbModel.FeedCategory" Role="FeedCategory" Multiplicity="*" />
+          <End Type="RSSAgregatorServer_dbModel.User" Role="User" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeedCategory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RSSAgregatorServer_dbModelStoreContainer" CdmEntityContainer="RSSAgregatorServer_dbEntities">
+          <EntitySetMapping Name="FeedCategories">
+            <EntityTypeMapping TypeName="RSSAgregatorServer_dbModel.FeedCategory">
+              <MappingFragment StoreEntitySet="FeedCategory">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedSources">
+            <EntityTypeMapping TypeName="RSSAgregatorServer_dbModel.FeedSource">
+              <MappingFragment StoreEntitySet="FeedSource">
+                <ScalarProperty Name="FeedCategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RSSAgregatorServer_dbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+                <ScalarProperty Name="TwitterId" ColumnName="TwitterId" />
+                <ScalarProperty Name="GoogleId" ColumnName="GoogleId" />
+                <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
