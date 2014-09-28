@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RSSAgregator.Database
+namespace RSSAgregator.Database.DataContext
 {
     using System;
     using System.Data.Entity;

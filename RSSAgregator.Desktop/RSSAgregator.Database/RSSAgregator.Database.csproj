@@ -48,48 +48,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FeedCategory.cs">
+    <Compile Include="DataContext\FeedCategory.cs">
       <DependentUpon>RssAgregatorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FeedSource.cs">
+    <Compile Include="DataContext\FeedSource.cs">
       <DependentUpon>RssAgregatorModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Manager\CategoryManager.cs" />
+    <Compile Include="Manager\SourceManager.cs" />
+    <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RssAgregatorModel.Context.cs">
+    <Compile Include="DataContext\RssAgregatorModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RssAgregatorModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="RssAgregatorModel.cs">
+    <Compile Include="DataContext\RssAgregatorModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RssAgregatorModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="RssAgregatorModel.Designer.cs">
+    <Compile Include="DataContext\RssAgregatorModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RssAgregatorModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="DataContext\User.cs">
       <DependentUpon>RssAgregatorModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="RssAgregatorModel.edmx">
+    <EntityDeploy Include="DataContext\RssAgregatorModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RssAgregatorModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="RssAgregatorModel.Context.tt">
+    <None Include="DataContext\RssAgregatorModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RssAgregatorModel.edmx</DependentUpon>
       <LastGenOutput>RssAgregatorModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="RssAgregatorModel.edmx.diagram">
+    <None Include="DataContext\RssAgregatorModel.edmx.diagram">
       <DependentUpon>RssAgregatorModel.edmx</DependentUpon>
     </None>
-    <None Include="RssAgregatorModel.tt">
+    <None Include="DataContext\RssAgregatorModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RssAgregatorModel.edmx</DependentUpon>
       <LastGenOutput>RssAgregatorModel.cs</LastGenOutput>

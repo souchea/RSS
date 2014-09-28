@@ -7,21 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RSSAgregator.Database
+namespace RSSAgregator.Database.DataContext
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class FeedSource
+    public partial class FeedCategory
     {
+        public FeedCategory()
+        {
+            this.FeedSources = new HashSet<FeedSource>();
+        }
+    
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public string Url { get; set; }
+        public string Name { get; set; }
         public bool Public { get; set; }
         public System.DateTime CreationDate { get; set; }
-        public int FeedCategoryId { get; set; }
+        public int UserId { get; set; }
     
+        public virtual ICollection<FeedSource> FeedSources { get; set; }
         public virtual User User { get; set; }
-        public virtual FeedCategory FeedCategory { get; set; }
     }
 }
