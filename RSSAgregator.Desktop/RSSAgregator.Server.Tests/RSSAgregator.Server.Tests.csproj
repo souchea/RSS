@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8B6312EF-EFD8-484B-933F-64D3AA406342}</ProjectGuid>
+    <ProjectGuid>{84D4AB6B-251E-4DE1-97E6-C91ABC3E6695}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RSSAgregator.Server.Tests</RootNamespace>
@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\RSSAgregator.Server\RSSAgregator.Server.csproj">
-      <Project>{D7826E79-7B58-4CB7-A9C3-F189EF6CD349}</Project>
+      <Project>{34E832CF-DB2E-4896-B1F1-11660FC7E6BE}</Project>
       <Name>RSSAgregator.Server</Name>
     </ProjectReference>
   </ItemGroup>

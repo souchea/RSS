@@ -11,27 +11,48 @@ namespace RSSAgregator.Database.Manager
     {
         public static void AddSource(FeedSource toAdd)
         {
-            
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                context.FeedSources.Add(toAdd);
+                context.SaveChanges();
+            }
         }
 
         public static void DeleteSource(FeedSource toDelete)
         {
-            
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                context.FeedSources.Remove(toDelete);
+                context.SaveChanges();
+            }
         }
 
         public static List<FeedSource> GetAllSources()
         {
-            return new List<FeedSource>();
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                return (from source in context.FeedSources 
+                        select source).ToList();
+            }
         }
 
-        public static List<FeedSource> GetSourcesNumber(int number)
+        public static List<FeedSource> GetSourcesNumber(int number = 5)
         {
-            return new List<FeedSource>();
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                return (from source in context.FeedSources
+                        select source).Take(number).ToList();
+            }
         }
 
         public static FeedSource GetSourceById(int id)
         {
-            return new FeedSource();
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                return (from source in context.FeedSources
+                        where source.Id == id
+                        select source).SingleOrDefault();
+            }
         }
     }
 }
