@@ -1,0 +1,91 @@
+﻿<Page x:Name="mainPage"
+    x:Class="RSSAgregator.Mobile.View.MainPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ContentDialog x:Name="AddNewFeed" 
+           PrimaryButtonText="Ajouter" IsPrimaryButtonEnabled="True"
+           SecondaryButtonText="Annuler" FullSizeDesired ="False">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adresse du flux RSS à ajouter."/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <StackPanel>
+                <TextBox x:Name="RssFeedAddTextBox"></TextBox>
+            </StackPanel>
+        </ContentDialog>
+        <Hub Header="RSS Feed Aggregator">
+            <HubSection MinWidth="750" Header="Latest">
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="The most recent feeds will be here." 
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection Header="Most Viewed" IsHeaderInteractive="True"  
+                MinWidth="250">
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Most viewed feeds will be there"
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection MinWidth="600" Header="Starred">
+                <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="The most starred feeds will be there" 
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        </Grid>
+                </DataTemplate>
+            </HubSection>
+
+                <HubSection Header="Categories" IsHeaderInteractive="True" 
+                MinWidth="250">
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Differents categories will be there"
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        <TextBlock Text="List of categories" 
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection Header="Account" IsHeaderInteractive="True" 
+                MinWidth="250">
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Login will be there"
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        <TextBlock Text="Info on the account will be there" 
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>  
+        </Hub>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="Refresh" Icon="Refresh" />
+            <AppBarButton Label="Help" Icon="Help" />
+            <AppBarButton Label="Add" Icon="Add" Click="AddFeed_Click"/>
+
+            <CommandBar.SecondaryCommands>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+</Page>
