@@ -1,0 +1,42 @@
+﻿<script type="text/javascript">
+    $(document).ready(function() {
+
+        $.ajax({
+            url: "@Url.Action("GetCategories")",
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+
+                var categories = "";
+                //replace by data foreach
+                for (var i = 0; i < 10; ++i) {
+                    categories += '<li><a href="#"><span class="badge pull-right">41</span>Home</a></li>';
+                }
+
+                $('#categories > ul').append(categories);
+                $('#categories > ul > li').click(function() {
+                    getChannels($(this));
+                });
+            },
+        });
+
+    });
+
+
+    function getChannels(title) 
+    {
+        console.log(title);
+
+      $.ajax({
+	          url: "@Url.Action("GetCategories")",
+              dataType: 'json',
+	          async: true,
+	          success: function(data) {
+	              console.log("jai charger les trucs");
+	          },
+
+	        });
+
+    }
+
+</script>

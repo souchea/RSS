@@ -14,5 +14,14 @@ namespace RSSAgregator.Web.Controllers
         {
             return View("Index");
         }
+
+        // GET: json categories
+        [Route("categories")]
+        public ActionResult GetCategories()
+        {
+            return Json(new { foo = "bar", baz = "Blech" }, JsonRequestBehavior.AllowGet );
+        }
+
     }
+
 }
