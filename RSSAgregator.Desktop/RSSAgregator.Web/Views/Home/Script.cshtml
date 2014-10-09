@@ -1,42 +1,58 @@
 ﻿<script type="text/javascript">
     $(document).ready(function() {
 
+
         $.ajax({
             url: "@Url.Action("GetCategories")",
-            dataType: 'json',
             async: true,
             success: function(data) {
+                $("#categories").html(data);
+                $("#categories > ul > li").each(function() {
 
-                var categories = "";
-                //replace by data foreach
-                for (var i = 0; i < 10; ++i) {
-                    categories += '<li><a href="#"><span class="badge pull-right">41</span>Home</a></li>';
-                }
-
-                $('#categories > ul').append(categories);
-                $('#categories > ul > li').click(function() {
-                    getChannels($(this));
+                    $(this).click($(this).children('a').children('span.title').text(), getChannels);
                 });
-            },
+
+
+            }
         });
 
     });
 
 
-    function getChannels(title) 
-    {
-        console.log(title);
+    function getChannels(event) {
 
-      $.ajax({
-	          url: "@Url.Action("GetCategories")",
-              dataType: 'json',
+        console.log(event.data);
+        $.ajax({
+            url: "@Url.Action("GetChannels","Home", new {category = "event.data"})",
 	          async: true,
 	          success: function(data) {
-	              console.log("jai charger les trucs");
+	              console.log(data);
+                $("#channels").html(data);
+                $("#channels > a").each(function() {
+
+                    console.log($(this).children('h4').text());
+                    $(this).click($(this).children('h4').text(), getItems);
+                });
+
+
+	          },
+
+	        });
+    }
+
+    function getItems(event) {
+
+         console.log(event.data);
+        $.ajax({
+            url: "@Url.Action("GetItems","Home", new {channel = "event.data"})",
+	          async: true,
+	          success: function(data) {
+                $("#items").html(data);
 	          },
 
 	        });
 
     }
+
 
 </script>
