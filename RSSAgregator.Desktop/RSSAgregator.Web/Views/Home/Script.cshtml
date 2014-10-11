@@ -1,7 +1,31 @@
-﻿<script type="text/javascript">
+﻿
+<script type="text/javascript">
+
     $(document).ready(function() {
 
+        getCategories();
 
+        $(this).keydown(function(key) {
+
+                    if (key.keyCode == 8) {
+
+                         var channel = $('a.active');
+                        if (channel.length != 0) {
+
+                            var elem = (channel.is("a:last")) ? channel.prev() : channel.next();
+                            channel.remove();
+                            elem.addClass("active");
+
+                            }
+
+                    }
+
+                        });
+
+    });
+
+
+    function getCategories() {
         $.ajax({
             url: "@Url.Action("GetCategories")",
             async: true,
@@ -9,48 +33,48 @@
                 $("#categories").html(data);
                 $("#categories > ul > li").each(function() {
 
-                    $(this).click($(this).children('a').children('span.title').text(), getChannels);
+                    $(this).click({_self: $(this), title: $(this).children('a').children('span.title').text()}, getChannels);
                 });
 
 
             }
         });
-
-    });
-
+    }
 
     function getChannels(event) {
 
-        console.log(event.data);
+        $('#categories > ul > li').removeClass("active");
+        event.data._self.addClass("active");
         $.ajax({
-            url: "@Url.Action("GetChannels","Home", new {category = "event.data"})",
-	          async: true,
-	          success: function(data) {
-	              console.log(data);
+            url: "@Url.Action("GetChannels","Home", new {category = "event.data.title"})",
+            async: true,
+            success: function(data) {
                 $("#channels").html(data);
                 $("#channels > a").each(function() {
 
-                    console.log($(this).children('h4').text());
-                    $(this).click($(this).children('h4').text(), getItems);
+                    $(this).click({_self: $(this), title: $(this).children('h4').text()}, getItems);
                 });
 
 
-	          },
+            },
 
-	        });
+        });
     }
 
     function getItems(event) {
 
-         console.log(event.data);
-        $.ajax({
-            url: "@Url.Action("GetItems","Home", new {channel = "event.data"})",
-	          async: true,
-	          success: function(data) {
-                $("#items").html(data);
-	          },
+        $('#channels > a').removeClass("active");
+        event.data._self.addClass("active");
 
-	        });
+        $.ajax({
+            url: "@Url.Action("GetItems","Home", new {channel = "event.data.title"})",
+            async: true,
+            success: function(data) {
+                $("#items").html(data);
+
+             },
+
+        });
 
     }
 

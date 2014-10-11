@@ -3,17 +3,14 @@
     ViewBag.Title = "Home";
 }
 
-
   <!-- top bar  -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
 
         <div>Hello Username</div>
         <button type="submit" class="btn btn-default">Logout</button>
-        <button type="button" class="btn btn-primary" id="up">Up</button>
 
-        <div><a href="#">#dashboard</a>/<a href="#">#category</a>/#rss</div>
-
+  
     </div>
 </nav>
 
@@ -29,11 +26,12 @@
 
     </div>
 
-    <div id="items">
+    <div class="grid effect-8" id="items">
+ 
+
 
     </div>
 
 </div>
 
-
-@Html.Partial("Script");
+@Html.Partial("Script")

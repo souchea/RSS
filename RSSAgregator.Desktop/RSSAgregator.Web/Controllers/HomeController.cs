@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RSSAgregator.Web.Models;
 
 namespace RSSAgregator.Web.Controllers
 {
     public class HomeController : Controller
     {
         // GET: Home
-        [Route("home")]
+        [Route("")]
         public ActionResult Index()
         {
             return View("Index");
@@ -21,7 +22,15 @@ namespace RSSAgregator.Web.Controllers
         {
             //return Json(new { foo = "bar", baz = "Blech" }, JsonRequestBehavior.AllowGet );
 
-            return PartialView("Categories");
+            var list = new List<Category>
+            {
+                new Category("Category1", 23),
+                new Category("Category2", 13),
+                new Category("Category3", 43),
+                new Category("Category4", 3),
+                
+            };
+            return PartialView("Categories", list);
 
         }
 
@@ -31,8 +40,16 @@ namespace RSSAgregator.Web.Controllers
         {
             //return Json(new { foo = category, baz = "Blech" }, JsonRequestBehavior.AllowGet );
 
+            var list = new List<Channel>
+            {
+                new Channel("Channel1", "ma petite description"),
+                new Channel("Channel2", "ma petite description"),
+                new Channel("Channel3", "ma petite description"),
+                new Channel("Channel4", "ma petite description"),
+                
+            };
 
-            return PartialView("Channels");
+            return PartialView("Channels", list);
 
         }
 

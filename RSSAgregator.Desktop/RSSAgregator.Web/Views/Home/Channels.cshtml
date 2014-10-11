@@ -1,15 +1,10 @@
-﻿
-<a href="#" class="list-group-item active">
-    <h4 class="list-group-item-heading">List group item heading</h4>
-    <p class="list-group-item-text">...</p>
-</a>
+﻿@model List<RSSAgregator.Web.Models.Channel>
 
-<a href="#" class="list-group-item">
-    <h4 class="list-group-item-heading">List group item heading</h4>
-    <p class="list-group-item-text">...</p>
-</a>
+@foreach(var channel in Model)
+{
 
-<a href="#" class="list-group-item">
-    <h4 class="list-group-item-heading">List group item heading</h4>
-    <p class="list-group-item-text">...</p>
-</a>
+    <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">@channel.Title</h4>
+        <p class="list-group-item-text">@channel.Description</p>
+    </a>
+}
