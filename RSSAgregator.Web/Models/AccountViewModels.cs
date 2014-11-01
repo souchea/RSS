@@ -70,6 +70,13 @@ namespace RSSAgregator.Web.Models
         public string ConfirmPassword { get; set; }
     }
 
+
+    public class LoginPageViewModel
+    {
+        public RegisterViewModel Register { get; set; }
+        public LoginViewModel Login { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]

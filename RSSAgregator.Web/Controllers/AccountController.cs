@@ -45,6 +45,7 @@ namespace RSSAgregator.Web.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+           
             return View();
         }
 
@@ -53,8 +54,11 @@ namespace RSSAgregator.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginPageViewModel loginPage, string returnUrl)
         {
+
+            LoginViewModel model = loginPage.Login;
+
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.Email, model.Password);
@@ -70,24 +74,26 @@ namespace RSSAgregator.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(loginPage);
         }
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //[AllowAnonymous]
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
 
         //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(LoginPageViewModel loginPage)
         {
+            RegisterViewModel model = loginPage.Register;
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
@@ -110,8 +116,8 @@ namespace RSSAgregator.Web.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            // If we got this far, something failed, redisplay for
+            return View("Login", loginPage);
         }
 
         //

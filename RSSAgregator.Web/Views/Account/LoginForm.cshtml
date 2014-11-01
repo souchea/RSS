@@ -1,0 +1,19 @@
+﻿@model RSSAgregator.Web.Models.LoginViewModel
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <p>@Html.LabelFor(m => m.Email) @Html.TextBoxFor(m => m.Email)</p>
+    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    <p>@Html.LabelFor(m => m.Password) @Html.PasswordFor(m => m.Password)</p>
+    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    <p>
+
+
+        @Html.LabelFor(m => m.RememberMe)
+        @Html.CheckBoxFor(m => m.RememberMe)
+    </p>
+    <p><input type="submit" value="Log in" class="btn btn-default" /></p>
+
+}
