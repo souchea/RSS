@@ -11,27 +11,48 @@ namespace RSSAgregator.Database.Manager
     {
         public static void AddUser(User toAdd)
         {
-
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                context.Users.Add(toAdd);
+                context.SaveChanges();
+            }
         }
 
         public static void DeleteUser(User toDelete)
         {
-
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                context.Users.Remove(toDelete);
+                context.SaveChanges();
+            }
         }
 
         public static List<User> GetAllUsers()
         {
-            return new List<User>();
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                return (from user in context.Users
+                        select user).ToList();
+            }
         }
 
         public static List<User> GetUsersNumber(int number = 5)
         {
-            return new List<User>();
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                return (from user in context.Users
+                        select user).Take(number).ToList();
+            }
         }
 
         public static User GetUserById(int id)
         {
-            return new User();
+            using (var context = new RSSAgregatorServer_dbEntities())
+            {
+                return (from user in context.Users
+                        where user.Id == id
+                        select user).SingleOrDefault();
+            }
         }
     }
 }
