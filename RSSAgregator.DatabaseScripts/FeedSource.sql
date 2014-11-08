@@ -4,6 +4,6 @@
     [UserId] INT NOT NULL, 
     [CategoryId] INT NOT NULL, 
     [Url] NVARCHAR(MAX) NOT NULL, 
-    [Public] TINYINT NOT NULL, 
+    [Public] BIT NOT NULL, 
     [CreationDate] DATETIME NOT NULL
 )

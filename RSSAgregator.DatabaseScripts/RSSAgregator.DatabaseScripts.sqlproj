@@ -66,4 +66,7 @@
   <ItemGroup>
     <None Include="RSSAgregator.DatabaseScripts.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="ForeignKeys.PostDeployment.sql" />
+  </ItemGroup>
 </Project>
