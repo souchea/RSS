@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -54,6 +55,15 @@ namespace RSSAgregator.Mobile
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
+
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+            if (internetConnectionProfile.IsWlanConnectionProfile == true)
+            {
+                
+            }
+
+
 
             // Ne répétez pas l'initialisation de l'application lorsque la fenêtre comporte déjà du contenu,
             // assurez-vous juste que la fenêtre est active

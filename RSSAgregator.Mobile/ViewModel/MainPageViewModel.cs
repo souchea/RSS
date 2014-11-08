@@ -1,16 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.Web.Syndication;
 using RSSAgregator.Mobile.Model;
 
 namespace RSSAgregator.Mobile.ViewModel
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : BaseViewModel
     {
-        private async Task<FeedDto.FeedData> GetFeedAsync(string feedUriString)
+        private ObservableCollection<FeedDto.FeedData> _Feeds = new ObservableCollection<FeedDto.FeedData>();
+        public ObservableCollection<FeedDto.FeedData> Feeds
+        {
+            get
+            {
+                return this._Feeds;
+            }
+        }
+
+        private string _account_ButtonText;
+
+        public string Account_ButtonText
+        {
+            get { return _account_ButtonText; }
+            set
+            {
+                _account_ButtonText = value;
+                NotifyPropertyChanged("Account_ButtonText");
+            }
+        }
+
+        public MainPageViewModel()
+        {
+            _account_ButtonText = "Login";
+        }
+
+        public async Task<FeedDto.FeedData> GetFeedAsync(string feedUriString)
         {
             SyndicationClient client = new SyndicationClient();
             Uri feedUri = new Uri(feedUriString);
@@ -40,7 +68,7 @@ namespace RSSAgregator.Mobile.ViewModel
                     if (feed.SourceFormat == SyndicationFormat.Atom10)
                     {
                         feedItem.Content = item.Content.Text;
-                        feedItem.Link = new Uri("http://windowsteamblog.com" + item.Id);
+                        feedItem.Link = new Uri(feedUriString + item.Id);
                     }
                     else if (feed.SourceFormat == SyndicationFormat.Rss20)
                     {

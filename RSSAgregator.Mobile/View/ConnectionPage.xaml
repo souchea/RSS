@@ -8,7 +8,26 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,0.333,0,-0.333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="PageTitle" Text="Login" Margin="9,-7,0,0" FontSize="56" />
+        </StackPanel>
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.Background>
+                <ImageBrush />
+            </Grid.Background>
+            <TextBox Height="43" Margin="28,111,10,0" Name="textBox1" Text="" VerticalAlignment="Top" />
+            <TextBox Height="38" Margin="28,254,10,0" Name="textBox2" Text="" VerticalAlignment="Top" />
+            <Button Content="Sign in " Height="72" HorizontalAlignment="Stretch" Margin="196,358,0,0" Name="button1" VerticalAlignment="Top" />
+            <Button Content="Create New Account !" HorizontalAlignment="Stretch" Margin="0,461,0,0" Name="button2" VerticalAlignment="Stretch" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="28,76,0,0" Name="textBlock1" Text="User Name" VerticalAlignment="Top" Foreground="White" FontWeight="Normal" FontFamily="Verdana" FontSize="24" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="28,0,0,284" Name="textBlock2" Text="Password" VerticalAlignment="Bottom" Foreground="White" FontWeight="Normal" FontFamily="Verdana" FontSize="24" />
+        </Grid>
     </Grid>
 </Page>

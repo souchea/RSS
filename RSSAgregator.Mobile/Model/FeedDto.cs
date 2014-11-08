@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RSSAgregator.Mobile.Model
 {
-    class FeedDto
+    public class FeedDto
     {
         public class FeedData
         {

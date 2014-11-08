@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using RSSAgregator.Mobile.Model;
 using RSSAgregator.Mobile.ViewModel;
 using Windows.Storage;
 using Windows.Web.Syndication;
-
-// Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace RSSAgregator.Mobile.View
 {
@@ -54,12 +54,24 @@ namespace RSSAgregator.Mobile.View
                 ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings; ;
 
                 string feed = RssFeedAddTextBox.Text;
-                string[] value = feed.Split('.');
-                KeyValuePair<string, object> newFeed = new KeyValuePair<string, object>(value[1], feed);
-                if (!localSettings.Values.Contains(newFeed))
+                Task<FeedDto.FeedData> newFeed = defaultViewModel.GetFeedAsync(feed);
+                int i = defaultViewModel.Feeds.Count + 1;
+                defaultViewModel.Feeds.Add(await newFeed);
+                KeyValuePair<string, object> newEntry = new KeyValuePair<string, object>(defaultViewModel.Feeds[i].Title, defaultViewModel.Feeds[i]);
+                if (!localSettings.Values.Contains(newEntry))
                 {
-                    localSettings.Values[value[1]] = feed;
-                } 
+                    localSettings.Values[defaultViewModel.Feeds[i].Title] = defaultViewModel.Feeds[i];
+                }
+            }
+        }
+
+        private async void Click_Account(object sender, RoutedEventArgs e)
+        {
+            Button accountButton = new Button();
+            accountButton = sender as Button;
+            if (accountButton.Content.Equals("Login"))
+            {
+                Frame.Navigate(typeof(ConnectionPage));
             }
         }
     }

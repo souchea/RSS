@@ -20,11 +20,11 @@ namespace RSSAgregator.Mobile.View
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class HomeScreen : Page
+    public sealed partial class ConnectionPage : Page
     {
-        public HomeScreen()
+        public ConnectionPage()
         {
-            //this.InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>

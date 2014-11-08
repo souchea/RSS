@@ -68,10 +68,7 @@
                 MinWidth="250">
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="Login will be there"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                        <TextBlock Text="Info on the account will be there" 
-                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        <Button Content="{Binding Account_ButtonText}" Click="Click_Account" ></Button>
                     </StackPanel>
                 </DataTemplate>
             </HubSection>  
