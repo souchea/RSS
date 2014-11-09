@@ -22,7 +22,7 @@ namespace RSSAgregator.Database.DataContext
 
         public int UserId { get; set; }
 
-        public byte Public { get; set; }
+        public bool Public { get; set; }
 
         public DateTime CreationDate { get; set; }
 

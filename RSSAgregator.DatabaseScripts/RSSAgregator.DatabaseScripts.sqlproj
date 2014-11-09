@@ -69,4 +69,7 @@
   <ItemGroup>
     <PostDeploy Include="ForeignKeys.PostDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="RSSAgregator.DatabaseScripts.refactorlog" />
+  </ItemGroup>
 </Project>
