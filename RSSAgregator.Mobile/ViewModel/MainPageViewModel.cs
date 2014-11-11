@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.Web.Syndication;
 using RSSAgregator.Mobile.Model;
@@ -33,9 +34,36 @@ namespace RSSAgregator.Mobile.ViewModel
             }
         }
 
+        private List<FeedDto.FeedItem> _lastFeed;
+
+        public List<FeedDto.FeedItem> LastFeed
+        {
+            get { return _lastFeed; }
+            set
+            {
+                _lastFeed = value;
+                NotifyPropertyChanged("LastFeed");
+            }
+        }
+
         public MainPageViewModel()
         {
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             _account_ButtonText = "Login";
+
+            if (localSettings.Values.Count > 0)
+            {
+                FeedDto.FeedData feeds = new FeedDto.FeedData();
+
+                for (int i = 0; i < localSettings.Values.Count; i++)
+                {
+                    feeds = localSettings.Values.Values as FeedDto.FeedData;
+                    for (int j = 0; j < feeds.Items.Count; j++)
+                    {
+                        _lastFeed.Add(feeds.Items[j]);
+                    }
+                }
+            }
         }
 
         public async Task<FeedDto.FeedData> GetFeedAsync(string feedUriString)

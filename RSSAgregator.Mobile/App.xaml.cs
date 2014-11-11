@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -18,6 +20,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
+using RSSAgregator.Mobile.Model;
 using RSSAgregator.Mobile.View;
 
 namespace RSSAgregator.Mobile
@@ -29,6 +32,16 @@ namespace RSSAgregator.Mobile
     {
         private TransitionCollection transitions;
 
+        #region Global parameters
+
+        internal static bool IsLogged { get; set; }
+
+        internal static UserInfo LoggedUser { get; set; }
+
+        internal static HttpClient WebApiClient { get; set; }
+
+        #endregion
+
         /// <summary>
         /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
         /// à être exécutée. Elle correspond donc à l'équivalent logique de main() ou WinMain().
@@ -37,6 +50,16 @@ namespace RSSAgregator.Mobile
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+            IsLogged = false;
+            LoggedUser = new UserInfo();
+
+            WebApiClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://rssagregator.azurewebsites.net/api/")
+            };
+            WebApiClient.DefaultRequestHeaders.Accept.Clear();
+            WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         /// <summary>

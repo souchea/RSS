@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace RSSAgregator.Mobile.Model
 {
@@ -31,6 +32,8 @@ namespace RSSAgregator.Mobile.Model
             public string Content { get; set; }
             public DateTime PubDate { get; set; }
             public Uri Link { get; set; }
+            public BitmapImage Pic { get; set; }
+            public int StateFeed { get; set; }
         }
     }
 }

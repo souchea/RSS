@@ -14,15 +14,16 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
+using RSSAgregator.Mobile.Model;
 
 namespace RSSAgregator.Mobile.View
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class ConnectionPage : ContentDialog
+    public sealed partial class SubscribeForm : Page
     {
-        public ConnectionPage()
+        public SubscribeForm()
         {
             this.InitializeComponent();
         }
@@ -32,13 +33,20 @@ namespace RSSAgregator.Mobile.View
         /// </summary>
         /// <param name="e">Données d'événement décrivant la manière dont l'utilisateur a accédé à cette page.
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
-        protected void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
 
-        private void SubscribeButton_OnClick(object sender, RoutedEventArgs e)
+        private static async void SubscribeButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SubscribeForm));
+            try
+            {
+                //await App.WebApiClient.PostAsync("", );
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

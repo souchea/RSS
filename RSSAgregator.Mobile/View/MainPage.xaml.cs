@@ -51,11 +51,11 @@ namespace RSSAgregator.Mobile.View
             ContentDialogResult result = await AddNewFeed.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings; ;
+                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
                 string feed = RssFeedAddTextBox.Text;
                 Task<FeedDto.FeedData> newFeed = defaultViewModel.GetFeedAsync(feed);
-                int i = defaultViewModel.Feeds.Count + 1;
+                int i = defaultViewModel.Feeds.Count;
                 defaultViewModel.Feeds.Add(await newFeed);
                 KeyValuePair<string, object> newEntry = new KeyValuePair<string, object>(defaultViewModel.Feeds[i].Title, defaultViewModel.Feeds[i]);
                 if (!localSettings.Values.Contains(newEntry))
@@ -73,6 +73,16 @@ namespace RSSAgregator.Mobile.View
             {
                 Frame.Navigate(typeof(ConnectionPage));
             }
+        }
+
+        private void Feed_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            
+        }
+
+        private void CategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

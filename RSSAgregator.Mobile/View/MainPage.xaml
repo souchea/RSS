@@ -26,10 +26,44 @@
         <Hub Header="RSS Feed Aggregator">
             <HubSection MinWidth="750" Header="Latest">
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="The most recent feeds will be here." 
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                    </Grid>
+                    <GridView x:Name="ItemGridView3"
+                              AutomationProperties.AutomationId="ItemGridView"
+                              AutomationProperties.Name="Grouped Items"
+                              Padding="0,0,10,10"
+                              ItemsSource="{Binding LastFeed}"
+                              SelectionMode="None"
+                              IsSwipeEnabled="false"
+                              IsItemClickEnabled="True"
+                              ItemClick="Feed_ItemClick"
+                              Margin="0,0,0,0"
+                              Grid.Row="1"
+                              Grid.Column="1">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                               Width="300"
+                                               Height="60" >
+                                    <Image Source="{Binding Path=Pic}"
+                                               Height="60" />
+                                    <TextBlock Text="{Binding Path=Title}"
+                                               Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}"
+                                               Height="30"
+                                               Width="250"
+                                               Margin="0,0,0,10"
+                                               Padding="5,5,0,0"
+                                               FontSize="16" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Foreground"
+                                        Value="White" />
+                                <Setter Property="Margin"
+                                        Value="0,10,0,0" />
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                    </GridView>
                 </DataTemplate>
             </HubSection>
 
@@ -43,23 +77,11 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection MinWidth="600" Header="Starred">
-                <DataTemplate>
-                        <Grid>
-                            <TextBlock Text="The most starred feeds will be there" 
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                        </Grid>
-                </DataTemplate>
-            </HubSection>
-
                 <HubSection Header="Categories" IsHeaderInteractive="True" 
                 MinWidth="250">
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="Differents categories will be there"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                        <TextBlock Text="List of categories" 
-                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        <Button Content="" Click="CategoryButton_Click"></Button>
                     </StackPanel>
                 </DataTemplate>
             </HubSection>
@@ -77,7 +99,6 @@
     <Page.BottomAppBar>
         <CommandBar>
             <AppBarButton Label="Refresh" Icon="Refresh" />
-            <AppBarButton Label="Help" Icon="Help" />
             <AppBarButton Label="Add" Icon="Add" Click="AddFeed_Click"/>
 
             <CommandBar.SecondaryCommands>
