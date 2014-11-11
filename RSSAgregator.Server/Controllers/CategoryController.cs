@@ -6,46 +6,60 @@ using System.Net.Http;
 using System.Web.Http;
 using RSSAgregator.Database.DataContext;
 using RSSAgregator.Database.Manager;
+using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
     public class CategoryController : ApiController
     {
         [HttpGet]
-        public IEnumerable<string> Get()
+        public List<CategoryDTO> Get(int id)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet]
-        public string Get(int id)
-        {
-            return "value";
+            var categories = CategoryManager.GetByUserId(id);
+            return (from category in categories
+                let sourceList = category.FeedSources.Select(source => new SourceDTO
+                {
+                    Id = source.Id,
+                    // todo rajouter un champ Title a la source
+                    Title = "title"
+                }).ToList()
+                select new CategoryDTO
+                {
+                    Id = category.Id, Feeds = sourceList
+                }).ToList();
         }
 
         [HttpPost]
-        public int Add(int userId, string name)
+        public int Add(int userId, string param)
         {
-            CategoryManager.AddCategory(new FeedCategory
+            var toCreateCategory = new FeedCategory
             {
                 CreationDate = DateTime.Now,
-                Name = name,
+                Name = param,
                 Public = true,
                 UserId = userId
-            });
+            };
+            CategoryManager.AddCategory(toCreateCategory);
 
-            return 1;
+            return toCreateCategory.Id;
+        }
+
+        [HttpPut]
+        public void Rename(int id, string name)
+        {
+            CategoryManager.RenameModel(id, name);
         }
 
         [HttpDelete]
         public void Delete(int id)
         {
-        }
+            var categoryToDelete = CategoryManager.GetCategoryById(id);
 
-        [HttpDelete]
-        public void DeleteAll(int id)
-        {
-            
+            foreach (var feedSource in categoryToDelete.FeedSources)
+            {
+                SourceManager.DeleteSource(feedSource);
+            }
+            CategoryManager.DeleteCategory(categoryToDelete);
         }
 
     }
