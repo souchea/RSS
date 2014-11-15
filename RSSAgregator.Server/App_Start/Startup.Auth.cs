@@ -2,9 +2,11 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+
 using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server
@@ -54,15 +56,17 @@ namespace RSSAgregator.Server
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "753742181365292",
+               appSecret: "9e61b6092c50bdde8f1ea26c44e3efdf");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "123279295858-jlv7c2maee5q7sgrksq284i63ruhtdjo.apps.googleusercontent.com",
+                ClientSecret = "tMc5mPUggLgV4G5iGi37RaK3"
+            });
+
+           
         }
     }
 }
