@@ -6,13 +6,19 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-
+using Microsoft.Owin.Security.OAuth;
+using RSSAgregator.Server.Providers;
 using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server
 {
     public partial class Startup
     {
+        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
+        public static string ClientId { get; private set; }
+        public static string ClientSecret { get; private set; }
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -47,6 +53,22 @@ namespace RSSAgregator.Server
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
+
+            // Configure the application for OAuth based flow
+            ClientId = "self";
+            ClientSecret = "self";
+            OAuthOptions = new OAuthAuthorizationServerOptions
+            {
+                TokenEndpointPath = new PathString("/Token"),
+                Provider = new ApplicationOAuthProvider(ClientId, ClientSecret),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14)
+                //AllowInsecureHttp = true
+            };
+
+            // Enable the application to use bearer tokens to authenticate users
+            app.UseOAuthBearerTokens(OAuthOptions);
+
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
@@ -66,6 +88,7 @@ namespace RSSAgregator.Server
                 ClientSecret = "tMc5mPUggLgV4G5iGi37RaK3"
             });
 
+ 
            
         }
     }
