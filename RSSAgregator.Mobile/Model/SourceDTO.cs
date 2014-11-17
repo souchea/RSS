@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RSSAgregator.Server.Models
+namespace RSSAgregator.Mobile.Model
 {
-    public class CategoryDTO
+    public class SourceDTO
     {
         public int Id { get; set; }
 
-        public List<SourceDTO> Feeds { get; set; }
-
-        public string Name { get; set; }
+        public string Title { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -46,8 +47,21 @@ namespace RSSAgregator.Mobile.ViewModel
             }
         }
 
+        private List<CategoryDTO> _categoryList;
+
+        public List<CategoryDTO> CategoryList
+        {
+            get { return _categoryList; }
+            set
+            {
+                _categoryList = value;
+                NotifyPropertyChanged("CategoryList");
+            }
+        }
+
         public MainPageViewModel()
         {
+            SetCategoryList();
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             _account_ButtonText = "Login";
 
@@ -64,6 +78,17 @@ namespace RSSAgregator.Mobile.ViewModel
                     }
                 }
             }
+        }
+
+
+        public async void SetCategoryList()
+        {
+            HttpResponseMessage response = await App.WebApiClient.GetAsync("Category/Get/3");
+            if (response.IsSuccessStatusCode)
+            {
+                CategoryList = await response.Content.ReadAsAsync<List<CategoryDTO>>();
+            }
+    
         }
 
         public async Task<FeedDto.FeedData> GetFeedAsync(string feedUriString)

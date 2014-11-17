@@ -25,7 +25,9 @@ namespace RSSAgregator.Server.Controllers
                 }).ToList()
                 select new CategoryDTO
                 {
-                    Id = category.Id, Feeds = sourceList
+                    Id = category.Id, 
+                    Feeds = sourceList, 
+                    Name = category.Name
                 }).ToList();
         }
 

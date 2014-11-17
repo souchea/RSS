@@ -38,7 +38,17 @@ namespace RSSAgregator.Mobile.View
 
         private void SubscribeButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SubscribeForm));
+           // Frame.Navigate(typeof(SubscribeForm));
+        }
+
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            throw new NotImplementedException();
         }
     }
 }

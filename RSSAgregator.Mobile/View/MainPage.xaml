@@ -24,7 +24,7 @@
             </StackPanel>
         </ContentDialog>
         <Hub Header="RSS Feed Aggregator">
-            <HubSection MinWidth="750" Header="Latest">
+            <HubSection MinWidth="300" Header="Latest">
                 <DataTemplate>
                     <GridView x:Name="ItemGridView3"
                               AutomationProperties.AutomationId="ItemGridView"
@@ -80,20 +80,32 @@
                 <HubSection Header="Categories" IsHeaderInteractive="True" 
                 MinWidth="250">
                 <DataTemplate>
-                    <StackPanel>
+                    <!--<StackPanel>
                         <Button Content="" Click="CategoryButton_Click"></Button>
-                    </StackPanel>
+                    </StackPanel>-->
+                    <GridView ItemsSource="{Binding CategoryList}">
+                        <GridView.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </GridView.Template>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
                 </DataTemplate>
             </HubSection>
 
-            <HubSection Header="Account" IsHeaderInteractive="True" 
+            <!--<HubSection Header="Account" IsHeaderInteractive="True" 
                 MinWidth="250">
                 <DataTemplate>
                     <StackPanel>
                         <Button Content="{Binding Account_ButtonText}" Click="Click_Account" ></Button>
                     </StackPanel>
                 </DataTemplate>
-            </HubSection>  
+            </HubSection>-->  
         </Hub>
     </Grid>
     <Page.BottomAppBar>

@@ -11,11 +11,10 @@ namespace RSSAgregator.Database.Manager
     {
         public static void AddCategory(FeedCategory toAdd)
         {
-            using (var context = new RssAgregatorDataContext())
-            {
-                context.FeedCategories.Add(toAdd);
-                context.SaveChanges();
-            }
+            var context = new RssAgregatorDataContext();
+
+            context.FeedCategories.Add(toAdd);
+            context.SaveChanges();
         }
 
         public static void RenameModel(int categoryId, string newName)
@@ -50,12 +49,12 @@ namespace RSSAgregator.Database.Manager
 
         public static List<FeedCategory> GetByUserId(int id)
         {
-            using (var context = new RssAgregatorDataContext())
-            {
-                return (from category in context.FeedCategories
-                        where category.UserId == id
-                        select category).ToList();
-            }
+            var context = new RssAgregatorDataContext();
+
+            return (from category in context.FeedCategories
+                where category.UserId == id
+                select category).ToList();
+
         }
 
         public static List<FeedCategory> GetCategoriesNumber(int number = 5)

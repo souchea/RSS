@@ -37,7 +37,7 @@ namespace RSSAgregator.Mobile.View
         {
         }
 
-        private static async void SubscribeButton_OnClick(object sender, RoutedEventArgs e)
+        private async void SubscribeButton_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
