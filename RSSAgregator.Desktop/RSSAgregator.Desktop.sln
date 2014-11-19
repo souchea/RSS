@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Database", "RS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Shared", "RSSAgregator.Shared\RSSAgregator.Shared.csproj", "{670DB2EB-557B-4C7C-94A2-CD1ECB69B340}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Client.Tests", "..\RSSAgregator.Client.Tests\RSSAgregator.Client.Tests.csproj", "{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,14 @@ Global
 		{670DB2EB-557B-4C7C-94A2-CD1ECB69B340}.Release|Any CPU.Build.0 = Release|Any CPU
 		{670DB2EB-557B-4C7C-94A2-CD1ECB69B340}.Release|ARM.ActiveCfg = Release|Any CPU
 		{670DB2EB-557B-4C7C-94A2-CD1ECB69B340}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,5 +131,6 @@ Global
 		{534E5A51-073A-4679-B883-C6894C7EE9D3} = {46C11D31-9352-403E-A3D2-0D2347350250}
 		{DEB10C0C-6DF0-4D0C-8153-51C758C0275B} = {46C11D31-9352-403E-A3D2-0D2347350250}
 		{670DB2EB-557B-4C7C-94A2-CD1ECB69B340} = {46C11D31-9352-403E-A3D2-0D2347350250}
+		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19} = {46C11D31-9352-403E-A3D2-0D2347350250}
 	EndGlobalSection
 EndGlobal

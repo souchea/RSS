@@ -32,5 +32,22 @@ namespace RSSAgregator.Shared.Common
             }
             return null;
         }
+
+        public async Task<bool> AddCategoryAsync(int userId, string catName)
+        {
+            try
+            {
+                HttpResponseMessage response = await WebApiClient.PostAsync(String.Format("Category/Add/{0}/{1}", userId, catName), null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.Web.Syndication;
 using RSSAgregator.Mobile.Model;
+using RSSAgregator.Shared.Common;
 
 namespace RSSAgregator.Mobile.ViewModel
 {
@@ -83,12 +84,11 @@ namespace RSSAgregator.Mobile.ViewModel
 
         public async void SetCategoryList()
         {
-            HttpResponseMessage response = await App.WebApiClient.GetAsync("Category/Get/3");
-            if (response.IsSuccessStatusCode)
-            {
-                CategoryList = await response.Content.ReadAsAsync<List<CategoryDTO>>();
-            }
-    
+            var service = new WebApiServiceManager();
+
+            var result = await service.GetCategoriesAsync(3);
+            var test = 4;
+
         }
 
         public async Task<FeedDto.FeedData> GetFeedAsync(string feedUriString)

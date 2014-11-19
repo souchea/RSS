@@ -9,5 +9,6 @@ namespace RSSAgregator.Shared.Common
     {
         HttpClient WebApiClient { get; set; }
         Task<List<CategoryDTO>> GetCategoriesAsync(int userId);
+        Task<bool> AddCategoryAsync(int userId, string catName);
     }
 }
