@@ -7,9 +7,9 @@ using RSSAgregator.Database.DataContext;
 
 namespace RSSAgregator.Database.Manager
 {
-    public class UserManager
+    public class UserManager : IUserManager
     {
-        public static void AddUser(User toAdd)
+        public void AddUser(User toAdd)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -18,7 +18,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static void DeleteUser(User toDelete)
+        public void DeleteUser(User toDelete)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -27,7 +27,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static List<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -36,7 +36,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static List<User> GetUsersNumber(int number = 5)
+        public List<User> GetUsersNumber(int number = 5)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -45,7 +45,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static User GetUserById(int id)
+        public User GetUserById(int id)
         {
             using (var context = new RssAgregatorDataContext())
             {

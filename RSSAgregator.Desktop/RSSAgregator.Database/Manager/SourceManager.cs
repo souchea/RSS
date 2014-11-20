@@ -7,9 +7,9 @@ using RSSAgregator.Database.DataContext;
 
 namespace RSSAgregator.Database.Manager
 {
-    public class SourceManager
+    public class SourceManager : ISourceManager
     {
-        public static void AddSource(FeedSource toAdd)
+        public void AddSource(FeedSource toAdd)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -18,7 +18,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static void DeleteSource(FeedSource toDelete)
+        public void DeleteSource(FeedSource toDelete)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -27,7 +27,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static List<FeedSource> GetAllSources()
+        public List<FeedSource> GetAllSources()
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -36,7 +36,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static List<FeedSource> GetSourcesNumber(int number = 5)
+        public List<FeedSource> GetSourcesNumber(int number = 5)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -45,7 +45,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static FeedSource GetSourceById(int id)
+        public FeedSource GetSourceById(int id)
         {
             using (var context = new RssAgregatorDataContext())
             {

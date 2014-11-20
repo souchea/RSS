@@ -7,9 +7,9 @@ using RSSAgregator.Database.DataContext;
 
 namespace RSSAgregator.Database.Manager
 {
-    public class CategoryManager
+    public class CategoryManager : ICategoryManager
     {
-        public static void AddCategory(FeedCategory toAdd)
+        public void AddCategory(FeedCategory toAdd)
         {
             var context = new RssAgregatorDataContext();
 
@@ -17,7 +17,7 @@ namespace RSSAgregator.Database.Manager
             context.SaveChanges();
         }
 
-        public static void RenameModel(int categoryId, string newName)
+        public void RenameModel(int categoryId, string newName)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -29,7 +29,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static void DeleteCategory(FeedCategory toDelete)
+        public void DeleteCategory(FeedCategory toDelete)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -38,7 +38,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static List<FeedCategory> GetAllCategories()
+        public List<FeedCategory> GetAllCategories()
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -47,7 +47,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static List<FeedCategory> GetByUserId(int id)
+        public List<FeedCategory> GetByUserId(int id)
         {
             var context = new RssAgregatorDataContext();
 
@@ -57,7 +57,7 @@ namespace RSSAgregator.Database.Manager
 
         }
 
-        public static List<FeedCategory> GetCategoriesNumber(int number = 5)
+        public List<FeedCategory> GetCategoriesNumber(int number = 5)
         {
             using (var context = new RssAgregatorDataContext())
             {
@@ -66,7 +66,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public static FeedCategory GetCategoryById(int id)
+        public FeedCategory GetCategoryById(int id)
         {
             using (var context = new RssAgregatorDataContext())
             {

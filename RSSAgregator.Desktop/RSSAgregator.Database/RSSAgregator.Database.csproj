@@ -53,6 +53,9 @@
     <Compile Include="DataContext\RssAgregatorDataContext.cs" />
     <Compile Include="DataContext\User.cs" />
     <Compile Include="Manager\CategoryManager.cs" />
+    <Compile Include="Manager\ICategoryManager.cs" />
+    <Compile Include="Manager\ISourceManager.cs" />
+    <Compile Include="Manager\IUserManager.cs" />
     <Compile Include="Manager\SourceManager.cs" />
     <Compile Include="Manager\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
