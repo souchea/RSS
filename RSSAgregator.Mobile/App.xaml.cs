@@ -18,10 +18,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Ninject;
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
 using RSSAgregator.Mobile.Model;
 using RSSAgregator.Mobile.View;
+using RSSAgregator.Shared.Common;
 
 namespace RSSAgregator.Mobile
 {
@@ -38,7 +40,7 @@ namespace RSSAgregator.Mobile
 
         internal static UserInfo LoggedUser { get; set; }
 
-        internal static HttpClient WebApiClient { get; set; }
+        internal static IKernel Kernel { get; set; }
 
         #endregion
 
@@ -54,12 +56,9 @@ namespace RSSAgregator.Mobile
             IsLogged = false;
             LoggedUser = new UserInfo();
 
-            WebApiClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://rssagregator.azurewebsites.net/api/")
-            };
-            WebApiClient.DefaultRequestHeaders.Accept.Clear();
-            WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Kernel = new StandardKernel();
+
+            Kernel.Bind<IServiceManager>().To<WebApiServiceManager>();
         }
 
         /// <summary>

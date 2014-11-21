@@ -14,6 +14,12 @@ namespace RSSAgregator.Server.Controllers
 {
     public class SourceController : ApiController
     {
+        protected ISourceManager SourceManager { get; set; }
+
+        public SourceController(ISourceManager sourceManager)
+        {
+            SourceManager = sourceManager;
+        }
 
         [HttpPost]
         public int Add(string url, int id, int catId)

@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
-using RSSAgregator.Mobile.Model;
-using RSSAgregator.Mobile.ViewModel;
+using RSSAgregator.Shared.Model;
+using RSSAgregator.Shared.ViewModel;
 using Windows.Storage;
 using Windows.Web.Syndication;
+using Ninject;
 
 namespace RSSAgregator.Mobile.View
 {
@@ -16,18 +17,15 @@ namespace RSSAgregator.Mobile.View
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private MainPageViewModel defaultViewModel = new MainPageViewModel();
 
-        public MainPageViewModel DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
+        public MainPageViewModel DefaultViewModel { get; set; }
 
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            DefaultViewModel = App.Kernel.Get<MainPageViewModel>();
         }
 
         /// <summary>
@@ -53,15 +51,15 @@ namespace RSSAgregator.Mobile.View
             {
                 ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-                string feed = RssFeedAddTextBox.Text;
-                Task<FeedDto.FeedData> newFeed = defaultViewModel.GetFeedAsync(feed);
-                int i = defaultViewModel.Feeds.Count;
-                defaultViewModel.Feeds.Add(await newFeed);
-                KeyValuePair<string, object> newEntry = new KeyValuePair<string, object>(defaultViewModel.Feeds[i].Title, defaultViewModel.Feeds[i]);
-                if (!localSettings.Values.Contains(newEntry))
-                {
-                    localSettings.Values[defaultViewModel.Feeds[i].Title] = defaultViewModel.Feeds[i];
-                }
+                //string feed = RssFeedAddTextBox.Text;
+                //Task<FeedDto.FeedData> newFeed = DefaultViewModel.GetFeedAsync(feed);
+                //int i = DefaultViewModel.Feeds.Count;
+                //DefaultViewModel.Feeds.Add(await newFeed);
+                //KeyValuePair<string, object> newEntry = new KeyValuePair<string, object>(DefaultViewModel.Feeds[i].Title, DefaultViewModel.Feeds[i]);
+                //if (!localSettings.Values.Contains(newEntry))
+                //{
+                //    localSettings.Values[DefaultViewModel.Feeds[i].Title] = DefaultViewModel.Feeds[i];
+                //}
             }
         }
 

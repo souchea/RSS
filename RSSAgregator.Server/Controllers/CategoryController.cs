@@ -12,6 +12,16 @@ namespace RSSAgregator.Server.Controllers
 {
     public class CategoryController : ApiController
     {
+        protected ICategoryManager CategoryManager { get; set; }
+
+        protected ISourceManager SourceManager { get; set; }
+
+        public CategoryController(ICategoryManager categoryManager, ISourceManager sourceManager)
+        {
+            CategoryManager = categoryManager;
+            SourceManager = sourceManager;
+        }
+
         [HttpGet]
         public List<CategoryDTO> Get(int id)
         {
