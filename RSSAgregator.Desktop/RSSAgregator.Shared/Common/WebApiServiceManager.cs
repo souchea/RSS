@@ -49,5 +49,22 @@ namespace RSSAgregator.Shared.Common
                 return false;
             }
         }
+
+        public async Task<bool> AddSourceAsyns(int userId, int catId, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await WebApiClient.PostAsync(String.Format("Source/Add/{0}?url={1}&catId={2}", userId, url, catId), null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            } 
+        }
     }
 }

@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d" Background="#FF0D468B">
 
     <Grid>
         <ContentDialog x:Name="AddNewFeed" 
@@ -26,44 +25,20 @@
         <Hub Header="RSS Feed Aggregator">
             <HubSection MinWidth="300" Header="Latest">
                 <DataTemplate>
-                    <GridView x:Name="ItemGridView3"
-                              AutomationProperties.AutomationId="ItemGridView"
-                              AutomationProperties.Name="Grouped Items"
-                              Padding="0,0,10,10"
-                              ItemsSource="{Binding LastFeed}"
-                              SelectionMode="None"
-                              IsSwipeEnabled="false"
-                              IsItemClickEnabled="True"
-                              ItemClick="Feed_ItemClick"
-                              Margin="0,0,0,0"
-                              Grid.Row="1"
-                              Grid.Column="1">
-                        <GridView.ItemTemplate>
+                    <ListView ItemsSource="{Binding SourceList}"
+                              Margin="0,0,0,139">
+                        <ListView.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </ListView.Template>
+                        <ListView.ItemTemplate>
                             <DataTemplate>
-                                    <StackPanel Orientation="Horizontal"
-                                               Width="300"
-                                               Height="60" >
-                                    <Image Source="{Binding Path=Pic}"
-                                               Height="60" />
-                                    <TextBlock Text="{Binding Path=Title}"
-                                               Foreground="{ThemeResource ListViewItemOverlayForegroundThemeBrush}"
-                                               Height="30"
-                                               Width="250"
-                                               Margin="0,0,0,10"
-                                               Padding="5,5,0,0"
-                                               FontSize="16" />
-                                </StackPanel>
+                                <TextBlock FontSize="25"
+                                           Text="{Binding Path=Title}" />
                             </DataTemplate>
-                        </GridView.ItemTemplate>
-                        <GridView.ItemContainerStyle>
-                            <Style TargetType="GridViewItem">
-                                <Setter Property="Foreground"
-                                        Value="White" />
-                                <Setter Property="Margin"
-                                        Value="0,10,0,0" />
-                            </Style>
-                        </GridView.ItemContainerStyle>
-                    </GridView>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </DataTemplate>
             </HubSection>
 
@@ -80,22 +55,26 @@
                 <HubSection Header="Categories" IsHeaderInteractive="True" 
                 MinWidth="250">
                 <DataTemplate>
-                    <!--<StackPanel>
-                        <Button Content="" Click="CategoryButton_Click"></Button>
-                    </StackPanel>-->
-                    <GridView ItemsSource="{Binding CategoryList}">
-                        <GridView.Template>
-                            <ControlTemplate>
-                                <ItemsPresenter />
-                            </ControlTemplate>
-                        </GridView.Template>
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}"/>
-                        </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                </DataTemplate>
+					<Grid>
+						<!--<StackPanel>
+							<Button Content="" Click="CategoryButton_Click"></Button>
+						</StackPanel>-->
+						<ListView ItemsSource="{Binding CategoryList}" Margin="0,0,-0.167,139">
+							<ListView.Template>
+								<ControlTemplate>
+									<ItemsPresenter />
+								</ControlTemplate>
+							</ListView.Template>
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<TextBlock FontSize="25" Text="{Binding Path=Name}"/>
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+						<TextBox Text="{Binding Path=ToAddCategoryText, Mode=TwoWay}" Margin="0,0,60,10" VerticalAlignment="Bottom" Height="40" />
+						<AppBarButton Icon="Add" Command="{Binding AddCategoryCommand}"  Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="62" Width="66"/>
+					</Grid>
+				</DataTemplate>				
             </HubSection>
 
             <!--<HubSection Header="Account" IsHeaderInteractive="True" 
@@ -109,7 +88,7 @@
         </Hub>
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton Label="Refresh" Icon="Refresh" />
             <AppBarButton Label="Add" Icon="Add" Click="AddFeed_Click"/>
 

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.ServiceModel.Syndication;
 using System.Web.Http;
+using System.Xml;
 using RSSAgregator.Database.DataContext;
 using RSSAgregator.Database.Manager;
 using RSSAgregator.Server.Models;
@@ -27,11 +29,11 @@ namespace RSSAgregator.Server.Controllers
         {
             var categories = CategoryManager.GetByUserId(id);
             return (from category in categories
-                let sourceList = category.FeedSources.Select(source => new SourceDTO
+                let sourceList = category.FeedSources.Select(source =>   
+                new SourceDTO
                 {
                     Id = source.Id,
-                    // todo rajouter un champ Title a la source
-                    Title = "title"
+                    Title = source.Title
                 }).ToList()
                 select new CategoryDTO
                 {
@@ -40,6 +42,7 @@ namespace RSSAgregator.Server.Controllers
                     Name = category.Name
                 }).ToList();
         }
+
 
         [HttpPost]
         public int Add(int userId, string param)

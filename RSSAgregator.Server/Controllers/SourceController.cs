@@ -22,7 +22,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
-        public int Add(string url, int id, int catId)
+        public int Add(int id, string url, int catId)
         {
             var newSource = new FeedSource
             {
@@ -30,11 +30,20 @@ namespace RSSAgregator.Server.Controllers
                 CreationDate = DateTime.Now,
                 Public = true,
                 Url = url,
-                UserId = id
+                UserId = id,
+                Title = GetTitleFromUrl(url)
             };
             SourceManager.AddSource(newSource);
 
             return newSource.Id;
+        }
+
+        public string GetTitleFromUrl(string url)
+        {
+            XmlReader reader = XmlReader.Create(url);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            reader.Close();
+            return feed.Title.Text;
         }
 
         [HttpDelete]

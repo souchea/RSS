@@ -26,6 +26,7 @@ namespace RSSAgregator.Mobile.View
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             DefaultViewModel = App.Kernel.Get<MainPageViewModel>();
+            DataContext = DefaultViewModel;
         }
 
         /// <summary>

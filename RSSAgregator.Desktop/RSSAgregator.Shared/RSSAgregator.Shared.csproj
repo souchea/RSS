@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Common\IServiceManager.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\WebApiServiceManager.cs" />
     <Compile Include="Model\CategoryDTO.cs" />
     <Compile Include="Model\SourceDTO.cs" />

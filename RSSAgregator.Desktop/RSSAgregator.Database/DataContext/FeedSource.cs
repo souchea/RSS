@@ -18,6 +18,8 @@ namespace RSSAgregator.Database.DataContext
         [Required]
         public string Url { get; set; }
 
+        public string Title { get; set; }
+
         public bool Public { get; set; }
 
         public DateTime CreationDate { get; set; }
