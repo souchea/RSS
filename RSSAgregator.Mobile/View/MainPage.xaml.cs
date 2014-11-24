@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using RSSAgregator.Mobile.Common;
+using RSSAgregator.Mobile.Model;
 using RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.ViewModel;
 using Windows.Storage;
@@ -52,16 +54,28 @@ namespace RSSAgregator.Mobile.View
             {
                 ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-                //string feed = RssFeedAddTextBox.Text;
-                //Task<FeedDto.FeedData> newFeed = DefaultViewModel.GetFeedAsync(feed);
-                //int i = DefaultViewModel.Feeds.Count;
-                //DefaultViewModel.Feeds.Add(await newFeed);
-                //KeyValuePair<string, object> newEntry = new KeyValuePair<string, object>(DefaultViewModel.Feeds[i].Title, DefaultViewModel.Feeds[i]);
-                //if (!localSettings.Values.Contains(newEntry))
-                //{
-                //    localSettings.Values[DefaultViewModel.Feeds[i].Title] = DefaultViewModel.Feeds[i];
-                //}
+                string feed = RssFeedAddTextBox.Text;
+                GetFeedAsync(feed);
+                /*int i = DefaultViewModel.Feeds.Count;
+                DefaultViewModel.Feeds.Add(await newFeed);*/
             }
+        }
+
+        private async void GetFeedAsync(string feedUriString)
+        {
+            Frame.Navigate(typeof (Categories), feedUriString);
+            /*SyndicationClient client = new SyndicationClient();
+            Uri feedUri = new Uri(feedUriString);
+
+            try
+            {
+                SyndicationFeed feed = await client.RetrieveFeedAsync(feedUri);
+
+                StorageManager.SaveFileAsync(feed.Title.Text, feed);
+            }
+            catch (Exception)
+            {
+            }*/
         }
 
         private async void Click_Account(object sender, RoutedEventArgs e)
@@ -81,7 +95,7 @@ namespace RSSAgregator.Mobile.View
 
         private void CategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Frame.Navigate(typeof(SourceListPage), sender);
         }
     }
 }

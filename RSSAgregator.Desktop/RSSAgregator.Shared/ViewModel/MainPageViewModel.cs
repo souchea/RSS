@@ -13,7 +13,6 @@ namespace RSSAgregator.Shared.ViewModel
 {
     public class MainPageViewModel : BaseViewModel
     {
-
         private string _account_ButtonText;
 
         public string Account_ButtonText

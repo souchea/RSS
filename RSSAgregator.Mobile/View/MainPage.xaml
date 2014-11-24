@@ -26,7 +26,7 @@
             <HubSection MinWidth="300" Header="Latest">
                 <DataTemplate>
                     <ListView ItemsSource="{Binding SourceList}"
-                              Margin="0,0,0,139">
+                              Margin="0,0,0,139" ItemClick="CategoryButton_Click">
                         <ListView.Template>
                             <ControlTemplate>
                                 <ItemsPresenter />

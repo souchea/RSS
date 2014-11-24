@@ -67,6 +67,7 @@ namespace RSSAgregator.Mobile.View
         /// antérieure.  L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+
         }
 
         /// <summary>
