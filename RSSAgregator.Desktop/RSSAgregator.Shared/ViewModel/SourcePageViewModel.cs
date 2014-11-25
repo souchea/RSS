@@ -11,6 +11,18 @@ namespace RSSAgregator.Shared.ViewModel
 {
     public class SourcePageViewModel : BaseViewModel
     {
+        private string _sourceNameText;
+
+        public string SourceNameText
+        {
+            get { return _sourceNameText; }
+            set
+            {
+                _sourceNameText = value;
+                NotifyPropertyChanged("SourceNameText");
+            }
+        }
+
         private ObservableCollection<SourceDTO> _sourceList;
 
         public ObservableCollection<SourceDTO> SourceList
@@ -45,6 +57,7 @@ namespace RSSAgregator.Shared.ViewModel
 
         public async void SetCategoryList(string catId)
         {
+            SourceNameText = catId;
             CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(3));
             SetSourceList(catId);
         }

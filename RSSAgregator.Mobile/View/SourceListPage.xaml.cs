@@ -107,5 +107,9 @@ namespace RSSAgregator.Mobile.View
 
         #endregion
 
+        private void Source_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FeedsPage), sender);
+        }
     }
 }
