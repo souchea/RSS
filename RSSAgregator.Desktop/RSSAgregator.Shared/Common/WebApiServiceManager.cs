@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using RSSAgregator.Shared.Model;
+using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.Common
 {
@@ -67,8 +68,25 @@ namespace RSSAgregator.Shared.Common
             } 
         }
 
+        public async Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb = 10)
+        {
+            var toReturnFeedList = new List<FeedDTO>();
+            try
+            {
+                HttpResponseMessage response = await WebApiClient.GetAsync(String.Format("Source/GetItems/{0}?nb={1}", sourceId, nb));
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<List<FeedDTO>>();
+                }
+                return toReturnFeedList;
+            }
+            catch (Exception)
+            {
+                return toReturnFeedList;
+            } 
+        }
+
         // delete categorie
-        // get sources
         // delete source
     }
 }

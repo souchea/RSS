@@ -54,12 +54,29 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SyndicationItem> GetItems(int id, int nb)
+        public IEnumerable<FeedItemDTO> GetItems(int id, int nb)
         {
             var source = SourceManager.GetSourceById(id);
             XmlReader reader = XmlReader.Create(source.Url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
+
+            var feedList = new List<FeedItemDTO>();
+                
+            foreach (var feedItem in feed.Items)
+            {
+                feedList.Add(new FeedItemDTO
+                {
+                    Id = feedItem.Id ?? "",
+                    BaseUri = feedItem.BaseUri ?? new Uri("http://www.test.com"),
+                    Content = "",
+                    PublishDate = feedItem.PublishDate,
+                    Summary = feedItem.Summary != null ? feedItem.Summary.Text : "",
+                    Title = feedItem.Title != null ? feedItem.Title.Text : ""
+                });
+            }
+
+            return feedList;
 
             // todo: voir si je renvois un SyndicationItem ou un DTO
             //foreach (SyndicationItem item in feed.Items)
@@ -68,7 +85,7 @@ namespace RSSAgregator.Server.Controllers
             //    String summary = item.Summary.Text;  
             //}
 
-            return feed.Items;
+            //return feed.Items;
         }
     }
 }

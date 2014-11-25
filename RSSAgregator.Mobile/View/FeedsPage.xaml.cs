@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using RSSAgregator.Shared.Model;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 using RSSAgregator.Shared.ViewModel;
@@ -95,9 +96,8 @@ namespace RSSAgregator.Mobile.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            var text = new TextBlock();
-            text = e.Parameter as TextBlock;
-            if (text != null) DefaultViewModel.SetFeedList(text.Text);
+            var source = e.Parameter as SourceDTO;
+            if (source != null) DefaultViewModel.SetFeedList(source);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

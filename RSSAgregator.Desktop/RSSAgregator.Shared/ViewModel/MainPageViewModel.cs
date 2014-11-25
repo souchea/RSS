@@ -61,6 +61,19 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private int _selectedSourceIndex;
+
+        public int SelectedSourceIndex
+        {
+            get { return _selectedSourceIndex; }
+            set
+            {
+                _selectedSourceIndex = value;
+                NotifyPropertyChanged("SelectedSourceIndex");
+            }
+        }
+        
+
         #region Commands
 
         private RelayCommand _addCategoryCommand;

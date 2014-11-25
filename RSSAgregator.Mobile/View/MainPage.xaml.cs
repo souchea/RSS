@@ -99,9 +99,11 @@ namespace RSSAgregator.Mobile.View
             Frame.Navigate(typeof(SourceListPage), sender);
         }
 
-        private void Source_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void Source_OnTapped(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            Frame.Navigate(typeof(FeedsPage), sender);
+            var selected = selectionChangedEventArgs.AddedItems[0] as Shared.Model.SourceDTO;
+            //int selected = DefaultViewModel.SelectedSourceIndex;
+            Frame.Navigate(typeof(FeedsPage), selected);
         }
     }
 }

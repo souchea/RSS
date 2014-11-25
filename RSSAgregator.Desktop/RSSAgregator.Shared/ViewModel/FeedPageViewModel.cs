@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RSSAgregator.Shared.Common;
 using RSSAgregator.Shared.Model;
+using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.ViewModel
 {
@@ -43,10 +44,11 @@ namespace RSSAgregator.Shared.ViewModel
             FeedList = new ObservableCollection<FeedDTO>();
         }
 
-        public async void SetFeedList(string feedId)
+        public async void SetFeedList(SourceDTO source)
         {
-            FeedName = feedId;
-            FeedList = new ObservableCollection<FeedDTO>();
+            FeedName = source.Title;
+            var feeds = await ServiceManager.GetFeedsAsync(source.Id, 10);
+            FeedList = new ObservableCollection<FeedDTO>(feeds);
         }
     }
 }

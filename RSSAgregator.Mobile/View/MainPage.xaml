@@ -26,6 +26,8 @@
             <HubSection MinWidth="300" Header="Latest">
                 <DataTemplate>
                     <ListView ItemsSource="{Binding SourceList}"
+                              SelectedItem="{Binding SelectedSourceIndex}"
+                              SelectionChanged="Source_OnTapped"
                               Margin="0,0,0,139">
                         <ListView.Template>
                             <ControlTemplate>
@@ -35,7 +37,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock FontSize="25"
-                                           Text="{Binding Path=Title}" Tapped="Source_OnTapped"/>
+                                           Text="{Binding Path=Title}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

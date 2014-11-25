@@ -31,7 +31,7 @@
         <!--TODO: le contenu doit être placé dans la grille suivante-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <ListView ItemsSource="{Binding FeedList}"
-                              Margin="0,0,0,139">
+                      Margin="0,0,0,-1">
                 <ListView.Template>
                     <ControlTemplate>
                         <ItemsPresenter />

@@ -32,7 +32,7 @@ namespace RSSAgregator.Database.Manager
             using (var context = new RssAgregatorDataContext())
             {
                 return (from source in context.FeedSources
-                        select source).ToList();
+                    select source).ToList();
             }
         }
 
@@ -41,18 +41,16 @@ namespace RSSAgregator.Database.Manager
             using (var context = new RssAgregatorDataContext())
             {
                 return (from source in context.FeedSources
-                        select source).Take(number).ToList();
+                    select source).Take(number).ToList();
             }
         }
 
         public FeedSource GetSourceById(int id)
         {
-            using (var context = new RssAgregatorDataContext())
-            {
-                return (from source in context.FeedSources
-                        where source.Id == id
-                        select source).SingleOrDefault();
-            }
+            var context = new RssAgregatorDataContext();
+            return (from source in context.FeedSources
+                where source.Id == id
+                select source).SingleOrDefault();
         }
     }
 }
