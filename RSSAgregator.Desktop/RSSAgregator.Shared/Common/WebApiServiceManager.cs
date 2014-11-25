@@ -50,7 +50,7 @@ namespace RSSAgregator.Shared.Common
             }
         }
 
-        public async Task<bool> AddSourceAsyns(int userId, int catId, string url)
+        public async Task<bool> AddSourceAsync(int userId, int catId, string url)
         {
             try
             {
@@ -66,5 +66,9 @@ namespace RSSAgregator.Shared.Common
                 return false;
             } 
         }
+
+        // delete categorie
+        // get sources
+        // delete source
     }
 }

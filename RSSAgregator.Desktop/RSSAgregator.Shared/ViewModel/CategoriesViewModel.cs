@@ -34,7 +34,7 @@ namespace RSSAgregator.Shared.ViewModel
         {
             var service = new WebApiServiceManager();
 
-            var result = await service.AddSourceAsyns(3, cat, url);
+            var result = await service.AddSourceAsync(3, cat, url);
         }
     }
 }
