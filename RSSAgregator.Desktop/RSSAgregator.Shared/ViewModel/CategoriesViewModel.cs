@@ -47,7 +47,7 @@ namespace RSSAgregator.Shared.ViewModel
                     catId = t.Id;
             }
 
-            var result = await service.AddSourceAsyns(3, catId, url);
+            var result = await service.AddSourceAsync(3, cat, url);
         }
     }
 }
