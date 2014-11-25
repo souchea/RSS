@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using RSSAgregator.Mobile.Common;
 using RSSAgregator.Mobile.Model;
@@ -93,9 +94,14 @@ namespace RSSAgregator.Mobile.View
             
         }
 
-        private void CategoryButton_Click(object sender, RoutedEventArgs e)
+        private async void CategoryButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SourceListPage), sender);
+        }
+
+        private void Source_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            
         }
     }
 }

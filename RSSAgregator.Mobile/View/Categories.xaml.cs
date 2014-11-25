@@ -47,11 +47,12 @@ namespace RSSAgregator.Mobile.View
 
         }
 
-        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+        private void ListViewBase_OnItemClick(object sender, RoutedEventArgs e)
         {
-            CategoryDTO cat = new CategoryDTO();
-            cat = sender as CategoryDTO;
-            DefaultViewModel.SetNewFeed(Url, cat.Id);
+            var cat = new TextBlock();
+            cat = sender as TextBlock;
+            if (cat != null) DefaultViewModel.SetNewFeed(Url, cat.Text);
+            Frame.GoBack();
         }
     }
 }

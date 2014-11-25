@@ -9,8 +9,20 @@ using RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.ViewModel
 {
-    public class CategoriesViewModel : BaseViewModel
+    public class SourcePageViewModel : BaseViewModel
     {
+        private ObservableCollection<SourceDTO> _sourceList;
+
+        public ObservableCollection<SourceDTO> SourceList
+        {
+            get { return _sourceList; }
+            set
+            {
+                _sourceList = value;
+                NotifyPropertyChanged("SourceList");
+            }
+        }
+
         private ObservableCollection<CategoryDTO> _categoryList;
 
         public ObservableCollection<CategoryDTO> CategoryList
@@ -25,29 +37,28 @@ namespace RSSAgregator.Shared.ViewModel
 
         private IServiceManager ServiceManager { get; set; }
 
-        public CategoriesViewModel(IServiceManager serviceManager)
+        public SourcePageViewModel(IServiceManager serviceManager)
         {
             ServiceManager = serviceManager;
-            SetCategoryList();
+            SourceList = new ObservableCollection<SourceDTO>();
         }
 
-        public async void SetCategoryList()
+        public async void SetCategoryList(string catId)
         {
             CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(3));
+            SetSourceList(catId);
         }
 
-        public async void SetNewFeed(string url, string cat)
+        private void SetSourceList(string catId)
         {
-            var service = new WebApiServiceManager();
-            int catId = 0;
-
-            foreach (CategoryDTO t in CategoryList)
+            foreach (CategoryDTO t1 in CategoryList)
             {
-                if (t.Name == cat)
-                    catId = t.Id;
+                if (t1.Name != catId) continue;
+                foreach (SourceDTO t in t1.Feeds)
+                {
+                    SourceList.Add(t);
+                }
             }
-
-            var result = await service.AddSourceAsyns(3, catId, url);
         }
     }
 }

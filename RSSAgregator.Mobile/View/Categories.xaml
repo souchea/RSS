@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#FF0D468B">
 
     <Grid x:Name="LayoutRoot">
 
@@ -31,7 +31,7 @@
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListView ItemsSource="{Binding CategoryList}" Margin="0,0,0,10" ItemClick="ListViewBase_OnItemClick">
+            <ListView ItemsSource="{Binding CategoryList}" Margin="0,0,0,10">
                 <ListView.Template>
                     <ControlTemplate>
                         <ItemsPresenter />
@@ -39,7 +39,7 @@
                 </ListView.Template>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock FontSize="25" Text="{Binding Path=Name}"/>
+                        <TextBlock FontSize="25" Text="{Binding Path=Name}" Tapped="ListViewBase_OnItemClick"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

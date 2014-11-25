@@ -26,7 +26,7 @@
             <HubSection MinWidth="300" Header="Latest">
                 <DataTemplate>
                     <ListView ItemsSource="{Binding SourceList}"
-                              Margin="0,0,0,139" ItemClick="CategoryButton_Click">
+                              Margin="0,0,0,139">
                         <ListView.Template>
                             <ControlTemplate>
                                 <ItemsPresenter />
@@ -35,7 +35,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock FontSize="25"
-                                           Text="{Binding Path=Title}" />
+                                           Text="{Binding Path=Title}" Tapped="Source_OnTapped"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -60,14 +60,14 @@
 							<Button Content="" Click="CategoryButton_Click"></Button>
 						</StackPanel>-->
 						<ListView ItemsSource="{Binding CategoryList}" Margin="0,0,-0.167,139">
-							<ListView.Template>
+                            <ListView.Template>
 								<ControlTemplate>
 									<ItemsPresenter />
 								</ControlTemplate>
 							</ListView.Template>
-							<ListView.ItemTemplate>
+                            <ListView.ItemTemplate>
 								<DataTemplate>
-									<TextBlock FontSize="25" Text="{Binding Path=Name}"/>
+									<TextBlock FontSize="25" Text="{Binding Path=Name}" Tapped="CategoryButton_Click"/>
 								</DataTemplate>
 							</ListView.ItemTemplate>
 						</ListView>

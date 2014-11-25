@@ -1,5 +1,4 @@
-﻿using Ninject;
-using RSSAgregator.Mobile.Common;
+﻿using RSSAgregator.Mobile.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,27 +17,24 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Mobile.View
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class SourceListPage : Page
+    public sealed partial class FeedsPage : Page
     {
         private NavigationHelper navigationHelper;
-        public SourcePageViewModel DefaultViewModel { get; set; }
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public SourceListPage()
+        public FeedsPage()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            DefaultViewModel = App.Kernel.Get<SourcePageViewModel>();
-            DataContext = DefaultViewModel;
         }
 
         /// <summary>
@@ -47,6 +43,15 @@ namespace RSSAgregator.Mobile.View
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
+        }
+
+        /// <summary>
+        /// Obtient le modèle d'affichage pour ce <see cref="Page"/>.
+        /// Cela peut être remplacé par un modèle d'affichage fortement typé.
+        /// </summary>
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -62,7 +67,6 @@ namespace RSSAgregator.Mobile.View
         /// antérieure.  L'état n'aura pas la valeur Null lors de la première visite de la page.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-
         }
 
         /// <summary>
@@ -95,9 +99,6 @@ namespace RSSAgregator.Mobile.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            var text = new TextBlock();
-            text = e.Parameter as TextBlock;
-            if (text != null) DefaultViewModel.SetCategoryList(text.Text);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -106,6 +107,5 @@ namespace RSSAgregator.Mobile.View
         }
 
         #endregion
-
     }
 }
