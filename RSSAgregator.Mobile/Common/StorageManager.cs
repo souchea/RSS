@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.Web.Syndication;
+using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Mobile.Common
 {

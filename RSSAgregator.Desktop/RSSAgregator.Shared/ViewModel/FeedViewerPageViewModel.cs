@@ -45,11 +45,17 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
-        public void SetViewerPage(FeedDTO feed)
+        public async void SetViewerPage(FeedDTO feed)
         {
             FeedName = feed.Title;
             FeedSummary = feed.Summary;
             FeedDate = feed.PublishDate.DateTime.ToString();
+            SaveFeed(feed);
+        }
+
+        private async void SaveFeed(FeedDTO feed)
+        {
+            
         }
     }
 }
