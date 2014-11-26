@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using RSSAgregator.Shared.Model;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
+using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Mobile.View
@@ -106,5 +107,16 @@ namespace RSSAgregator.Mobile.View
         }
 
         #endregion
+
+        private void Feed_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            TextBlock send = sender as TextBlock;
+
+            foreach (FeedDTO t in DefaultViewModel.FeedList)
+            {
+                if (t.Title == send.Text)
+                    Frame.Navigate(typeof (FeedViewerPage), t);
+            }
+        }
     }
 }

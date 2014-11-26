@@ -40,7 +40,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock FontSize="25"
-                                           Text="{Binding Path=Title}" />
+                                           Text="{Binding Path=Title}" Tapped="Feed_OnTapped"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

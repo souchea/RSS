@@ -107,6 +107,9 @@
     <Compile Include="View\FeedsPage.xaml.cs">
       <DependentUpon>FeedsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FeedViewerPage.xaml.cs">
+      <DependentUpon>FeedViewerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FeedsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FeedViewerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
