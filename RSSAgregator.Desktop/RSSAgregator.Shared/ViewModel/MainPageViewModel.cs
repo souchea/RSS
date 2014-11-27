@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
 using RSSAgregator.Shared.Common;
 using RSSAgregator.Shared.Model;
 
@@ -99,33 +100,35 @@ namespace RSSAgregator.Shared.ViewModel
 
         #endregion
 
+        #region Dependencies
+
         private IServiceManager ServiceManager { get; set; }
 
-        public MainPageViewModel(IServiceManager serviceManager)
+        private IDataManager RssDataManager { get; set; }
+
+        #endregion
+
+        public MainPageViewModel(IServiceManager serviceManager, IDataManager dataManager)
         {
             ServiceManager = serviceManager;
-            SourceList = new ObservableCollection<SourceDTO>();
-            SetCategoryList();
+            RssDataManager = dataManager;
+
+            SourceList = new ObservableCollection<SourceDTO>();;
+
+            RssDataManager.CategoryChanged += SetCategoryList;
+            RssDataManager.SourceChanged += SetSourceList;
         }
 
-
-        public async void SetCategoryList()
+        private void SetSourceList(object sender, EventArgs e)
         {
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(3));
-            SetSourceList();
-
+            SourceList = new ObservableCollection<SourceDTO>(RssDataManager.SourceList);
         }
 
-        public void SetSourceList()
+        private void SetCategoryList(object sender, EventArgs e)
         {
-            foreach (var category in CategoryList)
-            {
-                foreach (var source in category.Feeds)
-                {
-                    SourceList.Add(source);
-                }
-            }
+            CategoryList = new ObservableCollection<CategoryDTO>(RssDataManager.CategoryList);
         }
+
 
         public async void AddCategory()
         {

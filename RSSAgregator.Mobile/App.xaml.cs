@@ -19,9 +19,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Ninject;
+using RSSAgregator.Mobile.Common;
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
-using RSSAgregator.Mobile.Model;
 using RSSAgregator.Mobile.View;
 using RSSAgregator.Shared.Common;
 
@@ -36,10 +36,6 @@ namespace RSSAgregator.Mobile
 
         #region Global parameters
 
-        internal static bool IsLogged { get; set; }
-
-        internal static UserInfo LoggedUser { get; set; }
-
         internal static IKernel Kernel { get; set; }
 
         #endregion
@@ -53,11 +49,10 @@ namespace RSSAgregator.Mobile
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
 
-            IsLogged = false;
-            LoggedUser = new UserInfo();
-
             Kernel = new StandardKernel();
 
+            Kernel.Bind<IStorageManager>().To<StorageManager>();
+            Kernel.Bind<IDataManager>().To<RssDataManager>().InSingletonScope();
             Kernel.Bind<IServiceManager>().To<WebApiServiceManager>();
         }
 

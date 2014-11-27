@@ -13,9 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using RSSAgregator.Mobile.Model;
-
 namespace RSSAgregator.Mobile.View
 {
     /// <summary>

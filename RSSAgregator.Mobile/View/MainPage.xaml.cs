@@ -6,7 +6,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using RSSAgregator.Mobile.Common;
-using RSSAgregator.Mobile.Model;
 using RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.ViewModel;
 using Windows.Storage;

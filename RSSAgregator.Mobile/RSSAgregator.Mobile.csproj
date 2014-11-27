@@ -88,19 +88,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\IStorageManager.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\StorageManager.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Model\CategoryDTO.cs" />
-    <Compile Include="Model\FeedDto.cs" />
-    <Compile Include="Model\SourceDTO.cs" />
-    <Compile Include="Model\UserInfo.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ConnectionPageViewModel.cs" />
-    <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="View\Categories.xaml.cs">
       <DependentUpon>Categories.xaml</DependentUpon>
     </Compile>

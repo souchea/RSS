@@ -23,21 +23,33 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
-        private IServiceManager ServiceManager { get; set; }
+        #region Dependencies
 
-        public CategoriesViewModel(IServiceManager serviceManager)
+
+        private IDataManager RssDataManager { get; set; }
+
+        #endregion
+
+        public CategoriesViewModel(IDataManager dataManager)
         {
-            ServiceManager = serviceManager;
-            SetCategoryList();
+            RssDataManager = dataManager;
+            SetCategoryList(null, null);
+
+            RssDataManager.CategoryChanged += SetCategoryList;
         }
 
-        public async void SetCategoryList()
+        private void SetCategoryList(object sender, EventArgs e)
         {
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(3));
+            CategoryList = new ObservableCollection<CategoryDTO>(RssDataManager.CategoryList);
         }
+
 
         public async void SetNewFeed(string url, string cat)
         {
+            // todo /!\  ne pas passer un string mais un ID  /!\
+            //RssDataManager.AddSource(3, url, cat)
+
+
             var service = new WebApiServiceManager();
             int catId = 0;
 
