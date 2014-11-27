@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
@@ -11,6 +12,7 @@ using RSSAgregator.Shared.ViewModel;
 using Windows.Storage;
 using Windows.Web.Syndication;
 using Ninject;
+using QKit;
 
 namespace RSSAgregator.Mobile.View
 {
@@ -21,6 +23,8 @@ namespace RSSAgregator.Mobile.View
     {
 
         public MainPageViewModel DefaultViewModel { get; set; }
+
+        public MultiSelectListView CategoriesListView;
 
         public MainPage()
         {
@@ -103,6 +107,38 @@ namespace RSSAgregator.Mobile.View
             var selected = selectionChangedEventArgs.AddedItems[0] as Shared.Model.SourceDTO;
             //int selected = DefaultViewModel.SelectedSourceIndex;
             Frame.Navigate(typeof(FeedsPage), selected);
+        }
+
+        private void SelectAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            CategoriesListView.SelectionMode = ListViewSelectionMode.Multiple;
+        }
+
+        private void AccessControlCategoriesList(object sender, RoutedEventArgs e)
+        {
+            CategoriesListView = (MultiSelectListView)sender;
+        }
+
+        private void SelectList_SelectionModeChanged(object sender, RoutedEventArgs e)
+        {
+            if (CategoriesListView.SelectionMode != ListViewSelectionMode.Multiple)
+            {
+                SelectAppBarButton.Visibility = Visibility.Visible;
+                DeleteAppBarButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                SelectAppBarButton.Visibility = Visibility.Collapsed;
+                DeleteAppBarButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void DeleteAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<object> catList = CategoriesListView.SelectedItems.ToList();
+
+            //DefaultViewModel.DeleteCategories(catList);
+            CategoriesListView.SelectionMode = ListViewSelectionMode.None;
         }
     }
 }

@@ -23,5 +23,7 @@ namespace RSSAgregator.Shared.Common
 
         void StoreSources(List<SourceDTO> toStore);
 
+
+
     }
 }

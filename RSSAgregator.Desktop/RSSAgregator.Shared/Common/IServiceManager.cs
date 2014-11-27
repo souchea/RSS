@@ -13,5 +13,13 @@ namespace RSSAgregator.Shared.Common
         Task<bool> AddCategoryAsync(int userId, string catName);
 
         Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb);
+
+        Task<bool> DeleteCategory(int catId);
+
+        Task<bool> DeleteSource(int sourceId);
+
+        Task<bool> SendReadAsync(int sourceId);
+
+        Task<bool> SendStageAsync(int sourceId, string state);
     }
 }
