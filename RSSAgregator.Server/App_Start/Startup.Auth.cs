@@ -61,7 +61,7 @@ namespace RSSAgregator.Server
             {
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(ClientId, ClientSecret),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                AuthorizeEndpointPath = new PathString("/api/OAuth/Register"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14)
                 //AllowInsecureHttp = true
             };

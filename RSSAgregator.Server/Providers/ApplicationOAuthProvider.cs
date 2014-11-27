@@ -54,7 +54,7 @@ namespace RSSAgregator.Server.Providers
         {
 
             var oauthIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
-            oauthIdentity.AddClaim(new Claim(ClaimTypes.Name, _clientId));
+            oauthIdentity.AddClaim(new Claim("scope", "Register"));
             var ticket = new AuthenticationTicket(oauthIdentity, new AuthenticationProperties());
             context.Validated(ticket);
             return base.GrantClientCredentials(context);
