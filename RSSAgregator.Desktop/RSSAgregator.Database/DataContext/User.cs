@@ -28,6 +28,10 @@ namespace RSSAgregator.Database.DataContext
         [StringLength(50)]
         public string EmailAddress { get; set; }
 
+        [Required]
+        [StringLength(50)]
+        public string Password { get; set; }
+
         [StringLength(50)]
         public string FacebookId { get; set; }
 
@@ -38,6 +42,8 @@ namespace RSSAgregator.Database.DataContext
         public string GoogleId { get; set; }
 
         public DateTime SignUpDate { get; set; }
+
+        public DateTime LastSignInDate { get; set; }
 
         public virtual ICollection<FeedCategory> FeedCategories { get; set; }
 
