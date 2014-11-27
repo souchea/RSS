@@ -23,6 +23,11 @@ namespace RSSAgregator.Server.Controllers
     [Authorize]
     public class OAuthController : ApiController
     {
+        public IUserManager UserManager { get; set; }
+        public OAuthController(IUserManager userManager)
+        {
+            UserManager = userManager;
+        }
 
         // GET api/Account/ExternalLogin
         //[OverrideAuthentication]
@@ -31,6 +36,7 @@ namespace RSSAgregator.Server.Controllers
         [HttpPost]
         [Scope("Register")]
         [Route("api/oauth/register")]
+
         public async Task<IHttpActionResult> Register()
 
         {
