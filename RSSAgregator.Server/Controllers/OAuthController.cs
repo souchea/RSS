@@ -50,7 +50,7 @@ namespace RSSAgregator.Server.Controllers
             if (UserManager.GetAllUsers().Any(user => user.EmailAddress == postValues["username"]))
                 return Ok("user exist");
 
-           // var user = new User {EmailAddress = postValues["password"]};
+           // var user = new User {EmailAddress = postValues["username"], pass};
            // UserManager.AddUser(user);
 
             return Ok();
