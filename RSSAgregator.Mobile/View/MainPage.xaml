@@ -91,7 +91,7 @@
         </Hub>
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar x:Name="CommandBar" ClosedDisplayMode="Minimal">
             <AppBarButton Label="Add" Icon="Add" Click="AddFeed_Click"/>
             <AppBarButton x:Name="SelectAppBarButton"
                           Label="select"

@@ -121,7 +121,11 @@ namespace RSSAgregator.Shared.ViewModel
 
         public void DeleteCategories(List<CategoryDTO> catNameList)
         {
-            
+            foreach (CategoryDTO t in catNameList)
+            {
+                ServiceManager.DeleteCategory(t.Id);
+                CategoryList.Remove(t);
+            }
         }
 
         private void SetSourceList(object sender, EventArgs e)

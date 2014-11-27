@@ -130,6 +130,7 @@ namespace RSSAgregator.Mobile.View
             {
                 SelectAppBarButton.Visibility = Visibility.Collapsed;
                 DeleteAppBarButton.Visibility = Visibility.Visible;
+                CommandBar.Visibility = Visibility.Visible;
             }
         }
 
@@ -137,8 +138,10 @@ namespace RSSAgregator.Mobile.View
         {
             List<object> catList = CategoriesListView.SelectedItems.ToList();
 
-            //DefaultViewModel.DeleteCategories(catList);
+            var list = catList.OfType<CategoryDTO>();
+            DefaultViewModel.DeleteCategories(list.ToList());
             CategoriesListView.SelectionMode = ListViewSelectionMode.None;
+            CommandBar.Visibility = Visibility.Collapsed;
         }
     }
 }
