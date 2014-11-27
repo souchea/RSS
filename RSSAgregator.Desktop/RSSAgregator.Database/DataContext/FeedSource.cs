@@ -24,6 +24,10 @@ namespace RSSAgregator.Database.DataContext
 
         public DateTime CreationDate { get; set; }
 
+        public int ViewedNumber { get; set; }
+
+        public string ViewState { get; set; }
+
         public virtual FeedCategory FeedCategory { get; set; }
 
         public virtual User User { get; set; }

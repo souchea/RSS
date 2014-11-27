@@ -38,7 +38,8 @@ namespace RSSAgregator.Shared.Common
         {
             try
             {
-                HttpResponseMessage response = await WebApiClient.PostAsync(String.Format("Category/Add/{0}/{1}", userId, catName), null);
+                HttpResponseMessage response =
+                    await WebApiClient.PostAsync(String.Format("Category/Add/{0}/{1}", userId, catName), null);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -55,7 +56,10 @@ namespace RSSAgregator.Shared.Common
         {
             try
             {
-                HttpResponseMessage response = await WebApiClient.PostAsync(String.Format("Source/Add/{0}?url={1}&catId={2}", userId, url, catId), null);
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.PostAsync(String.Format("Source/Add/{0}?url={1}&catId={2}", userId, url, catId),
+                            null);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -65,7 +69,7 @@ namespace RSSAgregator.Shared.Common
             catch (Exception)
             {
                 return false;
-            } 
+            }
         }
 
         public async Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb = 10)
@@ -73,7 +77,8 @@ namespace RSSAgregator.Shared.Common
             var toReturnFeedList = new List<FeedDTO>();
             try
             {
-                HttpResponseMessage response = await WebApiClient.GetAsync(String.Format("Source/GetItems/{0}?nb={1}", sourceId, nb));
+                HttpResponseMessage response =
+                    await WebApiClient.GetAsync(String.Format("Source/GetItems/{0}?nb={1}", sourceId, nb));
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadAsAsync<List<FeedDTO>>();
@@ -83,10 +88,55 @@ namespace RSSAgregator.Shared.Common
             catch (Exception)
             {
                 return toReturnFeedList;
-            } 
+            }
         }
 
-        // delete categorie
-        // delete source
+        public async Task<bool> DeleteCategory(int catId)
+        {
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.DeleteAsync(String.Format("Category/Delete/{0}", catId));
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteSource(int sourceId)
+        {
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.DeleteAsync(String.Format("Source/Delete/{0}", sourceId));
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> SendReadAsync(int sourceId)
+        {
+            return true;
+        }
+
+        public async Task<bool> SendStageAsync(int sourceId, string state)
+        {
+            return true;
+        }
     }
 }

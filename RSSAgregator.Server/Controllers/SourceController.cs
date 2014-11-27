@@ -77,15 +77,25 @@ namespace RSSAgregator.Server.Controllers
             }
 
             return feedList;
-
-            // todo: voir si je renvois un SyndicationItem ou un DTO
-            //foreach (SyndicationItem item in feed.Items)
-            //{
-            //    String subject = item..Text;    
-            //    String summary = item.Summary.Text;  
-            //}
-
-            //return feed.Items;
         }
+
+        [HttpPost]
+        public void Read(int id)
+        {
+            var source = SourceManager.GetSourceById(id);
+
+            // ajoute 1 view a la source
+        }
+
+        [HttpPost]
+        public void SetState(int id)
+        {
+            var source = SourceManager.GetSourceById(id);
+
+            // set le viewState de la source
+        }
+
+
+
     }
 }

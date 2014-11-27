@@ -33,7 +33,8 @@ namespace RSSAgregator.Server.Controllers
                 new SourceDTO
                 {
                     Id = source.Id,
-                    Title = source.Title
+                    Title = source.Title,
+                    ViewedNumber = source.ViewedNumber
                 }).ToList()
                 select new CategoryDTO
                 {
@@ -42,7 +43,6 @@ namespace RSSAgregator.Server.Controllers
                     Name = category.Name
                 }).ToList();
         }
-
 
         [HttpPost]
         public int Add(int userId, string param)
