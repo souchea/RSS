@@ -40,6 +40,8 @@ namespace RSSAgregator.Server.Providers
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
+            oAuthIdentity.AddClaim(new Claim("scope", "isLogged"));
+
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                CookieAuthenticationDefaults.AuthenticationType);
 

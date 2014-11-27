@@ -22,11 +22,7 @@ namespace RSSAgregator.Server
                 defaults: new {action= "Add" }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "Register",
-                routeTemplate: "api/{controller}/register",
-                defaults: new { action = "Register" }
-            );
+           
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
