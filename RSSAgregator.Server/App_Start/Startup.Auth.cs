@@ -2,15 +2,23 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using Microsoft.Owin.Security.OAuth;
+using RSSAgregator.Server.Providers;
 using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server
 {
     public partial class Startup
     {
+        public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+
+        public static string ClientId { get; private set; }
+        public static string ClientSecret { get; private set; }
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -45,6 +53,20 @@ namespace RSSAgregator.Server
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
+
+            // Configure the application for OAuth based flow
+            ClientId = "self";
+            ClientSecret = "self";
+            OAuthOptions = new OAuthAuthorizationServerOptions
+            {
+                TokenEndpointPath = new PathString("/Token"),
+                Provider = new ApplicationOAuthProvider(ClientId, ClientSecret),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
+            };
+
+            // Enable the application to use bearer tokens to authenticate users
+            app.UseOAuthBearerTokens(OAuthOptions);
+
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
@@ -54,15 +76,18 @@ namespace RSSAgregator.Server
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "753742181365292",
+               appSecret: "9e61b6092c50bdde8f1ea26c44e3efdf");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "123279295858-jlv7c2maee5q7sgrksq284i63ruhtdjo.apps.googleusercontent.com",
+                ClientSecret = "tMc5mPUggLgV4G5iGi37RaK3"
+            });
+
+ 
+           
         }
     }
 }
