@@ -119,8 +119,9 @@ namespace RSSAgregator.Shared.ViewModel
             RssDataManager.SourceChanged += SetSourceList;
         }
 
-        public void DeleteCategories(List<CategoryDTO> catNameList)
+        public void DeleteCategories(List<object> catNameList)
         {
+            var list = catNameList.OfType<CategoryDTO>().ToList();
             foreach (CategoryDTO t in catNameList)
             {
                 ServiceManager.DeleteCategory(t.Id);

@@ -29,21 +29,25 @@
         </StackPanel>
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListView ItemsSource="{Binding FeedList}"
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,5,10,-1">
+            <StackPanel Orientation="Vertical" Margin="0,0" Width="auto" Height="auto">
+                <ScrollViewer Height="303" Margin="0,0,-0.333,0" Name="scrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding FeedList}"
                       Margin="0,0,0,-1">
-                <ListView.Template>
-                    <ControlTemplate>
-                        <ItemsPresenter />
-                    </ControlTemplate>
-                </ListView.Template>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock FontSize="25"
+                        <ListView.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </ListView.Template>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="25"
                                            Text="{Binding Path=Title}" Tapped="Feed_OnTapped"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

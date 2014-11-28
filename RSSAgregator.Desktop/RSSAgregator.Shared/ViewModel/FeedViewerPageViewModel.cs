@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
@@ -48,8 +50,9 @@ namespace RSSAgregator.Shared.ViewModel
         public async void SetViewerPage(FeedDTO feed)
         {
             FeedName = feed.Title;
-            FeedSummary = feed.Summary;
             FeedDate = feed.PublishDate.DateTime.ToString();
+            FeedSummary = feed.Summary;
+            
             SaveFeed(feed);
         }
 

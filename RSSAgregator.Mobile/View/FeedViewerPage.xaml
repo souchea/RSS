@@ -27,7 +27,11 @@
             <TextBlock Text="{Binding FeedDate}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
         </StackPanel>
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <TextBlock Text="{Binding FeedSummary}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0" TextWrapping="WrapWholeWords"/>
+            <StackPanel Orientation="Vertical" Margin="0,0" Width="auto" Height="auto">
+                <ScrollViewer Height="303" Margin="0,0,-0.333,0" Name="scrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0" TextWrapping="WrapWholeWords"/>
+                </ScrollViewer>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

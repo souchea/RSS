@@ -30,21 +30,22 @@
         </StackPanel>
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <q:MultiSelectListView x:Name="SelectSourceList" ItemsSource="{Binding SourceList}" SelectionModeChanged="SelectList_SelectionModeChanged"
-                              Margin="0,0,0,139">
-                <ListView.Template>
-                    <ControlTemplate>
-                        <ItemsPresenter />
-                    </ControlTemplate>
-                </ListView.Template>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock FontSize="25"
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,9,10,0">
+            <ScrollViewer Name="scrollViewer1" VerticalScrollBarVisibility="Auto">
+                <q:MultiSelectListView x:Name="SelectSourceList" ItemsSource="{Binding SourceList}" SelectionModeChanged="SelectList_SelectionModeChanged" Height="385">
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <ItemsPresenter />
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="25"
                                            Text="{Binding Path=Title}" Tapped="Source_OnTapped" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </q:MultiSelectListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </q:MultiSelectListView>
+            </ScrollViewer>
         </Grid>
     </Grid>
     <Page.BottomAppBar>

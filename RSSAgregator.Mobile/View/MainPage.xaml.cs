@@ -67,18 +67,6 @@ namespace RSSAgregator.Mobile.View
         private async void GetFeedAsync(string feedUriString)
         {
             Frame.Navigate(typeof (Categories), feedUriString);
-            /*SyndicationClient client = new SyndicationClient();
-            Uri feedUri = new Uri(feedUriString);
-
-            try
-            {
-                SyndicationFeed feed = await client.RetrieveFeedAsync(feedUri);
-
-                StorageManager.SaveFileAsync(feed.Title.Text, feed);
-            }
-            catch (Exception)
-            {
-            }*/
         }
 
         private async void Click_Account(object sender, RoutedEventArgs e)
@@ -89,11 +77,6 @@ namespace RSSAgregator.Mobile.View
             {
                 Frame.Navigate(typeof(ConnectionPage));
             }
-        }
-
-        private void Feed_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            
         }
 
         private async void CategoryButton_Click(object sender, RoutedEventArgs e)
@@ -138,8 +121,7 @@ namespace RSSAgregator.Mobile.View
         {
             List<object> catList = CategoriesListView.SelectedItems.ToList();
 
-            var list = catList.OfType<CategoryDTO>();
-            DefaultViewModel.DeleteCategories(list.ToList());
+            DefaultViewModel.DeleteCategories(catList);
             CategoriesListView.SelectionMode = ListViewSelectionMode.None;
         }
     }
