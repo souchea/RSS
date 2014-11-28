@@ -65,7 +65,6 @@ namespace RSSAgregator.Server.App_Start
         {
             kernel.Bind<ICategoryManager>().To<CategoryManager>();
             kernel.Bind<ISourceManager>().To<SourceManager>();
-            kernel.Bind<IUserManager>().To<UserManager>();
 
         }        
     }

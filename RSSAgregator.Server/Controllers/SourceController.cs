@@ -12,6 +12,9 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
+    // todo remettre le authorize des que tout marche bien cote client
+    //[Authorize]
+
     public class SourceController : ApiController
     {
         protected ISourceManager SourceManager { get; set; }
@@ -22,7 +25,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
-        public int Add(int id, string url, int catId)
+        public int Add(string id, string url, int catId)
         {
             var newSource = new FeedSource
             {

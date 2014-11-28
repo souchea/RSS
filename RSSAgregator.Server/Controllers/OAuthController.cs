@@ -23,11 +23,6 @@ namespace RSSAgregator.Server.Controllers
     [Authorize]
     public class OAuthController : ApiController
     {
-        public IUserManager UserManager { get; set; }
-        public OAuthController(IUserManager userManager)
-        {
-            UserManager = userManager;
-        }
 
         // GET api/Account/ExternalLogin
         //[OverrideAuthentication]
@@ -47,7 +42,7 @@ namespace RSSAgregator.Server.Controllers
                 return NotFound();
             
             // user manager and register + check si il exist deja
-            if (UserManager.GetAllUsers().Any(user => user.EmailAddress == postValues["username"]))
+            //if (UserManager.GetAllUsers().Any(user => user.EmailAddress == postValues["username"]))
                 return Ok("user exist");
 
            // var user = new User {EmailAddress = postValues["username"], pass};

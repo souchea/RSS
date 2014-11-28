@@ -12,7 +12,8 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
-    [Authorize]
+    // todo remettre le authorize des que tout marche bien cote client
+    //[Authorize]
     public class CategoryController : ApiController
     {
         protected ICategoryManager CategoryManager { get; set; }
@@ -26,7 +27,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
-        public List<CategoryDTO> Get(int id)
+        public List<CategoryDTO> Get(string id)
         {
             var categories = CategoryManager.GetByUserId(id);
             return (from category in categories
@@ -46,7 +47,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
-        public int Add(int userId, string param)
+        public int Add(string userId, string param)
         {
             var toCreateCategory = new FeedCategory
             {

@@ -9,7 +9,7 @@ namespace RSSAgregator.Database.Manager
         void RenameModel(int categoryId, string newName);
         void DeleteCategory(FeedCategory toDelete);
         List<FeedCategory> GetAllCategories();
-        List<FeedCategory> GetByUserId(int id);
+        List<FeedCategory> GetByUserId(string id);
         List<FeedCategory> GetCategoriesNumber(int number = 5);
         FeedCategory GetCategoryById(int id);
     }

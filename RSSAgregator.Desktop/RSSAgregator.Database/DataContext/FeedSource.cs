@@ -11,25 +11,29 @@ namespace RSSAgregator.Database.DataContext
     {
         public int Id { get; set; }
 
-        public int UserId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
 
         public int CategoryId { get; set; }
 
         [Required]
         public string Url { get; set; }
 
-        public string Title { get; set; }
-
         public bool Public { get; set; }
 
         public DateTime CreationDate { get; set; }
 
+        [Required]
+        [StringLength(255)]
+        public string Title { get; set; }
+
         public int ViewedNumber { get; set; }
 
+        [Required]
+        [StringLength(255)]
         public string ViewState { get; set; }
 
         public virtual FeedCategory FeedCategory { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

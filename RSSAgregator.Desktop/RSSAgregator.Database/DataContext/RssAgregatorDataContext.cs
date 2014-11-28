@@ -12,12 +12,25 @@ namespace RSSAgregator.Database.DataContext
         {
         }
 
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<FeedCategory> FeedCategories { get; set; }
         public virtual DbSet<FeedSource> FeedSources { get; set; }
-        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.AspNetUserClaims)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.UserId);
+
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.AspNetUserLogins)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.UserId);
+
             modelBuilder.Entity<FeedCategory>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -26,16 +39,6 @@ namespace RSSAgregator.Database.DataContext
                 .HasMany(e => e.FeedSources)
                 .WithRequired(e => e.FeedCategory)
                 .HasForeignKey(e => e.CategoryId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.FeedCategories)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.FeedSources)
-                .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
         }
     }
