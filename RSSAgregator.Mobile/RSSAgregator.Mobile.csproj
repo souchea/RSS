@@ -186,6 +186,9 @@
     <Reference Include="Ninject">
       <HintPath>..\RSSAgregator.Desktop\packages\Portable.Ninject.3.3\lib\Wpa81\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="QKit">
+      <HintPath>..\RSSAgregator.Desktop\packages\QKit.0.4.1\lib\wpa81\QKit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\RSSAgregator.Desktop\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
