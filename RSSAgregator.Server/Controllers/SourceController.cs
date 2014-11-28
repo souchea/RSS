@@ -91,7 +91,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
-        public void SetState(int id)
+        public void SetState(int id, string state)
         {
             var source = SourceManager.GetSourceById(id);
 

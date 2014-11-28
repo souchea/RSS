@@ -24,6 +24,11 @@ namespace RSSAgregator.Shared.Common
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        public void SetToken(string token)
+        {
+            WebApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);           
+        }
+
         public async Task<List<CategoryDTO>> GetCategoriesAsync(string userId)
         {
             HttpResponseMessage response = await WebApiClient.GetAsync(String.Format("Category/Get/{0}", userId));
@@ -131,22 +136,85 @@ namespace RSSAgregator.Shared.Common
 
         public async Task<bool> SendReadAsync(int sourceId)
         {
-            return true;
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.PostAsync(String.Format("Source/Read/{0}", sourceId),
+                            null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> SendStageAsync(int sourceId, string state)
         {
-            return true;
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.PostAsync(String.Format("Source/SetState/{0}?state={1}", sourceId, state),
+                            null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public async Task<string> GetTokenRegisterAsync()
+        public async Task<bool> GetTokenRegisterAsync(string username, string password)
         {
-            return "";
+            try
+            {
+                HttpResponseMessage response =
+                    await WebApiClient.PostAsync(String.Format("Token?grant_type=client_credentials&client_id=self&client_secret=self"), null);
+                if (response.IsSuccessStatusCode)
+                {
+                    HttpResponseMessage response2 =
+    await WebApiClient.PostAsync(String.Format("oauth/register?grant_type=password&client_id=self&client_secret=self&email={0}&password={1}", username, password), null);
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        var token = await response2.Content.ReadAsStringAsync();
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public async Task<string> GetTokenLoginAsync(string username, string password)
+        public async Task<bool> GetTokenLoginAsync(string username, string password)
         {
-            return "";
+            try
+            {
+                HttpResponseMessage response =
+                    await WebApiClient.PostAsync(String.Format("Token?grant_type=password&client_id=self&client_secret=self&username={0}&password={1}", username, password), null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
