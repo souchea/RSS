@@ -43,7 +43,6 @@ namespace RSSAgregator.Mobile.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: préparer la page pour affichage ici.
-
             // TODO: si votre application comporte plusieurs pages, assurez-vous que vous
             // gérez le bouton Retour physique en vous inscrivant à l’événement
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed.
@@ -125,12 +124,13 @@ namespace RSSAgregator.Mobile.View
             {
                 SelectAppBarButton.Visibility = Visibility.Visible;
                 DeleteAppBarButton.Visibility = Visibility.Collapsed;
+                CommandBar.ClosedDisplayMode = AppBarClosedDisplayMode.Minimal;
             }
             else
             {
                 SelectAppBarButton.Visibility = Visibility.Collapsed;
                 DeleteAppBarButton.Visibility = Visibility.Visible;
-                CommandBar.Visibility = Visibility.Visible;
+                CommandBar.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
             }
         }
 
@@ -141,7 +141,6 @@ namespace RSSAgregator.Mobile.View
             var list = catList.OfType<CategoryDTO>();
             DefaultViewModel.DeleteCategories(list.ToList());
             CategoriesListView.SelectionMode = ListViewSelectionMode.None;
-            CommandBar.Visibility = Visibility.Collapsed;
         }
     }
 }

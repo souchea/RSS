@@ -62,6 +62,15 @@ namespace RSSAgregator.Shared.ViewModel
             SetSourceList(catId);
         }
 
+        public void DeleteSources(List<SourceDTO> catNameList)
+        {
+            foreach (SourceDTO t in catNameList)
+            {
+                ServiceManager.DeleteSource(t.Id);
+                SourceList.Remove(t);
+            }
+        }
+
         private void SetSourceList(string catId)
         {
             foreach (CategoryDTO t1 in CategoryList)

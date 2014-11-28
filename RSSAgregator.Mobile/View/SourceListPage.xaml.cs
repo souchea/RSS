@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
+using RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Mobile.View
@@ -111,5 +112,38 @@ namespace RSSAgregator.Mobile.View
         {
             Frame.Navigate(typeof(FeedsPage), sender);
         }
+
+        private void SelectList_SelectionModeChanged(object sender, RoutedEventArgs e)
+        {
+            if (SelectSourceList.SelectionMode != ListViewSelectionMode.Multiple)
+            {
+                SelectAppBarButton.Visibility = Visibility.Visible;
+                DeleteAppBarButton.Visibility = Visibility.Collapsed;
+                CommandBar.ClosedDisplayMode = AppBarClosedDisplayMode.Minimal;
+            }
+            else
+            {
+                SelectAppBarButton.Visibility = Visibility.Collapsed;
+                DeleteAppBarButton.Visibility = Visibility.Visible;
+                CommandBar.Visibility = Visibility.Visible;
+                CommandBar.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
+            }
+        }
+        private void SelectAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            SelectSourceList.SelectionMode = ListViewSelectionMode.Multiple;
+        }
+
+        private void DeleteAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<object> catList = SelectSourceList.SelectedItems.ToList();
+
+            var list = catList.OfType<SourceDTO>();
+            DefaultViewModel.DeleteSources(list.ToList());
+            SelectSourceList.SelectionMode = ListViewSelectionMode.None;
+            CommandBar.Visibility = Visibility.Collapsed;
+        }
     }
+
+        
 }
