@@ -31,7 +31,7 @@ namespace RSSAgregator.Server.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("RssAgregatorDataContext", throwIfV1Schema: false)
         {
         }
 

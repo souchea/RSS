@@ -58,7 +58,7 @@ namespace RSSAgregator.Shared.ViewModel
         public async void SetCategoryList(string catId)
         {
             SourceNameText = catId;
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(3));
+            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf"));
             SetSourceList(catId);
         }
 

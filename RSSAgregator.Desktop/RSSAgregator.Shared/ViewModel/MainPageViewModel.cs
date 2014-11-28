@@ -141,7 +141,7 @@ namespace RSSAgregator.Shared.ViewModel
 
         public async void AddCategory()
         {
-            var result = await ServiceManager.AddCategoryAsync(3, ToAddCategoryText);
+            var result = await ServiceManager.AddCategoryAsync("599de3d2-811f-42fa-8544-a7b0975d3baf", ToAddCategoryText);
             if (result)
             {
             }

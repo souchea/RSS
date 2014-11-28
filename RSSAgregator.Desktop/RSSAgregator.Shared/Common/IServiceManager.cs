@@ -9,8 +9,10 @@ namespace RSSAgregator.Shared.Common
     public interface IServiceManager
     {
         HttpClient WebApiClient { get; set; }
-        Task<List<CategoryDTO>> GetCategoriesAsync(int userId);
-        Task<bool> AddCategoryAsync(int userId, string catName);
+        Task<List<CategoryDTO>> GetCategoriesAsync(string userId);
+        Task<bool> AddCategoryAsync(string userId, string catName);
+
+        Task<bool> AddSourceAsync(string userId, int catId, string url);
 
         Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb);
 

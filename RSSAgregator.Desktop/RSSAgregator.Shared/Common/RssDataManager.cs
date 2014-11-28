@@ -55,7 +55,7 @@ namespace RSSAgregator.Shared.Common
 
             try
             {
-                var onlineCategories = await ServiceManager.GetCategoriesAsync(3);
+                var onlineCategories = await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf");
                 //CategoryList = onlineCategories;
                 StorageManager.StoreCategories(onlineCategories);
                 if (CategoryChanged != null)

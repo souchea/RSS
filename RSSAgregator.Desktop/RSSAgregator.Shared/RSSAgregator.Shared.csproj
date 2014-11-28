@@ -37,8 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Common\IDataManager.cs" />
+    <Compile Include="Common\ILoginManager.cs" />
     <Compile Include="Common\IServiceManager.cs" />
     <Compile Include="Common\IStorageManager.cs" />
+    <Compile Include="Common\LoginManager.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\RssDataManager.cs" />
     <Compile Include="Common\WebApiServiceManager.cs" />

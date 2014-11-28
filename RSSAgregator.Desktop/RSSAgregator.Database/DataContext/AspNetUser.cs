@@ -12,6 +12,7 @@ namespace RSSAgregator.Database.DataContext
         {
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            AspNetRoles = new HashSet<AspNetRole>();
         }
 
         public string Id { get; set; }
@@ -44,5 +45,7 @@ namespace RSSAgregator.Database.DataContext
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
 
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

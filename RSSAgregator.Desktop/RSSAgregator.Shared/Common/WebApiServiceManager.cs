@@ -24,7 +24,7 @@ namespace RSSAgregator.Shared.Common
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<CategoryDTO>> GetCategoriesAsync(int userId)
+        public async Task<List<CategoryDTO>> GetCategoriesAsync(string userId)
         {
             HttpResponseMessage response = await WebApiClient.GetAsync(String.Format("Category/Get/{0}", userId));
             if (response.IsSuccessStatusCode)
@@ -34,7 +34,7 @@ namespace RSSAgregator.Shared.Common
             return null;
         }
 
-        public async Task<bool> AddCategoryAsync(int userId, string catName)
+        public async Task<bool> AddCategoryAsync(string userId, string catName)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace RSSAgregator.Shared.Common
             }
         }
 
-        public async Task<bool> AddSourceAsync(int userId, int catId, string url)
+        public async Task<bool> AddSourceAsync(string userId, int catId, string url)
         {
             try
             {
@@ -137,6 +137,16 @@ namespace RSSAgregator.Shared.Common
         public async Task<bool> SendStageAsync(int sourceId, string state)
         {
             return true;
+        }
+
+        public async Task<string> GetTokenRegisterAsync()
+        {
+            return "";
+        }
+
+        public async Task<string> GetTokenLoginAsync(string username, string password)
+        {
+            return "";
         }
     }
 }

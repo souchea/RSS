@@ -21,6 +21,11 @@ namespace RSSAgregator.Database.DataContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetRole>()
+                .HasMany(e => e.AspNetUsers)
+                .WithMany(e => e.AspNetRoles)
+                .Map(m => m.ToTable("AspNetUserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
+
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.AspNetUserClaims)
                 .WithRequired(e => e.AspNetUser)
