@@ -62,6 +62,7 @@ namespace RSSAgregator.Server
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(ClientId, ClientSecret),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
+                AllowInsecureHttp = true
             };
 
             // Enable the application to use bearer tokens to authenticate users
