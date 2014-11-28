@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Desktop
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Interaction logic for Register.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Register : Page
     {
-        public MainWindow()
+        public Register()
         {
             InitializeComponent();
         }
