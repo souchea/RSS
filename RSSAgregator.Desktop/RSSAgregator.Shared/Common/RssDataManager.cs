@@ -47,7 +47,9 @@ namespace RSSAgregator.Shared.Common
 
         public async void SetCategoryList()
         {
-            CategoryList = await StorageManager.GetStoredCategories();
+            var cat = await StorageManager.GetStoredCategories();
+            if (cat != null)
+                CategoryList = cat;
             if (CategoryChanged != null)
             {
                 CategoryChanged(this, new EventArgs());
@@ -56,7 +58,7 @@ namespace RSSAgregator.Shared.Common
             try
             {
                 var onlineCategories = await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf");
-                //CategoryList = onlineCategories;
+                CategoryList = onlineCategories;
                 StorageManager.StoreCategories(onlineCategories);
                 if (CategoryChanged != null)
                 {

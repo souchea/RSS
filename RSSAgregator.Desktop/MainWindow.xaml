@@ -73,7 +73,7 @@
             </ListView>
             <!-- This element displays the Feed content in a website page format -->
             <WebBrowser Name="ItemContent" Grid.Column="2" Grid.Row="2" Visibility="Hidden"></WebBrowser>
-            <!-- This contains the Feeds list (changes often) -->
+            <!-- This contains the Feeds list (changes often)   -->
             <ListView Name="ItemsList" Grid.Column="2" Grid.Row="2">
                 <ListView.ItemTemplate>
                     <DataTemplate>

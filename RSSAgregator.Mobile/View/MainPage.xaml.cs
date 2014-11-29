@@ -42,6 +42,7 @@ namespace RSSAgregator.Mobile.View
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
             // TODO: préparer la page pour affichage ici.
             // TODO: si votre application comporte plusieurs pages, assurez-vous que vous
             // gérez le bouton Retour physique en vous inscrivant à l’événement
@@ -67,16 +68,6 @@ namespace RSSAgregator.Mobile.View
         private async void GetFeedAsync(string feedUriString)
         {
             Frame.Navigate(typeof (Categories), feedUriString);
-        }
-
-        private async void Click_Account(object sender, RoutedEventArgs e)
-        {
-            Button accountButton = new Button();
-            accountButton = sender as Button;
-            if (accountButton.Content.Equals("Login"))
-            {
-                Frame.Navigate(typeof(ConnectionPage));
-            }
         }
 
         private async void CategoryButton_Click(object sender, RoutedEventArgs e)

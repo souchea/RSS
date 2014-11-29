@@ -12,7 +12,7 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CategoryController : ApiController
     {
         protected ICategoryManager CategoryManager { get; set; }

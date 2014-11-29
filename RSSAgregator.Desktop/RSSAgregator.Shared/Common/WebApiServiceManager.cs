@@ -36,7 +36,7 @@ namespace RSSAgregator.Shared.Common
             {
                 return await response.Content.ReadAsAsync<List<CategoryDTO>>();
             }
-            return null;
+            return new List<CategoryDTO>();
         }
 
         public async Task<bool> AddCategoryAsync(string userId, string catName)

@@ -12,7 +12,7 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
 
     public class SourceController : ApiController
     {
@@ -67,6 +67,7 @@ namespace RSSAgregator.Server.Controllers
                 
             foreach (var feedItem in feed.Items)
             {
+
                 feedList.Add(new FeedItemDTO
                 {
                     Id = feedItem.Id ?? "",
