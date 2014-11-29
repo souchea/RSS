@@ -97,8 +97,8 @@ namespace RSSAgregator.Mobile.View
 
         private void ListViewBase_OnItemClick(object sender, RoutedEventArgs e)
         {
-            TextBlock cat = sender as TextBlock;
-            if (cat != null) DefaultViewModel.SetNewSource(DefaultViewModel.GetCompleteUrl(Url), DefaultViewModel.GetCatId(cat.Text));
+            CategoryDTO item = ListViewCategory.SelectedItem as CategoryDTO;
+            if (item != null) DefaultViewModel.SetNewSource(DefaultViewModel.GetCompleteUrl(Url), item.Id);
             Frame.GoBack();
         }
     }

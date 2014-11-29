@@ -31,7 +31,7 @@
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <ListView ItemsSource="{Binding CategoryList}" Margin="0,0,0,10">
+            <ListView x:Name="ListViewCategory" ItemsSource="{Binding CategoryList}" Margin="0,0,0,10">
                 <ListView.Template>
                     <ControlTemplate>
                         <ItemsPresenter />
