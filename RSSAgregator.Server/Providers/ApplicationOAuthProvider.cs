@@ -86,7 +86,9 @@ namespace RSSAgregator.Server.Providers
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
-            context.AdditionalResponseParameters.Add("userID", context.Identity.GetUserId());
+            var id = context.Identity.GetUserId();
+            if (id != null)
+                context.AdditionalResponseParameters.Add("userID", id);
             return Task.FromResult<object>(null);
         }
 
