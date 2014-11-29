@@ -73,10 +73,20 @@ namespace RSSAgregator.Mobile.Common
         {
             var serializer = new DataContractSerializer(typeof (List<SourceDTO>));
 
-            using (var fileStream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("sources.xml", CreationCollisionOption.ReplaceExisting))
+            try
             {
-                serializer.WriteObject(fileStream, toStore);
+
+
+                using (
+                    var fileStream =
+                        await
+                            ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("sources.xml",
+                                CreationCollisionOption.OpenIfExists))
+                {
+                    serializer.WriteObject(fileStream, toStore);
+                }
             }
+            catch { }
         }
     }
 }
