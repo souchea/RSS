@@ -106,12 +106,15 @@ namespace RSSAgregator.Shared.ViewModel
 
         private IDataManager RssDataManager { get; set; }
 
+        private ILoginManager LoginManager { get; set; }
+
         #endregion
 
-        public MainPageViewModel(IServiceManager serviceManager, IDataManager dataManager)
+        public MainPageViewModel(IServiceManager serviceManager, IDataManager dataManager, ILoginManager loginManager)
         {
             ServiceManager = serviceManager;
             RssDataManager = dataManager;
+            LoginManager = loginManager;
 
             SourceList = new ObservableCollection<SourceDTO>();;
 
@@ -143,9 +146,10 @@ namespace RSSAgregator.Shared.ViewModel
 
         public async void AddCategory()
         {
-            var result = await ServiceManager.AddCategoryAsync("599de3d2-811f-42fa-8544-a7b0975d3baf", ToAddCategoryText);
+            var result = await ServiceManager.AddCategoryAsync(LoginManager.UserId, ToAddCategoryText);
             if (result)
             {
+
             }
         }
     }

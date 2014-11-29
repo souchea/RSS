@@ -55,7 +55,7 @@ namespace RSSAgregator.Mobile.View
             // cet événement est géré automatiquement.
         }
 
-        public bool IsConnection()
+        private bool IsConnection()
         {
             ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
             if (internetConnectionProfile != null)
