@@ -28,32 +28,24 @@ namespace RSSAgregator.Shared.ViewModel
 
         private IDataManager RssDataManager { get; set; }
 
+        private ILoginManager LoginManager { get; set; }
+
         #endregion
 
-        public CategoriesViewModel(IDataManager dataManager)
+        public CategoriesViewModel(IDataManager dataManager, ILoginManager loginManager)
         {
             RssDataManager = dataManager;
+            LoginManager = loginManager;
             SetCategoryList(null, null);
 
             RssDataManager.CategoryChanged += SetCategoryList;
         }
 
-        public int GetCatId(string catName)
-        {
-            int catId = 0;
-
-            foreach (CategoryDTO t in CategoryList.Where(t => t.Name == catName))
-            {
-                catId = t.Id;
-            }
-            return (catId);
-        }
-
         public string GetCompleteUrl(string url)
         {
-            if (!url.Contains("http://wwww."))
+            if (!url.Contains("http://www."))
             {
-                url = url.Insert(0, "http://wwww.");
+                url = url.Insert(0, "http://www.");
             }
             return (url);
         }
@@ -70,8 +62,8 @@ namespace RSSAgregator.Shared.ViewModel
 
             // todo cette fonction pue la merde serieux
             var service = new WebApiServiceManager();
-            
-            var result = await service.AddSourceAsync("599de3d2-811f-42fa-8544-a7b0975d3baf", catId, url);
+
+            var result = await service.AddSourceAsync(LoginManager.UserId, catId, url);
         }
     }
 }
