@@ -38,27 +38,39 @@ namespace RSSAgregator.Shared.ViewModel
             RssDataManager.CategoryChanged += SetCategoryList;
         }
 
+        public int GetCatId(string catName)
+        {
+            int catId = 0;
+
+            foreach (CategoryDTO t in CategoryList.Where(t => t.Name == catName))
+            {
+                catId = t.Id;
+            }
+            return (catId);
+        }
+
+        public string GetCompleteUrl(string url)
+        {
+            if (!url.Contains("http://wwww."))
+            {
+                url = url.Insert(0, "http://wwww.");
+            }
+            return (url);
+        }
+
         private void SetCategoryList(object sender, EventArgs e)
         {
             CategoryList = new ObservableCollection<CategoryDTO>(RssDataManager.CategoryList);
         }
 
 
-        public async void SetNewFeed(string url, string cat)
+        public async void SetNewSource(string url, int catId)
         {
-            // todo /!\  ne pas passer un string mais un ID  /!\
             //RssDataManager.AddSource(3, url, cat)
 
             // todo cette fonction pue la merde serieux
             var service = new WebApiServiceManager();
-            int catId = 0;
-
-            foreach (CategoryDTO t in CategoryList)
-            {
-                if (t.Name == cat)
-                    catId = t.Id;
-            }
-
+            
             var result = await service.AddSourceAsync("599de3d2-811f-42fa-8544-a7b0975d3baf", catId, url);
         }
     }

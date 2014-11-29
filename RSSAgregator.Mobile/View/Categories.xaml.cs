@@ -49,9 +49,8 @@ namespace RSSAgregator.Mobile.View
 
         private void ListViewBase_OnItemClick(object sender, RoutedEventArgs e)
         {
-            var cat = new TextBlock();
-            cat = sender as TextBlock;
-            if (cat != null) DefaultViewModel.SetNewFeed(Url, cat.Text);
+            TextBlock cat = sender as TextBlock;
+            if (cat != null) DefaultViewModel.SetNewSource(DefaultViewModel.GetCompleteUrl(Url), DefaultViewModel.GetCatId(cat.Text));
             Frame.GoBack();
         }
     }

@@ -22,14 +22,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="{Binding FeedName}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="{Binding FeedDate}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+        <StackPanel Grid.Row="0" Margin="10,0,0,568" Grid.RowSpan="2">
+            <TextBlock Text="{Binding FeedName}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,5,0,0"/>
+            <TextBlock Text="{Binding FeedDate}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,7,0,0"/>
         </StackPanel>
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <StackPanel Orientation="Vertical" Margin="0,0" Width="auto" Height="auto">
-                <ScrollViewer Height="303" Margin="0,0,-0.333,0" Name="scrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0" TextWrapping="WrapWholeWords"/>
+                <ScrollViewer Height="507" Margin="0,0,-0.333,0" Name="scrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
+                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Height="507" Width="362"/>
                 </ScrollViewer>
             </StackPanel>
         </Grid>
