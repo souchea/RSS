@@ -1,63 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using System.Web.Script.Serialization;
-using System.Web.WebPages;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
 using RSSAgregator.Server.APIAttribute;
 using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
+
     [Authorize]
     public class OAuthController : ApiController
     {
 
-
-        private ApplicationUserManager _userManager { get; set; }
-
-        public OAuthController()
-        {
-
-        }
-
-
-       public OAuthController(ApplicationUserManager userManager)
-       {
-           UserManager = userManager;
-       }
-
-       public ApplicationUserManager UserManager
+        public ApplicationUserManager UserManager
        {
            get
            {
-               return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+               return Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
            }
-           private set
-           {
-               _userManager = value;
-           }
-       }
+        }
 
-        // GET api/Account/ExternalLogin
-        //[OverrideAuthentication]
-        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
 
-        [HttpPost]
         [Scope("Register")]
         [Route("api/oauth/register")]
-
-
        public async Task<IHttpActionResult> Register(AccountBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -67,7 +34,6 @@ namespace RSSAgregator.Server.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
             
-            //revoir le renvoi des messages
             if (!result.Succeeded)
                 return BadRequest(result.Errors.Aggregate("", (current, error) => current + (error + ", ")));
             
@@ -94,6 +60,23 @@ namespace RSSAgregator.Server.Controllers
             return Ok("ok");
         }
 
+
+        [HttpPost]
+        [Scope("isLogged")]
+        [Route("api/oauth/changepassword")]
+        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+           
+            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+                model.NewPassword);
+
+            if (!result.Succeeded)
+                return BadRequest(result.Errors.Aggregate("", (current, error) => current + (error + ", ")));
+
+            return Ok("ok");
+        }
 
 
     }

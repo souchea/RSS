@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Http.Results;
+using System.Web.WebPages;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -29,6 +32,12 @@ namespace RSSAgregator.Server.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+
+            if (context.UserName.IsEmpty() || context.Password.IsEmpty())
+            {
+                context.SetError("error_parameter", "The user name or password cannot be null.");
+                return;
+            }
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
@@ -64,14 +73,20 @@ namespace RSSAgregator.Server.Providers
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            string clientId = null;
-            string clientSecret = null;
+            string clientId;
+            string clientSecret;
 
             if ((context.TryGetFormCredentials(out clientId, out clientSecret) ||
                 context.TryGetBasicCredentials(out clientId, out clientSecret)) && clientId == _clientId
                 && clientSecret == _clientSecret)
                 context.Validated(clientId);
 
+            return Task.FromResult<object>(null);
+        }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            context.AdditionalResponseParameters.Add("userID", context.Identity.GetUserId());
             return Task.FromResult<object>(null);
         }
 
