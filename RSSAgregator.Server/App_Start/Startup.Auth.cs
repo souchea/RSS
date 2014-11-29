@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
@@ -40,9 +40,18 @@ namespace RSSAgregator.Server
                     // This is a security feature which is used when you change a password or add an external login to your account.  
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager)),
+                    OnApplyRedirect = ctx =>
+                    {
+                        if (!IsApiRequest(ctx.Request))
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                    }
                 }
             });            
+
+
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -63,6 +72,7 @@ namespace RSSAgregator.Server
                 Provider = new ApplicationOAuthProvider(ClientId, ClientSecret),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
                 AllowInsecureHttp = true
+            
             };
 
             // Enable the application to use bearer tokens to authenticate users
@@ -81,7 +91,7 @@ namespace RSSAgregator.Server
                appId: "753742181365292",
                appSecret: "9e61b6092c50bdde8f1ea26c44e3efdf");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = "123279295858-jlv7c2maee5q7sgrksq284i63ruhtdjo.apps.googleusercontent.com",
                 ClientSecret = "tMc5mPUggLgV4G5iGi37RaK3"
@@ -89,6 +99,12 @@ namespace RSSAgregator.Server
 
  
            
+        }
+
+        private static bool IsApiRequest(IOwinRequest request)
+        {
+            string apiPath = VirtualPathUtility.ToAbsolute("~/api/");
+            return request.Uri.LocalPath.StartsWith(apiPath);
         }
     }
 }
