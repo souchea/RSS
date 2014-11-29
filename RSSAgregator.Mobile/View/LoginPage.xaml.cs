@@ -115,12 +115,12 @@ namespace RSSAgregator.Mobile
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            //var worked = await DefaultViewModel.LoginAsync(Password.Password);
+            var worked = await DefaultViewModel.LoginAsync(Password.Password);
 
-            //if (worked)
-            //{
+            if (worked)
+            {
                 Frame.Navigate(typeof(MainPage));
-            //}
+            }
         }
 
         private void ButtonBase_OnClick2(object sender, RoutedEventArgs e)

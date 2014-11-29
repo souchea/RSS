@@ -3,38 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="768" Width="1024">
     <Grid x:Name="MainGrid">
-	    <Grid x:Name="SubMainGrid">
-		    <Grid.RowDefinitions>
-			    <RowDefinition x:Name="UpSide" Height="25"/>
-			    <RowDefinition x:Name="DownSide"/>
-		    </Grid.RowDefinitions>
-		    <Grid.ColumnDefinitions>
-			    <ColumnDefinition x:Name="LeftSide"/>
-			    <ColumnDefinition x:Name="Spacer" Width="3"/>
-			    <ColumnDefinition x:Name="RightSide" Width="4*"/>
-		    </Grid.ColumnDefinitions>
-       
-		    <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Background="#FFB9B9B9"/>
-       
+        <!-- Grid containgin most of the elements -->
+        <Grid x:Name="SubMainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="UpSide" Height="25"/>
+                <RowDefinition x:Name="DownSide"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftSide"/>
+                <ColumnDefinition x:Name="Spacer" Width="3"/>
+                <ColumnDefinition x:Name="RightSide" Width="4*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Used to add a feature of enlarging the list so the user can read long texts easier -->
+            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Background="#FFB9B9B9"/>
+
+            <!-- The main Menu bar -->
             <Menu Margin="0" Grid.ColumnSpan="3" Name="MainMenu" IsMainMenu="True" Background="DarkBlue" Foreground="White">
+                <!-- Should contain everything about the user account -->
                 <MenuItem Name="MAccount" Header="A_ccount">
                     <MenuItem Name="SMLogin" Header="Log_in" Click="SMLogin_Click" Background="DarkBlue" Foreground="White"></MenuItem>
                     <MenuItem Name="SMLogout" Header="Log_out" Background="DarkBlue" Foreground="White"></MenuItem>
                 </MenuItem>
+                <!-- Should contain everything about category modifications-->
+                <MenuItem Name="MGroups" Header="_Categories" Background="DarkBlue">
+                    <MenuItem Name="SBAddGroup" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBDelGroup" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBEditGroup" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
+                </MenuItem>
+                <!-- Should contain everything about feeds manipulations -->
                 <MenuItem Name="MFeeds" Header="_Feeds">
                     <MenuItem Name="SBAddFeed" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
                     <MenuItem Name="SBDelFeed" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
                     <MenuItem Name="SBEditFeed" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
                 </MenuItem>
-                <MenuItem Name="MGroups" Header="_Groups" Background="DarkBlue">
-                    <MenuItem Name="SBAddGroup" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
-                    <MenuItem Name="SBDelGroup" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
-                    <MenuItem Name="SBEditGroup" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
-                </MenuItem>
+                <!-- A simple exit button -->
                 <MenuItem Name="QuitApp" Header="_Quit" Click="QuitApp_Click">
                 </MenuItem>
             </Menu>
-        
+            <!-- This contains the list of categories (changes rarely) -->
             <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Background="DarkBlue">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -49,7 +56,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
+            <!-- This contains the sources list (changes moderately) -->
             <ListView Name="FeedList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -64,8 +71,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-       
+            <!-- This element displays the Feed content in a website page format -->
             <WebBrowser Name="ItemContent" Grid.Column="2" Grid.Row="2" Visibility="Hidden"></WebBrowser>
+            <!-- This contains the Feeds list (changes often)   -->
             <ListView Name="ItemsList" Grid.Column="2" Grid.Row="2">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -85,8 +93,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        
-	    </Grid>
+
+        </Grid>
+        <!-- Grid for displaying login/register elements -->
         <Grid Name="Credentials" Background="Green" Width="500" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

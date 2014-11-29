@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Ninject;
 using RSSAgregator.Shared.Model;
+using RSSAgregator.Shared.Common;
 using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Desktop
@@ -23,14 +24,33 @@ namespace RSSAgregator.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainPageViewModel DefaultViewModel { get; set; }
+        private enum AppState
+        {
+            None,
+            Login,
+            Register,
+            Category,
+            Flux,
+            Item,
+            ItemContent,
+            AddFlux,
+            DelFlux,
+            EditFlux,
+            AddCategory,
+            DelCategory,
+            EditCategory
+        }
+
+        public ViewModel.ViewModelContainer DefaultViewModel { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            DefaultViewModel = App.Kernel.Get<MainPageViewModel>();
-            DataContext = DefaultViewModel;
 
+            ObservableCollection<CategoryDTO> categories = new ObservableCollection<CategoryDTO>();
+            ObservableCollection<SourceDTO> sources;
+            categories.Add(new CategoryDTO { Id = 0, Feeds = null, Name = "Test"});
+            categories.Add(new CategoryDTO { Id = 1, Feeds = null, Name = "Test2" });
         }
 
         private void SMLogin_Click(object sender, RoutedEventArgs e)

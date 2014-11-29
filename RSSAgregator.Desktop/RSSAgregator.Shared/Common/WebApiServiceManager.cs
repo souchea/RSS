@@ -225,7 +225,7 @@ namespace RSSAgregator.Shared.Common
             }
         }
 
-        public async Task<bool> GetTokenLoginAsync(string username, string password)
+        public async Task<string> GetTokenLoginAsync(string username, string password)
         {
             try
             {
@@ -247,13 +247,13 @@ namespace RSSAgregator.Shared.Common
 
                     SetToken(token.access_token);
 
-                    return true;
+                    return token.userID;
                 }
-                return false;
+                return null;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
     }
