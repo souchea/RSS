@@ -47,19 +47,37 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        #region Dependencies
+
         private IServiceManager ServiceManager { get; set; }
 
-        public SourcePageViewModel(IServiceManager serviceManager)
+        private IDataManager DataManager { get; set; }
+
+        #endregion
+
+        public SourcePageViewModel(IServiceManager serviceManager, IDataManager dataManager)
         {
             ServiceManager = serviceManager;
+            DataManager = dataManager;
+
             SourceList = new ObservableCollection<SourceDTO>();
         }
 
         public async void SetCategoryList(string catId)
         {
             SourceNameText = catId;
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(3));
+            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf"));
             SetSourceList(catId);
+        }
+
+        public void DeleteSources(IEnumerable<object> sourcesNameList)
+        {
+            var list = sourcesNameList.OfType<SourceDTO>().ToList();
+            foreach (SourceDTO t in list)
+            {
+                ServiceManager.DeleteSource(t.Id);
+                SourceList.Remove(t);
+            }
         }
 
         private void SetSourceList(string catId)

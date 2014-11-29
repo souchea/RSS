@@ -1,4 +1,4 @@
-﻿
+﻿using RSSAgregator.Mobile.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,22 +16,20 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Ninject;
-using RSSAgregator.Mobile.Common;
-using RSSAgregator.Mobile.View;
 using RSSAgregator.Shared.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace RSSAgregator.Mobile
+namespace RSSAgregator.Mobile.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LoginPage : Page
+    public sealed partial class SuscribePage : Page
     {
         private NavigationHelper navigationHelper;
 
-        public LoginPage()
+        public SuscribePage()
         {
             this.InitializeComponent();
 
@@ -111,19 +109,13 @@ namespace RSSAgregator.Mobile
 
         #endregion
 
-        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            //var worked = await DefaultViewModel.LoginAsync(Password.Password);
-
-            //if (worked)
-            //{
+            var worked = DefaultViewModel.RegisterAsync(Password.Password);
+            if (worked.Result)
+            {
                 Frame.Navigate(typeof(MainPage));
-            //}
-        }
-
-        private void ButtonBase_OnClick2(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(SuscribePage));
+            }
         }
     }
 }

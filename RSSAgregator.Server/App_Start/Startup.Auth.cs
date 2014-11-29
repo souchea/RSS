@@ -68,7 +68,7 @@ namespace RSSAgregator.Server
             ClientSecret = "self";
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString("/Token"),
+                TokenEndpointPath = new PathString("/api/Token"),
                 Provider = new ApplicationOAuthProvider(ClientId, ClientSecret),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
                 AllowInsecureHttp = true

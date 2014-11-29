@@ -49,7 +49,7 @@ namespace RSSAgregator.Shared.ViewModel
             // todo /!\  ne pas passer un string mais un ID  /!\
             //RssDataManager.AddSource(3, url, cat)
 
-
+            // todo cette fonction pue la merde serieux
             var service = new WebApiServiceManager();
             int catId = 0;
 
@@ -59,7 +59,7 @@ namespace RSSAgregator.Shared.ViewModel
                     catId = t.Id;
             }
 
-            var result = await service.AddSourceAsync(3, catId, url);
+            var result = await service.AddSourceAsync("599de3d2-811f-42fa-8544-a7b0975d3baf", catId, url);
         }
     }
 }

@@ -10,21 +10,25 @@ namespace RSSAgregator.Client.Tests
         [TestMethod]
         public void TestAddCategory()
         {
-            var service = new WebApiServiceManager();
 
-            var result = service.AddCategoryAsync(3, "new category").Result;
-
-            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void TestGetCategories()
         {
+
+        }
+
+        [TestMethod]
+        public void TestGetTokenLogin()
+        {
             var service = new WebApiServiceManager();
 
-            var result = service.GetCategoriesAsync(3).Result;
+            var result = service.GetTokenLoginAsync("souchet.aurelien@gmail.com", "]");
 
-            Assert.IsNotNull(result);
+            result.Wait();
+
+            Assert.IsTrue(result.Result);
         }
     }
 }

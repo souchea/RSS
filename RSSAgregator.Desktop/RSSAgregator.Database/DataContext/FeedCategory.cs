@@ -20,14 +20,14 @@ namespace RSSAgregator.Database.DataContext
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int UserId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
 
         public bool Public { get; set; }
 
         public DateTime CreationDate { get; set; }
 
         public virtual ICollection<FeedSource> FeedSources { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

@@ -1,8 +1,126 @@
 ﻿<Window x:Class="RSSAgregator.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="MainWindow" Height="768" Width="1024">
+    <Grid x:Name="MainGrid">
+	    <Grid x:Name="SubMainGrid">
+		    <Grid.RowDefinitions>
+			    <RowDefinition x:Name="UpSide" Height="25"/>
+			    <RowDefinition x:Name="DownSide"/>
+		    </Grid.RowDefinitions>
+		    <Grid.ColumnDefinitions>
+			    <ColumnDefinition x:Name="LeftSide"/>
+			    <ColumnDefinition x:Name="Spacer" Width="3"/>
+			    <ColumnDefinition x:Name="RightSide" Width="4*"/>
+		    </Grid.ColumnDefinitions>
+       
+		    <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Background="#FFB9B9B9"/>
+       
+            <Menu Margin="0" Grid.ColumnSpan="3" Name="MainMenu" IsMainMenu="True" Background="DarkBlue" Foreground="White">
+                <MenuItem Name="MAccount" Header="A_ccount">
+                    <MenuItem Name="SMLogin" Header="Log_in" Click="SMLogin_Click" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SMLogout" Header="Log_out" Background="DarkBlue" Foreground="White"></MenuItem>
+                </MenuItem>
+                <MenuItem Name="MFeeds" Header="_Feeds">
+                    <MenuItem Name="SBAddFeed" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBDelFeed" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBEditFeed" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
+                </MenuItem>
+                <MenuItem Name="MGroups" Header="_Groups" Background="DarkBlue">
+                    <MenuItem Name="SBAddGroup" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBDelGroup" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBEditGroup" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
+                </MenuItem>
+                <MenuItem Name="QuitApp" Header="_Quit" Click="QuitApp_Click">
+                </MenuItem>
+            </Menu>
         
+            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Background="DarkBlue">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Name="ItemName"/>
+                            <Label Grid.Column="1" Name="SubItemCount"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView Name="FeedList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Name="ItemName"/>
+                            <Label Grid.Column="1" Name="SubItemCount"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+       
+            <WebBrowser Name="ItemContent" Grid.Column="2" Grid.Row="2" Visibility="Hidden"></WebBrowser>
+            <ListView Name="ItemsList" Grid.Column="2" Grid.Row="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.ColumnSpan="2" HorizontalAlignment="Left" Name="ItemTitle"/>
+                            <Label Grid.Row="1" HorizontalAlignment="Left" Name="ItemAuthor"/>
+                            <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Name="ItemPublishDate"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        
+	    </Grid>
+        <Grid Name="Credentials" Background="Green" Width="500" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBox Name="EMail" Grid.Column="0" Grid.Row="1" MaxLines="1" MaxLength="256" Text="Enter your e-mail" Foreground="Gray" Margin="5,0,0,0" Background="LightGreen" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+            <Image Name="EMailImage" Grid.Column="1" Grid.Row="1" />
+            <Label Name="EmailInfo" Grid.Column="0" Grid.Row="2" />
+            <TextBox Name="Password" Grid.Column="0" Grid.Row="3" MaxLines="1" MaxLength="256"  Text="Enter your password" Foreground="Gray" Margin="5,0,0,0" Background="LightGreen"  GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+            <Image Name="PasswordImage" Grid.Column="1" Grid.Row="3" />
+            <Label Name="PasswordInfo" Grid.Column="0" Grid.Row="4" />
+            <Grid Name="RegisterButtonsArea" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Margin="15,5" Name="ButtonReset" Click="ButtonReset_Click">Reset</Button>
+                <Button Grid.Column="1" Grid.Row="0" Margin="15,5" Name="ButtonValidate" Click="ButtonValidate_Click">Login</Button>
+                <Button Grid.Column="2" Grid.Row="0" Margin="15,5" Name="ButtonCancel" Click="ButtonCancel_Click">Cancel</Button>
+                <Label Name="CredentialsInfo" Grid.Row="1" Grid.RowSpan="3"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -13,19 +13,7 @@ using RSSAgregator.Shared.Model;
 namespace RSSAgregator.Shared.ViewModel
 {
     public class MainPageViewModel : BaseViewModel
-    {
-        private string _account_ButtonText;
-
-        public string Account_ButtonText
-        {
-            get { return _account_ButtonText; }
-            set
-            {
-                _account_ButtonText = value;
-                NotifyPropertyChanged("Account_ButtonText");
-            }
-        }
-
+    { 
         private string _toAddCategoryText;
 
         public string ToAddCategoryText
@@ -119,8 +107,9 @@ namespace RSSAgregator.Shared.ViewModel
             RssDataManager.SourceChanged += SetSourceList;
         }
 
-        public void DeleteCategories(List<CategoryDTO> catNameList)
+        public void DeleteCategories(List<object> catNameList)
         {
+            var list = catNameList.OfType<CategoryDTO>().ToList();
             foreach (CategoryDTO t in catNameList)
             {
                 ServiceManager.DeleteCategory(t.Id);
@@ -141,7 +130,7 @@ namespace RSSAgregator.Shared.ViewModel
 
         public async void AddCategory()
         {
-            var result = await ServiceManager.AddCategoryAsync(3, ToAddCategoryText);
+            var result = await ServiceManager.AddCategoryAsync("599de3d2-811f-42fa-8544-a7b0975d3baf", ToAddCategoryText);
             if (result)
             {
             }

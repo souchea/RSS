@@ -18,23 +18,28 @@ namespace RSSAgregator.Shared.Common
         {
             WebApiClient = new HttpClient
             {
-                BaseAddress = new Uri("http://rssagregator.azurewebsites.net/api/")
+                BaseAddress = new Uri("https://rssagregator.azurewebsites.net/api/")
             };
             WebApiClient.DefaultRequestHeaders.Accept.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<CategoryDTO>> GetCategoriesAsync(int userId)
+        public void SetToken(string token)
+        {
+            WebApiClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);           
+        }
+
+        public async Task<List<CategoryDTO>> GetCategoriesAsync(string userId)
         {
             HttpResponseMessage response = await WebApiClient.GetAsync(String.Format("Category/Get/{0}", userId));
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadAsAsync<List<CategoryDTO>>();
             }
-            return null;
+            return new List<CategoryDTO>();
         }
 
-        public async Task<bool> AddCategoryAsync(int userId, string catName)
+        public async Task<bool> AddCategoryAsync(string userId, string catName)
         {
             try
             {
@@ -52,7 +57,7 @@ namespace RSSAgregator.Shared.Common
             }
         }
 
-        public async Task<bool> AddSourceAsync(int userId, int catId, string url)
+        public async Task<bool> AddSourceAsync(string userId, int catId, string url)
         {
             try
             {
@@ -131,12 +136,125 @@ namespace RSSAgregator.Shared.Common
 
         public async Task<bool> SendReadAsync(int sourceId)
         {
-            return true;
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.PostAsync(String.Format("Source/Read/{0}", sourceId),
+                            null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> SendStageAsync(int sourceId, string state)
         {
-            return true;
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.PostAsync(String.Format("Source/SetState/{0}?state={1}", sourceId, state),
+                            null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> GetTokenRegisterAsync(string username, string password)
+        {
+            var values = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                    new KeyValuePair<string, string>("client_id", "self"),
+                    new KeyValuePair<string, string>("client_secret", "self")
+                };
+
+            var content = new FormUrlEncodedContent(values);
+
+            try
+            {
+                HttpResponseMessage response =
+                    await WebApiClient.PostAsync("Token", content);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var token1 = await response.Content.ReadAsAsync<TokenResult>();
+
+                    SetToken(token1.access_token);
+
+                    var values2 = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("client_id", "self"),
+                    new KeyValuePair<string, string>("client_secret", "self"),
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
+                };
+
+                    var content2 = new FormUrlEncodedContent(values2);
+
+                    HttpResponseMessage response2 = await WebApiClient.PostAsync("oauth/register", content2);
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        var token = await response2.Content.ReadAsAsync<TokenResult>();
+
+                        SetToken(token.access_token);
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> GetTokenLoginAsync(string username, string password)
+        {
+            try
+            {
+                var values = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("client_id", "self"),
+                    new KeyValuePair<string, string>("client_secret", "self"),
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
+                };
+
+                var content = new FormUrlEncodedContent(values);
+
+                HttpResponseMessage response = await WebApiClient.PostAsync("Token", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var token = await response.Content.ReadAsAsync<TokenResult>();
+
+                    SetToken(token.access_token);
+
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

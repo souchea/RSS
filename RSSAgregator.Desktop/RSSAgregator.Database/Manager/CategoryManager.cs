@@ -47,7 +47,7 @@ namespace RSSAgregator.Database.Manager
             }
         }
 
-        public List<FeedCategory> GetByUserId(int id)
+        public List<FeedCategory> GetByUserId(string id)
         {
             var context = new RssAgregatorDataContext();
 

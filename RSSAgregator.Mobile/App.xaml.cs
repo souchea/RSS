@@ -54,6 +54,7 @@ namespace RSSAgregator.Mobile
             Kernel.Bind<IStorageManager>().To<StorageManager>();
             Kernel.Bind<IDataManager>().To<RssDataManager>().InSingletonScope();
             Kernel.Bind<IServiceManager>().To<WebApiServiceManager>();
+            Kernel.Bind<ILoginManager>().To<LoginManager>();
         }
 
         /// <summary>

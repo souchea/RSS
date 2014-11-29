@@ -33,7 +33,6 @@ namespace RSSAgregator.Mobile.View
         public FeedViewerPage()
         {
             this.InitializeComponent();
-
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -89,7 +88,11 @@ namespace RSSAgregator.Mobile.View
             FeedDTO feed = new FeedDTO();
             feed = e.Parameter as FeedDTO;
 
-            DefaultViewModel.SetViewerPage(feed);
+            if (feed != null)
+            {
+                feed.Summary = Windows.Data.Html.HtmlUtilities.ConvertToText(feed.Summary);
+                DefaultViewModel.SetViewerPage(feed);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

@@ -12,6 +12,8 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
+    //[Authorize]
+
     public class SourceController : ApiController
     {
         protected ISourceManager SourceManager { get; set; }
@@ -22,7 +24,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
-        public int Add(int id, string url, int catId)
+        public int Add(string id, string url, int catId)
         {
             var newSource = new FeedSource
             {
@@ -65,6 +67,7 @@ namespace RSSAgregator.Server.Controllers
                 
             foreach (var feedItem in feed.Items)
             {
+
                 feedList.Add(new FeedItemDTO
                 {
                     Id = feedItem.Id ?? "",
@@ -88,7 +91,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
-        public void SetState(int id)
+        public void SetState(int id, string state)
         {
             var source = SourceManager.GetSourceById(id);
 
