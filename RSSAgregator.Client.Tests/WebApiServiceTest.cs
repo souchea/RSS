@@ -24,7 +24,7 @@ namespace RSSAgregator.Client.Tests
         {
             var service = new WebApiServiceManager();
 
-            var result = service.GetTokenLoginAsync("souchet.aurelien@gmail.com", "bmsDE35]");
+            var result = service.GetTokenLoginAsync("souchet.aurelien@gmail.com", "]");
 
             result.Wait();
 

@@ -96,8 +96,7 @@ namespace RSSAgregator.Mobile.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            var text = new TextBlock();
-            text = e.Parameter as TextBlock;
+            TextBlock text = e.Parameter as TextBlock;
             if (text != null) DefaultViewModel.SetCategoryList(text.Text);
         }
 
@@ -136,10 +135,9 @@ namespace RSSAgregator.Mobile.View
 
         private void DeleteAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            List<object> catList = SelectSourceList.SelectedItems.ToList();
+            List<object> sourceList = SelectSourceList.SelectedItems.ToList();
 
-            var list = catList.OfType<SourceDTO>();
-            DefaultViewModel.DeleteSources(list.ToList());
+            DefaultViewModel.DeleteSources(sourceList);
             SelectSourceList.SelectionMode = ListViewSelectionMode.None;
             CommandBar.Visibility = Visibility.Collapsed;
         }
