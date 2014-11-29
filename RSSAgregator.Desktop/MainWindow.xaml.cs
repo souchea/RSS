@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ninject;
 using RSSAgregator.Shared.Model;
+using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Desktop
 {
@@ -21,9 +23,14 @@ namespace RSSAgregator.Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainPageViewModel DefaultViewModel { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            DefaultViewModel = App.Kernel.Get<MainPageViewModel>();
+            DataContext = DefaultViewModel;
+
         }
 
         private void SMLogin_Click(object sender, RoutedEventArgs e)
