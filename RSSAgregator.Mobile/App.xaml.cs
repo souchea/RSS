@@ -76,10 +76,10 @@ namespace RSSAgregator.Mobile
 
             ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
 
-            if (internetConnectionProfile.IsWlanConnectionProfile == true)
-            {
+            //if (internetConnectionProfile.IsWlanConnectionProfile == true)
+            //{
                 
-            }
+            //}
 
 
 

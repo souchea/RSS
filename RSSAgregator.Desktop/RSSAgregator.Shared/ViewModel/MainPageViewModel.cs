@@ -38,6 +38,18 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private bool _networkStatus;
+
+        public bool NetworkStatus
+        {
+            get { return _networkStatus; }
+            set
+            {
+                _networkStatus = value;
+                NotifyPropertyChanged("NetworkStatus");
+            }
+        }
+
         private ObservableCollection<SourceDTO> _sourceList;
 
         public ObservableCollection<SourceDTO> SourceList
@@ -107,14 +119,15 @@ namespace RSSAgregator.Shared.ViewModel
             RssDataManager.SourceChanged += SetSourceList;
         }
 
-        public void DeleteCategories(List<object> catNameList)
+        public async void DeleteCategories(IEnumerable<object> catNameList)
         {
             var list = catNameList.OfType<CategoryDTO>().ToList();
-            foreach (CategoryDTO t in catNameList)
+            foreach (CategoryDTO t in list)
             {
-                ServiceManager.DeleteCategory(t.Id);
+                bool sucess = await ServiceManager.DeleteCategory(t.Id);
                 CategoryList.Remove(t);
             }
+            RssDataManager.StorageManager.StoreCategories(CategoryList.ToList());
         }
 
         private void SetSourceList(object sender, EventArgs e)

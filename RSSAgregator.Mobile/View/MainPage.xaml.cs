@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
+using Windows.Networking.Connectivity;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
@@ -33,6 +35,8 @@ namespace RSSAgregator.Mobile.View
 
             DefaultViewModel = App.Kernel.Get<MainPageViewModel>();
             DataContext = DefaultViewModel;
+
+            DefaultViewModel.NetworkStatus = IsConnection();
         }
 
         /// <summary>
@@ -49,6 +53,23 @@ namespace RSSAgregator.Mobile.View
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed.
             // Si vous utilisez le NavigationHelper fourni par certains modèles,
             // cet événement est géré automatiquement.
+        }
+
+        public bool IsConnection()
+        {
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            if (internetConnectionProfile != null)
+            {
+                if (internetConnectionProfile.IsWlanConnectionProfile)
+                {
+                    return (true);
+                }
+                else if (internetConnectionProfile.IsWwanConnectionProfile)
+                {
+                    return (false);
+                }
+            }
+            return (false);
         }
 
         private async void AddFeed_Click(object sender, RoutedEventArgs e)

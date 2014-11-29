@@ -42,8 +42,9 @@
                      TextWrapping="Wrap"
                      Text="{Binding Path=Email, Mode=TwoWay}"
                      Header="Login"
-                     VerticalAlignment="Top" />
-            <PasswordBox Margin="0,119,0,0"
+                     VerticalAlignment="Top"
+                     InputScope="EmailSmtpAddress"/>
+                    <PasswordBox Margin="0,119,0,0"
                      VerticalAlignment="Top"
                      Name="Password"
                      Header="Mot de passe" />
