@@ -120,8 +120,8 @@
     <Compile Include="View\SourceListPage.xaml.cs">
       <DependentUpon>SourceListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SubscribeForm.xaml.cs">
-      <DependentUpon>SubscribeForm.xaml</DependentUpon>
+    <Compile Include="View\SuscribePage.xaml.cs">
+      <DependentUpon>SuscribePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -170,7 +170,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SubscribeForm.xaml">
+    <Page Include="View\SuscribePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

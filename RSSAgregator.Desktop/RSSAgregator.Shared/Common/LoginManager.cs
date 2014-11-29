@@ -12,9 +12,10 @@ namespace RSSAgregator.Shared.Common
 
         public string UserInfo { get; private set; }
 
-        public string Token { get; private set; }
+        #region Dependencies
+        private IServiceManager ServiceManager { get; set; }
 
-        public IServiceManager ServiceManager { get; set; }
+        #endregion
 
         public LoginManager(IServiceManager serviceManager)
         {
@@ -23,17 +24,27 @@ namespace RSSAgregator.Shared.Common
 
         public void LogOut()
         {
-            
+            IsLogged = false;
         }
 
         public async Task<bool> LoginAsync(string username, string password)
         {
-            return true;
+            var success = await ServiceManager.GetTokenLoginAsync(username, password);
+            if (success)
+            {
+                IsLogged = true;
+            }
+            return success;
         }
 
         public async Task<bool> RegisterAndLoginAsync(string username, string password)
         {
-            return true;
+            var success = await ServiceManager.GetTokenRegisterAsync(username, password);
+            if (success)
+            {
+                IsLogged = true;
+            }
+            return success;
         }
 
 

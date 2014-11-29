@@ -18,7 +18,7 @@ namespace RSSAgregator.Shared.Common
         {
             WebApiClient = new HttpClient
             {
-                BaseAddress = new Uri("http://rssagregator.azurewebsites.net/api/")
+                BaseAddress = new Uri("https://rssagregator.azurewebsites.net/api/")
             };
             WebApiClient.DefaultRequestHeaders.Accept.Clear();
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -176,17 +176,43 @@ namespace RSSAgregator.Shared.Common
 
         public async Task<bool> GetTokenRegisterAsync(string username, string password)
         {
+            var values = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                    new KeyValuePair<string, string>("client_id", "self"),
+                    new KeyValuePair<string, string>("client_secret", "self")
+                };
+
+            var content = new FormUrlEncodedContent(values);
+
             try
             {
                 HttpResponseMessage response =
-                    await WebApiClient.PostAsync(String.Format("Token?grant_type=client_credentials&client_id=self&client_secret=self"), null);
+                    await WebApiClient.PostAsync("Token", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    HttpResponseMessage response2 =
-    await WebApiClient.PostAsync(String.Format("oauth/register?grant_type=password&client_id=self&client_secret=self&email={0}&password={1}", username, password), null);
+
+                    var token1 = await response.Content.ReadAsAsync<TokenResult>();
+
+                    SetToken(token1.access_token);
+
+                    var values2 = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("client_id", "self"),
+                    new KeyValuePair<string, string>("client_secret", "self"),
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
+                };
+
+                    var content2 = new FormUrlEncodedContent(values2);
+
+                    HttpResponseMessage response2 = await WebApiClient.PostAsync("oauth/register", content2);
                     if (response2.IsSuccessStatusCode)
                     {
-                        var token = await response2.Content.ReadAsStringAsync();
+                        var token = await response2.Content.ReadAsAsync<TokenResult>();
+
+                        SetToken(token.access_token);
 
                         return true;
                     }
@@ -203,10 +229,24 @@ namespace RSSAgregator.Shared.Common
         {
             try
             {
-                HttpResponseMessage response =
-                    await WebApiClient.PostAsync(String.Format("Token?grant_type=password&client_id=self&client_secret=self&username={0}&password={1}", username, password), null);
+                var values = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("client_id", "self"),
+                    new KeyValuePair<string, string>("client_secret", "self"),
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
+                };
+
+                var content = new FormUrlEncodedContent(values);
+
+                HttpResponseMessage response = await WebApiClient.PostAsync("Token", content);
                 if (response.IsSuccessStatusCode)
                 {
+                    var token = await response.Content.ReadAsAsync<TokenResult>();
+
+                    SetToken(token.access_token);
+
                     return true;
                 }
                 return false;

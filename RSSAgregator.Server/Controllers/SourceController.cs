@@ -12,8 +12,7 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
-    // todo remettre le authorize des que tout marche bien cote client
-    //[Authorize]
+    [Authorize]
 
     public class SourceController : ApiController
     {

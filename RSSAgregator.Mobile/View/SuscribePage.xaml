@@ -1,11 +1,13 @@
-﻿<Page x:Class="RSSAgregator.Mobile.LoginPage"
+﻿<Page x:Class="RSSAgregator.Mobile.View.SuscribePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:local="using:RSSAgregator.Mobile"
+      xmlns:local="using:RSSAgregator.Mobile.View"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d"
-      Background="#FF0D468B">
+      mc:Ignorable="d">
+    <Page.Background>
+        <SolidColorBrush Color="#FF0D468B" />
+    </Page.Background>
 
     <Grid x:Name="LayoutRoot">
 
@@ -23,40 +25,30 @@
         <!-- Title Panel -->
         <StackPanel Grid.Row="0"
                     Margin="19,0,0,0">
-            <TextBlock Text="Epitech"
-                       Style="{ThemeResource TitleTextBlockStyle}"
-                       Margin="0,12,0,0" />
-            <TextBlock Text="RSS Agregator"
+            <TextBlock Text="Nouveau compte"
                        Margin="0,-6.5,0,26.5"
                        Style="{ThemeResource HeaderTextBlockStyle}"
-                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"
-                       FontFamily="Global User Interface" />
+                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" />
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1"
               x:Name="ContentRoot"
-              Margin="10,9.833,10,0">
-            <TextBox Height="69"
-                     Margin="0,33,0,0"
+              Margin="19,9.5,19,0">
+            <TextBox Margin="0,42,0,0"
                      TextWrapping="Wrap"
+                     Header="Email"
                      Text="{Binding Path=Email, Mode=TwoWay}"
-                     Header="Login"
                      VerticalAlignment="Top" />
-            <PasswordBox Margin="0,119,0,0"
-                     VerticalAlignment="Top"
-                     Name="Password"
-                     Header="Mot de passe" />
-            <Button Content="Valider"
+            <PasswordBox Margin="0,133,0,0"
+                         Header="Mot de passe"
+                         Name="Password"
+                         VerticalAlignment="Top" />
+            <Button Content="Creer mon compte"
                     HorizontalAlignment="Stretch"
-                    Margin="0,209,0,0"
+                    Margin="0,241,0,0"
                     VerticalAlignment="Top"
-                    Click="ButtonBase_OnClick" />
-            <Button Content="Creer un compte"
-                    HorizontalAlignment="Stretch"
-                    Margin="0,291,0,0"
-                    VerticalAlignment="Top"                 
-                    Click="ButtonBase_OnClick2" />
+                    Click="ButtonBase_OnClick"/>
 
         </Grid>
     </Grid>

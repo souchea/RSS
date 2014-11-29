@@ -47,11 +47,19 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        #region Dependencies
+
         private IServiceManager ServiceManager { get; set; }
 
-        public SourcePageViewModel(IServiceManager serviceManager)
+        private IDataManager DataManager { get; set; }
+
+        #endregion
+
+        public SourcePageViewModel(IServiceManager serviceManager, IDataManager dataManager)
         {
             ServiceManager = serviceManager;
+            DataManager = dataManager;
+
             SourceList = new ObservableCollection<SourceDTO>();
         }
 
