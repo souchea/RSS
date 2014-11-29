@@ -1,5 +1,3 @@
-using RSSAgregator.Database.Manager;
-
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(RSSAgregator.Server.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(RSSAgregator.Server.App_Start.NinjectWebCommon), "Stop")]
 
@@ -63,9 +61,6 @@ namespace RSSAgregator.Server.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ICategoryManager>().To<CategoryManager>();
-            kernel.Bind<ISourceManager>().To<SourceManager>();
-
         }        
     }
 }

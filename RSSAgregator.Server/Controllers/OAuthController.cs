@@ -14,21 +14,38 @@ namespace RSSAgregator.Server.Controllers
     public class OAuthController : ApiController
     {
 
+        private ApplicationUserManager _userManager;
+
+        public  OAuthController()
+        { }
+
+        public OAuthController(ApplicationUserManager userManager)
+        {
+            _userManager = userManager;
+        }
+
         public ApplicationUserManager UserManager
        {
            get
            {
-               return Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+               return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+           }
+           private set
+           {
+               _userManager = value;
            }
         }
 
-
+        [HttpPost]
         [Scope("Register")]
         [Route("api/oauth/register")]
        public async Task<IHttpActionResult> Register(AccountBindingModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            if (model == null || model.Email == null || model.Password == null)
+                return BadRequest("Parameters cannot be null");
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 
@@ -46,6 +63,12 @@ namespace RSSAgregator.Server.Controllers
         [Route("api/oauth/delete")]
         public async Task<IHttpActionResult> Delete(AccountBindingModel model)
         {
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (model == null || model.Email == null || model.Password == null)
+                return BadRequest("Parameters cannot be null");
 
           ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
 
@@ -68,7 +91,14 @@ namespace RSSAgregator.Server.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-           
+
+
+            if (model == null || model.NewPassword == null || model.OldPassword == null)
+                return BadRequest("Parameters cannot be null");
+
+            if (User.Identity.GetUserId() == null)
+                return BadRequest("Unknown User");
+
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
 
