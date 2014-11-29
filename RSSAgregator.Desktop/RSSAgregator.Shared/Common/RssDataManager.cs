@@ -16,6 +16,8 @@ namespace RSSAgregator.Shared.Common
 
         public IServiceManager ServiceManager { get; set; }
 
+        public ILoginManager LoginManager { get; set; }
+
         #endregion
 
         #region Properties
@@ -34,18 +36,21 @@ namespace RSSAgregator.Shared.Common
 
         #endregion
 
-        public RssDataManager(IStorageManager storageManager, IServiceManager serviceManager)
+        public RssDataManager(IStorageManager storageManager, IServiceManager serviceManager, ILoginManager loginManager)
         {
             ServiceManager = serviceManager;
             StorageManager = storageManager;
+            LoginManager = loginManager;
 
             CategoryList = new List<CategoryDTO>();
             SourceList = new List<SourceDTO>();
 
+            LoginManager.UserChanged += SetCategoryList;
+
             SetCategoryList();
         }
 
-        public async void SetCategoryList()
+        public async void SetCategoryList(object sender, EventArgs eventArgs)
         {
             var cat = await StorageManager.GetStoredCategories();
             if (cat != null)
@@ -57,7 +62,7 @@ namespace RSSAgregator.Shared.Common
 
             try
             {
-                var onlineCategories = await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf");
+                var onlineCategories = await ServiceManager.GetCategoriesAsync(LoginManager.UserId);
                 CategoryList = onlineCategories;
                 StorageManager.StoreCategories(onlineCategories);
                 if (CategoryChanged != null)
@@ -69,6 +74,11 @@ namespace RSSAgregator.Shared.Common
             {
             }
             SetSourceList();
+        }
+
+        public void SetCategoryList()
+        {
+            SetCategoryList(null, null);
         }
 
         public async void SetSourceList()
