@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,8 +18,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Ninject;
+using RSSAgregator.Mobile.Common;
 
 // Pour plus d'informations sur le modèle Application vide, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
+using RSSAgregator.Mobile.View;
+using RSSAgregator.Shared.Common;
 
 namespace RSSAgregator.Mobile
 {
@@ -27,6 +34,12 @@ namespace RSSAgregator.Mobile
     {
         private TransitionCollection transitions;
 
+        #region Global parameters
+
+        internal static IKernel Kernel { get; set; }
+
+        #endregion
+
         /// <summary>
         /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
         /// à être exécutée. Elle correspond donc à l'équivalent logique de main() ou WinMain().
@@ -35,6 +48,12 @@ namespace RSSAgregator.Mobile
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+
+            Kernel = new StandardKernel();
+
+            Kernel.Bind<IStorageManager>().To<StorageManager>();
+            Kernel.Bind<IDataManager>().To<RssDataManager>().InSingletonScope();
+            Kernel.Bind<IServiceManager>().To<WebApiServiceManager>();
         }
 
         /// <summary>
@@ -53,6 +72,15 @@ namespace RSSAgregator.Mobile
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
+
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+
+            if (internetConnectionProfile.IsWlanConnectionProfile == true)
+            {
+                
+            }
+
+
 
             // Ne répétez pas l'initialisation de l'application lorsque la fenêtre comporte déjà du contenu,
             // assurez-vous juste que la fenêtre est active
@@ -91,7 +119,7 @@ namespace RSSAgregator.Mobile
                 // Quand la pile de navigation n'est pas restaurée, accédez à la première page,
                 // puis configurez la nouvelle page en transmettant les informations requises en tant que
                 // paramètre
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(LoginPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

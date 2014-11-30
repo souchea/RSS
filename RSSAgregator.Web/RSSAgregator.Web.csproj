@@ -169,48 +169,26 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\login\css\component.css" />
-    <Content Include="Content\login\css\content.css" />
-    <Content Include="Content\login\css\demo.css" />
-    <Content Include="Content\login\css\normalize.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\login\fonts\blokk\BLOKKRegular.svg" />
-    <Content Include="Content\login\fonts\codropsicons\codropsicons.svg" />
-    <Content Include="Content\login\fonts\codropsicons\license.txt" />
-    <Content Include="Content\login\fonts\icomoon\icomoon.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\login\img\wood_pattern.jpg" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\login\fonts\blokk\BLOKKRegular.eot" />
-    <Content Include="Content\login\fonts\blokk\BLOKKRegular.ttf" />
-    <Content Include="Content\login\fonts\blokk\BLOKKRegular.woff" />
-    <Content Include="Content\login\fonts\codropsicons\codropsicons.eot" />
-    <Content Include="Content\login\fonts\codropsicons\codropsicons.ttf" />
-    <Content Include="Content\login\fonts\codropsicons\codropsicons.woff" />
-    <Content Include="Content\login\fonts\icomoon\icomoon.eot" />
-    <Content Include="Content\login\fonts\icomoon\icomoon.ttf" />
-    <Content Include="Content\login\fonts\icomoon\icomoon.woff" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\login\js\classie.js" />
-    <Content Include="Scripts\login\js\modernizr.custom.js" />
-    <Content Include="Scripts\login\js\uiMorphingButton_fixed.js" />
-    <Content Include="Scripts\login\js\uiMorphingButton_inflow.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <None Include="Content\js\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\js\jquery-1.10.2.js" />
+    <Content Include="Content\js\jquery-1.10.2.min.js" />
+    <None Include="Content\js\jquery.validate-vsdoc.js" />
+    <Content Include="Content\js\jquery.validate.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\js\modernizr-2.6.2.js" />
+    <Content Include="Content\js\respond.js" />
+    <Content Include="Content\js\respond.min.js" />
+    <Content Include="Content\js\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -225,7 +203,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Content\js\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
@@ -241,17 +219,14 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Account\Login.old.cshtml" />
-    <Content Include="Views\Account\LoginForm.cshtml" />
-    <Content Include="Views\Account\Register.old.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
