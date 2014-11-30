@@ -202,6 +202,7 @@ namespace RSSAgregator.Desktop
                     SourceList.Visibility = System.Windows.Visibility.Hidden;
                     FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
+                    FeedUri.Visibility = System.Windows.Visibility.Hidden;
                     NavPrevious.Background = Brushes.DarkBlue;
                     NavNext.Background = Brushes.DarkBlue;
                     MLoad.IsEnabled = false;
@@ -225,6 +226,7 @@ namespace RSSAgregator.Desktop
                     SourceList.Visibility = System.Windows.Visibility.Visible;
                     FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
+                    FeedUri.Visibility = System.Windows.Visibility.Hidden;
                     MLoad.IsEnabled = false;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = true;
@@ -248,9 +250,17 @@ namespace RSSAgregator.Desktop
                     SourceList.Visibility = System.Windows.Visibility.Visible;
                     FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Visible;
-                    MLoad.IsEnabled = true;
+                    FeedUri.Visibility = System.Windows.Visibility.Visible;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = false;
+                    prevAppState = curAppState;
+                    curAppState = state;
+                    return true;
+                #endregion
+                #region State ItemContent
+                case AppState.ItemContent:
+                    MLoad.IsEnabled = false;
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
@@ -391,6 +401,7 @@ namespace RSSAgregator.Desktop
                 CategoryDTO c = CategoryList.SelectedItem as CategoryDTO;
                 DefaultViewModel.CategoryPageVM.SetNewSource(CategoryName.Text, c.Id);
             }
+            DefaultViewModel.MainPageVM.RefreshSourceList();
                 PreviousState();
         }
 
@@ -418,7 +429,7 @@ namespace RSSAgregator.Desktop
                 DefaultViewModel.FeedPageVM.SetFeedList(SourceList.SelectedItem as SourceDTO);
                 NextState();
             }
-            else if (curAppState == AppState.Item && FeedList.SelectedItem != null)
+            else if ((curAppState == AppState.Item || curAppState == AppState.ItemContent)&& FeedList.SelectedItem != null)
             {
                 FeedDTO f = FeedList.SelectedItem as FeedDTO;
                 FeedBody.Content = f.Content;
@@ -440,7 +451,7 @@ namespace RSSAgregator.Desktop
 
         private void FeedUri_Click(object sender, RoutedEventArgs e)
         {
-            if (FeedList.SelectedItem != null)
+            if (FeedList.SelectedItem != null && curAppState == AppState.ItemContent)
             {
                 FeedDTO f = FeedList.SelectedItem as FeedDTO;
                 System.Diagnostics.Process.Start(f.Id);
