@@ -134,6 +134,7 @@ namespace RSSAgregator.Mobile.View
             List<object> catList = CategoriesListView.SelectedItems.ToList();
 
             DefaultViewModel.DeleteCategories(catList);
+            DefaultViewModel.RefreshSourceList();
             CategoriesListView.SelectionMode = ListViewSelectionMode.None;
         }
     }

@@ -152,10 +152,8 @@ namespace RSSAgregator.Shared.ViewModel
 
         public async void RefreshSourceList()
         {
-            List<CategoryDTO> list = await RefreshCategoryList();
-            RssDataManager.StorageManager.StoreCategories(list);
             List<SourceDTO> newList = new List<SourceDTO>();
-            foreach (CategoryDTO t in list)
+            foreach (CategoryDTO t in CategoryList)
             {
                 newList.AddRange(t.Feeds);
             }
