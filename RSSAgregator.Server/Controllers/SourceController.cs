@@ -17,13 +17,16 @@ namespace RSSAgregator.Server.Controllers
     {
         protected ISourceManager SourceManager { get; set; }
 
-        public SourceController(ISourceManager sourceManager)
+        protected ICategoryManager CategoryManager { get; set; }
+
+        public SourceController(ISourceManager sourceManager, ICategoryManager categoryManager)
         {
             SourceManager = sourceManager;
+            CategoryManager = categoryManager;
         }
 
         [HttpPost]
-        public int Add(string id, string url, int catId)
+        public int Add(string id, [FromUri]string url, [FromUri]int catId)
         {
             var newSource = new FeedSource
             {
@@ -32,7 +35,10 @@ namespace RSSAgregator.Server.Controllers
                 Public = true,
                 Url = url,
                 UserId = id,
-                Title = GetTitleFromUrl(url)
+                Title = GetTitleFromUrl(url),
+                //FeedCategory = CategoryManager.GetCategoryById(catId),
+                ViewedNumber = 0,
+                ViewState = "none"
             };
             SourceManager.AddSource(newSource);
 
