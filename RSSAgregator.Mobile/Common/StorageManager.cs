@@ -30,7 +30,11 @@ namespace RSSAgregator.Mobile.Common
         {
             try
             {
-                var fileStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("categories.xml");
+                var file = await ApplicationData.Current.LocalFolder.GetFileAsync("categories.xml");
+
+                var fileStream = await file.OpenStreamForReadAsync();
+
+                //var fileStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("categories.xml");
 
                 var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
 
@@ -46,7 +50,9 @@ namespace RSSAgregator.Mobile.Common
         {
             try
             {
-                var fileStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync("sources.xml");
+                var file = await ApplicationData.Current.LocalFolder.GetFileAsync("sources.xml");
+
+                var fileStream = await file.OpenStreamForReadAsync();
 
                 var serializer = new DataContractSerializer(typeof(List<SourceDTO>));
 
@@ -63,7 +69,9 @@ namespace RSSAgregator.Mobile.Common
         {
             var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
 
-            using (var fileStream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("categories.xml", CreationCollisionOption.ReplaceExisting))
+            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("categories.xml", CreationCollisionOption.ReplaceExisting);
+
+            using (var fileStream = await file.OpenStreamForWriteAsync())
             {
                 serializer.WriteObject(fileStream, toStore);
             }
@@ -75,16 +83,21 @@ namespace RSSAgregator.Mobile.Common
 
             try
             {
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("sources.xml", CreationCollisionOption.ReplaceExisting);
 
-
-                using (
-                    var fileStream =
-                        await
-                            ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("sources.xml",
-                                CreationCollisionOption.OpenIfExists))
+                using (var fileStream = await file.OpenStreamForWriteAsync())
                 {
                     serializer.WriteObject(fileStream, toStore);
                 }
+
+                //using (
+                //    var fileStream =
+                //        await
+                //            ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync("sources.xml",
+                //                CreationCollisionOption.OpenIfExists))
+                //{
+                //    serializer.WriteObject(fileStream, toStore);
+                //}
             }
             catch { }
         }
