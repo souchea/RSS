@@ -12,13 +12,13 @@
                 <RowDefinition x:Name="DownSide" Height="25"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LeftSide"/>
+                <ColumnDefinition x:Name="LeftSide" MinWidth="100"/>
                 <ColumnDefinition x:Name="Spacer" Width="3"/>
-                <ColumnDefinition x:Name="RightSide" Width="4*"/>
+                <ColumnDefinition x:Name="RightSide" Width="4*" MinWidth="250"/>
             </Grid.ColumnDefinitions>
             
             <!-- Used to add a feature of enlarging the list so the user can read long texts easier -->
-            <GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Background="#FFB9B9B9"/>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Grid.Row="0" Grid.RowSpan="3" Background="#FFB9B9B9"/>
 
             <!-- The main Menu bar -->
             <Menu Margin="0" Grid.ColumnSpan="3" Name="MainMenu" IsMainMenu="True" Background="DarkBlue" Foreground="White">
@@ -42,7 +42,7 @@
             </Menu>
             
             <!-- This contains the list of categories (changes rarely) -->
-            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" ItemsSource="{Binding MainPageVM.CategoryList}" SelectionChanged="CategoryList_SelectionChanged" SelectionMode="Multiple">
+            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" ItemsSource="{Binding CategoryPageVM.CategoryList}" SelectionChanged="CategoryList_SelectionChanged" SelectionMode="Multiple">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

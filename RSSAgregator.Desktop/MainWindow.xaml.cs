@@ -108,16 +108,10 @@ namespace RSSAgregator.Desktop
             }
             if (!check)
                 return;
-            CredentialsInfo.Content = "Please wait...loging you in";
-<<<<<<< HEAD
+            CredentialsInfo.Content = (curAppState == AppState.Login? "Please wait...loging you in" : "Please wait...registering your credentials");
             DefaultViewModel.LoginPageVM.Email = "jean-baptiste.lechelon@epitech.eu";
             Password.Password = "Epitech42#";
-            if ((ButtonRegister.IsChecked == true ? DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)).Result == true)
-=======
-
-
             if ((ButtonRegister.IsChecked == true ? await DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : await DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)))
->>>>>>> origin/master
             {
                 ButtonReset_Click(null, null);
                 ChangeState(AppState.Category);
@@ -304,7 +298,7 @@ namespace RSSAgregator.Desktop
             List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
             if (items.Count > 0)
             {
-                //    DefaultViewModel.CategoryPageVM.SetNewSource(DefaultViewModel.CategoryPageVM.GetCompleteUrl(Url), item.Id);
+                DefaultViewModel.SourcePageVM.SetCategoryList("");
             }
         }
 
