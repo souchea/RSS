@@ -260,7 +260,7 @@ namespace RSSAgregator.Desktop
                 #endregion
                 #region State ItemContent
                 case AppState.ItemContent:
-                    MLoad.IsEnabled = false;
+                    MLoad.IsEnabled = true;
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
