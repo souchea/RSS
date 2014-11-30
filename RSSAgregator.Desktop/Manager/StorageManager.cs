@@ -13,8 +13,6 @@ namespace RSSAgregator.Desktop.Manager
     public class StorageManager : IStorageManager
     {
         #region IStorageManager Members
-        class StorageManager : IStorageManager
-        {
 
             public async Task<List<CategoryDTO>> GetStoredCategories()
             {
@@ -65,7 +63,6 @@ namespace RSSAgregator.Desktop.Manager
                 var serializer = new DataContractSerializer(typeof(List<SourceDTO>));
                 serializer.WriteObject(stream, toStore);
             }
-        }
         #endregion
     }
 }

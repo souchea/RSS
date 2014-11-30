@@ -7,9 +7,10 @@ using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Desktop.ViewModel
 {
-    class ViewModelContainer
+    public class ViewModelContainer
     {
         public MainPageViewModel MainPageVM { get; set;}
         public LoginPageViewModel LoginPageVM { get; set; }
+
     }
 }
