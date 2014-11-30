@@ -73,10 +73,7 @@ namespace RSSAgregator.Desktop
         private void QuitApp_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Really Quit?", "Exit", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-            {
-                //SaveData();
                 Close();
-            }
         }
 
         private void ButtonReset_Click(object sender, RoutedEventArgs e)
@@ -108,16 +105,10 @@ namespace RSSAgregator.Desktop
             }
             if (!check)
                 return;
-            CredentialsInfo.Content = "Please wait...loging you in";
-<<<<<<< HEAD
+            CredentialsInfo.Content = (curAppState == AppState.Login? "Please wait...loging you in" : "Please wait...registering your credentials");
             DefaultViewModel.LoginPageVM.Email = "jean-baptiste.lechelon@epitech.eu";
             Password.Password = "Epitech42#";
-            if ((ButtonRegister.IsChecked == true ? DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)).Result == true)
-=======
-
-
             if ((ButtonRegister.IsChecked == true ? await DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : await DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)))
->>>>>>> origin/master
             {
                 ButtonReset_Click(null, null);
                 ChangeState(AppState.Category);
@@ -125,14 +116,14 @@ namespace RSSAgregator.Desktop
             else
             {
                 ButtonReset_Click(null, null);
-                CredentialsInfo.Content =  "Login failed.";
+                CredentialsInfo.Content =  (curAppState == AppState.Login ? "Login failed!" : "Registering failed!");
             }
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             ButtonReset_Click(null, null);
-            ChangeState(AppState.None);
+            ChangeState(prevAppState);
         }
 
         bool IsValidEmail(string email)
@@ -152,6 +143,7 @@ namespace RSSAgregator.Desktop
         {
             switch (state)
             {
+                #region State None
                 case AppState.None:
                     SubMainGrid.IsEnabled = true;
                     Credentials.Visibility = System.Windows.Visibility.Hidden;
@@ -159,12 +151,16 @@ namespace RSSAgregator.Desktop
                     SourceList.Visibility = System.Windows.Visibility.Hidden;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
                     FeedContent.Visibility = System.Windows.Visibility.Hidden;
-                    GoToPrevious.Visibility = System.Windows.Visibility.Hidden;
+                    CategoryChange.Visibility = System.Windows.Visibility.Hidden;
+                    NavPrevious.Visibility = System.Windows.Visibility.Hidden;
+                    NavNext.Visibility = System.Windows.Visibility.Hidden;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
+                #endregion
+                #region State Login
                 case AppState.Login:
                     CredentialsTitle.Content = "Authenticate";
                     if (curAppState != AppState.Register)
@@ -177,6 +173,8 @@ namespace RSSAgregator.Desktop
                         ButtonRegister.IsChecked = false;
                     curAppState = state;
                     return true;
+                #endregion
+                #region State Register
                 case AppState.Register:
                     CredentialsTitle.Content = "Register";
                     if (curAppState != AppState.Login)
@@ -187,55 +185,88 @@ namespace RSSAgregator.Desktop
                     ButtonRegister.IsChecked = true;
                     curAppState = state;
                     return true;
+                #endregion
+                #region State Category
                 case AppState.Category:
                     if (curAppState == AppState.Login || curAppState == AppState.Register)
                     {
-                        SubMainGrid.IsEnabled = true;
                         Credentials.Visibility = System.Windows.Visibility.Hidden;
-                        MGroups.IsEnabled = true;
-                        MFeeds.IsEnabled = true;
                     }
+                    SubMainGrid.IsEnabled = true;
+                    CategoryChange.Visibility = System.Windows.Visibility.Hidden;
+                    NavPrevious.Visibility = System.Windows.Visibility.Visible;
+                    NavNext.Visibility = System.Windows.Visibility.Visible;
                     CategoryList.Visibility = System.Windows.Visibility.Visible;
                     SourceList.Visibility = System.Windows.Visibility.Hidden;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
-                    GoToPrevious.Visibility = System.Windows.Visibility.Hidden;
+                    MGroups.IsEnabled = true;
+                    MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
+                #endregion
+                #region State Flux
                 case AppState.Flux:
                     if (curAppState == AppState.Login || curAppState == AppState.Register)
-                    {
-                        SubMainGrid.IsEnabled = true;
                         Credentials.Visibility = System.Windows.Visibility.Hidden;
-                        MGroups.IsEnabled = true;
-                        MFeeds.IsEnabled = true;
-                    }
+                    SubMainGrid.IsEnabled = true;
+                    CategoryChange.Visibility = System.Windows.Visibility.Hidden;
+                    NavPrevious.Visibility = System.Windows.Visibility.Visible;
+                    NavPrevious.Background = Brushes.Green;
+                    NavNext.Visibility = System.Windows.Visibility.Visible;
+                    NavNext.Background = Brushes.Green;
                     CategoryList.Visibility = System.Windows.Visibility.Hidden;
                     SourceList.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
-                    GoToPrevious.Visibility = System.Windows.Visibility.Visible;
-                    GoToPrevious.Content = "Return to categories list";
+                    MGroups.IsEnabled = false;
+                    MFeeds.IsEnabled = true;
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
+                #endregion
+                #region State Item
                 case AppState.Item:
                     if (curAppState == AppState.Login || curAppState == AppState.Register)
                     {
-                        SubMainGrid.IsEnabled = true;
                         Credentials.Visibility = System.Windows.Visibility.Hidden;
-                        MGroups.IsEnabled = true;
-                        MFeeds.IsEnabled = true;
                     }
+                    SubMainGrid.IsEnabled = true;
+                    CategoryChange.Visibility = System.Windows.Visibility.Hidden;
+                    NavPrevious.Visibility = System.Windows.Visibility.Visible;
+                    NavNext.Visibility = System.Windows.Visibility.Visible;
                     CategoryList.Visibility = System.Windows.Visibility.Hidden;
                     SourceList.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Visible;
-                    GoToPrevious.Visibility = System.Windows.Visibility.Visible;
-                    GoToPrevious.Content = "Return to sources list";
+                    MGroups.IsEnabled = false;
+                    MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
+                #endregion
+                #region State AddCategory
                 case AppState.AddCategory:
+                    SubMainGrid.IsEnabled = false;
+                    CategoryChange.Visibility = System.Windows.Visibility.Visible;
+                    CategoryChangeTitle.Content = "Add Category";
+                    prevAppState = curAppState;
+                    curAppState = state;
                     return true;
+                #endregion
+                #region State EditCategory
+                case AppState.EditCategory:
+                    SubMainGrid.IsEnabled = false;
+                    CategoryChange.Visibility = System.Windows.Visibility.Visible;
+                    CategoryChangeTitle.Content = "Edit Category";
+                    prevAppState = curAppState;
+                    curAppState = state;
+                    return true;
+                #endregion
+                #region State DelCategory
+                case AppState.DelCategory:
+                    prevAppState = curAppState;
+                    curAppState = state;
+                    return true;
+                #endregion
                 default:
                     return false;
             }
@@ -249,6 +280,20 @@ namespace RSSAgregator.Desktop
                 return ChangeState(stateChain[i + 1]);
             if (curAppState == AppState.Register 
                 || curAppState == AppState.AddCategory || curAppState == AppState.EditCategory || curAppState == AppState.DelCategory 
+                || curAppState == AppState.AddFlux || curAppState == AppState.EditFlux || curAppState == AppState.DelFlux)
+                return ChangeState(prevAppState);
+            return false;
+        }
+
+        private bool PreviousState()
+        {
+            if (curAppState == AppState.None)
+                return false;
+            int i;
+            if ((i = stateChain.IndexOf(curAppState)) > 0)
+                return ChangeState(stateChain[i - 1]);
+            if (curAppState == AppState.Register
+                || curAppState == AppState.AddCategory || curAppState == AppState.EditCategory || curAppState == AppState.DelCategory
                 || curAppState == AppState.AddFlux || curAppState == AppState.EditFlux || curAppState == AppState.DelFlux)
                 return ChangeState(prevAppState);
             return false;
@@ -270,17 +315,12 @@ namespace RSSAgregator.Desktop
 
         private void SBAddGroup_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeState(AppState.AddCategory);
         }
 
         private void SBDelGroup_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void SBEditGroup_Click(object sender, RoutedEventArgs e)
-        {
-
+            ChangeState(AppState.DelCategory);
         }
 
         private void SBAddFeed_Click(object sender, RoutedEventArgs e)
@@ -293,18 +333,13 @@ namespace RSSAgregator.Desktop
 
         }
 
-        private void SBEditFeed_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ChangeState(AppState.Category);
             List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
-            if (items.Count > 0)
+            if (items!= null && items.Count > 0)
             {
-                //    DefaultViewModel.CategoryPageVM.SetNewSource(DefaultViewModel.CategoryPageVM.GetCompleteUrl(Url), item.Id);
+                DefaultViewModel.SourcePageVM.SetCategoryList("");
             }
         }
 
@@ -313,6 +348,50 @@ namespace RSSAgregator.Desktop
 
         }
         private void FeedList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void RegisterButtonsArea_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                ButtonValidate_Click(null, null);
+        }
+
+        private void CategoryChange_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                CategoryChangeValidate_Click(null, null);
+        }
+
+        private void CategoryChangeValidate_Click(object sender, RoutedEventArgs e)
+        {
+                DefaultViewModel.MainPageVM.AddCategory();
+                PreviousState();
+        }
+
+        private void CategoryChangeCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DefaultViewModel.MainPageVM.ToAddCategoryText = string.Empty;
+            ChangeState(prevAppState);
+        }
+
+        private void NavPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousState();
+        }
+
+        private void NavNext_Click(object sender, RoutedEventArgs e)
+        {
+            NextState();
+        }
+
+        private void SourceChangeValidate_Click(object sender, RoutedEventArgs e)
+        {
+            NextState();
+        }
+
+        private void SourceChangeCancel_Click(object sender, RoutedEventArgs e)
         {
 
         }

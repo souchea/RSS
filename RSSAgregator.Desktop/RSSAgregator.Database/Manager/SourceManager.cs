@@ -11,10 +11,18 @@ namespace RSSAgregator.Database.Manager
     {
         public void AddSource(FeedSource toAdd)
         {
+            try
+            {
             using (var context = new RssAgregatorDataContext())
             {
                 context.FeedSources.Add(toAdd);
                 context.SaveChanges();
+            }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
             }
         }
 

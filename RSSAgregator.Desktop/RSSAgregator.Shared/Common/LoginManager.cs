@@ -60,6 +60,7 @@ namespace RSSAgregator.Shared.Common
             if (success)
             {
                 IsLogged = true;
+                OnUserChanged();
             }
             return success;
         }

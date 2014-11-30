@@ -24,13 +24,12 @@ namespace RSSAgregator.Desktop
 
         public App()
         {
-
             Kernel = new StandardKernel();
 
-            Kernel.Bind<IStorageManager>().To<StorageManager>();
+            Kernel.Bind<IStorageManager>().To<StorageManager>().InSingletonScope();
             Kernel.Bind<IDataManager>().To<RssDataManager>().InSingletonScope();
-            Kernel.Bind<IServiceManager>().To<WebApiServiceManager>();
-            Kernel.Bind<ILoginManager>().To<LoginManager>();    
+            Kernel.Bind<IServiceManager>().To<WebApiServiceManager>().InSingletonScope();
+            Kernel.Bind<ILoginManager>().To<LoginManager>().InSingletonScope();    
         }
 
     }
