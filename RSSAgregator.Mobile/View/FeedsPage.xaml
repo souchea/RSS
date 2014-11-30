@@ -31,8 +31,8 @@
         <!--TODO: le contenu doit être placé dans la grille suivante-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,5,10,-1">
             <StackPanel Orientation="Vertical" Margin="0,0" Width="auto" Height="auto">
-                <ScrollViewer Height="303" Margin="0,0,-0.333,0" Name="scrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding FeedList}"
+                <ScrollViewer Height="401" Name="ScrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
+                    <ListView  ItemsSource="{Binding FeedList}"
                       Margin="0,0,0,-1">
                         <ListView.Template>
                             <ControlTemplate>
@@ -47,6 +47,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
+                <TextBlock x:Name="FeedCollectionChangeStatus" Text="{Binding FeedUpdate}"/>
             </StackPanel>
         </Grid>
     </Grid>

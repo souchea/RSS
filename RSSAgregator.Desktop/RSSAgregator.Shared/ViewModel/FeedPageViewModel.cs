@@ -24,6 +24,18 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private string _feedUpdate;
+
+        public string FeedUpdate
+        {
+            get { return _feedUpdate; }
+            set
+            {
+                _feedUpdate = value;
+                NotifyPropertyChanged("FeedUpdate");
+            }
+        }
+
         private string _feedName;
 
         public string FeedName
@@ -42,6 +54,13 @@ namespace RSSAgregator.Shared.ViewModel
         {
             ServiceManager = serviceManager;
             FeedList = new ObservableCollection<FeedDTO>();
+        }
+
+        public List<FeedDTO> GetMoreFeeds()
+        {
+            List<FeedDTO> newFeeds = new List<FeedDTO>();
+           // newFeeds = ServiceManager.GetOldFeeds(FeedList[FeedList.Count - 1].PublishDate, 10);
+            return (newFeeds);
         }
 
         public async void SetFeedList(SourceDTO source)

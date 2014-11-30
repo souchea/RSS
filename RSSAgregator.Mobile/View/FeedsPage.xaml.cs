@@ -42,6 +42,25 @@ namespace RSSAgregator.Mobile.View
 
             DefaultViewModel = App.Kernel.Get<FeedPageViewModel>();
             DataContext = DefaultViewModel;
+
+            if (DefaultViewModel.FeedList != null)
+            {
+                DefaultViewModel.FeedList.CollectionChanged -= _feedList_CollectionChanged;
+            }
+
+           /* DefaultViewModel.FeedList = new GeneratorIncrementalLoadingClass<FeedDTO>(100, (count) =>
+            {
+                return (DefaultViewModel.GetMoreFeeds());
+            });*/
+            //DefaultViewModel.FeedList.CollectionChanged += _feedList_CollectionChanged;
+
+            DefaultViewModel.FeedUpdate = String.Empty;
+        }
+
+
+        void _feedList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DefaultViewModel.FeedUpdate = String.Format("Collection was changed. Count = {0}", DefaultViewModel.FeedList.Count);
         }
 
         /// <summary>
