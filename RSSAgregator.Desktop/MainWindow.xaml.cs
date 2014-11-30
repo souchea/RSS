@@ -88,7 +88,7 @@ namespace RSSAgregator.Desktop
             CredentialsInfo.Content = string.Empty;
         }
 
-        private void ButtonValidate_Click(object sender, RoutedEventArgs e)
+        private async void ButtonValidate_Click(object sender, RoutedEventArgs e)
         {
             bool check = true;
             if (!IsValidEmail(EMail.Text))
@@ -109,9 +109,15 @@ namespace RSSAgregator.Desktop
             if (!check)
                 return;
             CredentialsInfo.Content = "Please wait...loging you in";
+<<<<<<< HEAD
             DefaultViewModel.LoginPageVM.Email = "jean-baptiste.lechelon@epitech.eu";
             Password.Password = "Epitech42#";
             if ((ButtonRegister.IsChecked == true ? DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)).Result == true)
+=======
+
+
+            if ((ButtonRegister.IsChecked == true ? await DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : await DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)))
+>>>>>>> origin/master
             {
                 ButtonReset_Click(null, null);
                 ChangeState(AppState.Category);
