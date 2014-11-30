@@ -73,10 +73,7 @@ namespace RSSAgregator.Desktop
         private void QuitApp_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Really Quit?", "Exit", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-            {
-                //SaveData();
                 Close();
-            }
         }
 
         private void ButtonReset_Click(object sender, RoutedEventArgs e)
@@ -296,7 +293,7 @@ namespace RSSAgregator.Desktop
         {
             ChangeState(AppState.Category);
             List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
-            if (items.Count > 0)
+            if (items!= null && items.Count > 0)
             {
                 DefaultViewModel.SourcePageVM.SetCategoryList("");
             }
