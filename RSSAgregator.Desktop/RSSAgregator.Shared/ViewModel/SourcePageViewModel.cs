@@ -53,12 +53,15 @@ namespace RSSAgregator.Shared.ViewModel
 
         private IDataManager DataManager { get; set; }
 
+        private ILoginManager LoginManager { get; set; }
+
         #endregion
 
-        public SourcePageViewModel(IServiceManager serviceManager, IDataManager dataManager)
+        public SourcePageViewModel(IServiceManager serviceManager, IDataManager dataManager, ILoginManager loginManager)
         {
             ServiceManager = serviceManager;
             DataManager = dataManager;
+            LoginManager = loginManager;
 
             SourceList = new ObservableCollection<SourceDTO>();
         }
@@ -66,7 +69,7 @@ namespace RSSAgregator.Shared.ViewModel
         public async void SetCategoryList(string catId)
         {
             SourceNameText = catId;
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf"));
+            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(LoginManager.UserId));
             SetSourceList(catId);
         }
 
