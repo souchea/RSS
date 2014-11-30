@@ -46,7 +46,7 @@ namespace RSSAgregator.Mobile.View
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            DefaultViewModel.RefreshSourceList();
+            //DefaultViewModel.RefreshSourceList();
             // TODO: préparer la page pour affichage ici.
             // TODO: si votre application comporte plusieurs pages, assurez-vous que vous
             // gérez le bouton Retour physique en vous inscrivant à l’événement
