@@ -42,7 +42,7 @@
             </Menu>
             
             <!-- This contains the list of categories (changes rarely) -->
-            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" ItemsSource="{Binding MainPageVM.CategoryList}">
+            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" ItemsSource="{Binding MainPageVM.CategoryList}" SelectionChanged="CategoryList_SelectionChanged" SelectionMode="Multiple">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -57,7 +57,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <!-- This contains the sources list (changes moderately) -->
-            <ListView Name="SourceList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden" ItemsSource="{Binding MainPageVM.SourceList}">
+            <ListView Name="SourceList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden" ItemsSource="{Binding MainPageVM.SourceList}" SelectionChanged="SourceList_SelectionChanged" SelectionMode="Multiple">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -71,8 +71,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <!-- This element displays the Feed content in a website page format -->
-            <WebBrowser Name="FeedContent" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"></WebBrowser>
             <!-- This contains the Feeds list (changes often)   -->
             <ListView Name="FeedList" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" SelectionMode="Multiple" SelectionChanged="FeedList_SelectionChanged"  ItemsSource="{Binding FeedPageVM.FeedList}">
                 <ListView.ItemTemplate>
@@ -92,7 +90,10 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>    
+            </ListView>
+            <!-- This element displays the Feed content in a website page format -->
+            <WebBrowser Name="FeedContent" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"></WebBrowser>
+            <!-- This button is used for navigating to previous lists -->
             <Button Name="GoToPrevious" Grid.Column="0" Grid.Row="2" Background="DarkBlue" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden">Categories</Button>
         </Grid>
         <!-- Grid for displaying login/register elements -->
