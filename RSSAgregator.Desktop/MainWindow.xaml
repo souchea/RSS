@@ -34,6 +34,7 @@
                     <MenuItem Name="SBAddFeed" Header="_Add" Background="DarkBlue" Foreground="White" Click="SBAddFeed_Click"></MenuItem>
                     <MenuItem Name="SBDelFeed" Header="_Remove" Background="DarkBlue" Foreground="White" Click="SBDelFeed_Click"></MenuItem>
                 </MenuItem>
+                <MenuItem Name="MLoad" Header="Load _More Feeds" Click="MLoad_Click"/>
                 <!-- A simple exit button -->
                 <MenuItem Name="QuitApp" Header="_Quit" Click="QuitApp_Click">
                 </MenuItem>
@@ -75,17 +76,17 @@
             <ListView Name="FeedList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Background="DarkBlue" SelectionMode="Single" ItemsSource="{Binding FeedPageVM.FeedList, Mode=TwoWay}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid MaxWidth="250">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
                                 <RowDefinition Height="50"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Foreground="White" Name="ItemTitle" Text="{Binding Path=Title}" IsManipulationEnabled="False" TextWrapping="WrapWithOverflow"/>
+                            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Foreground="White" Name="ItemTitle" Text="{Binding Path=Title}" IsManipulationEnabled="False" TextWrapping="Wrap"/>
                             <Label Grid.Row="1" HorizontalAlignment="Left" Foreground="White" Name="ItemAuthor" Content="{Binding Path=Author}"/>
                             <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Foreground="White" Name="ItemDate" Content="{Binding Path=PublishDate.DateTime}"/>
                             <TextBlock Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Foreground="White" Name="ItemSummary" Text="{Binding Path=Summary}" IsManipulationEnabled="False" TextWrapping="Wrap"/>
