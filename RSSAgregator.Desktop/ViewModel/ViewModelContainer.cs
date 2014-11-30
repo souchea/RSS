@@ -11,6 +11,7 @@ namespace RSSAgregator.Desktop.ViewModel
     {
         public MainPageViewModel MainPageVM { get; set;}
         public LoginPageViewModel LoginPageVM { get; set; }
+        public FeedPageViewModel FeedPageVM { get; set; }
 
     }
 }

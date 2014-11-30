@@ -19,6 +19,7 @@ namespace RSSAgregator.Desktop.Manager
                 try
                 {
                     String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "categories.xml");
+                    //if (new FileInfo(path).Exists)
                     FileStream stream = File.OpenRead(path);
 
                     var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
@@ -51,6 +52,7 @@ namespace RSSAgregator.Desktop.Manager
             public void StoreCategories(List<CategoryDTO> toStore)
             {
                 String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "categories.xml");
+                new FileInfo(path).Directory.Create();
                 FileStream stream = File.Open(path, FileMode.Create);
                 var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
                 serializer.WriteObject(stream, toStore);
@@ -59,6 +61,7 @@ namespace RSSAgregator.Desktop.Manager
             public void StoreSources(List<SourceDTO> toStore)
             {
                 String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "sources.xml");
+                new FileInfo(path).Directory.Create();
                 FileStream stream = File.Open(path, FileMode.Create);
                 var serializer = new DataContractSerializer(typeof(List<SourceDTO>));
                 serializer.WriteObject(stream, toStore);

@@ -8,7 +8,8 @@
         <Grid x:Name="SubMainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="UpSide" Height="25"/>
-                <RowDefinition x:Name="DownSide"/>
+                <RowDefinition x:Name="MiddleSide" Height="*"/>
+                <RowDefinition x:Name="DownSide" Height="25"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="LeftSide"/>
@@ -22,25 +23,26 @@
             <!-- The main Menu bar -->
             <Menu Margin="0" Grid.ColumnSpan="3" Name="MainMenu" IsMainMenu="True" Background="DarkBlue" Foreground="White">
                 <!-- Should contain everything about the user account -->
-                <MenuItem Name="MAccount" Header="_Login" Click="SMLogin_Click"/>
+                <MenuItem Name="MLogin" Header="_Login" Click="SMLogin_Click"/>
                 <!-- Should contain everything about category modifications-->
                 <MenuItem Name="MGroups" Header="_Categories" Background="DarkBlue">
-                    <MenuItem Name="SBAddGroup" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
-                    <MenuItem Name="SBDelGroup" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
-                    <MenuItem Name="SBEditGroup" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBAddGroup" Header="_Add" Background="DarkBlue" Foreground="White" Click="SBAddGroup_Click"></MenuItem>
+                    <MenuItem Name="SBDelGroup" Header="_Remove" Background="DarkBlue" Foreground="White" Click="SBDelGroup_Click"></MenuItem>
+                    <MenuItem Name="SBEditGroup" Header="_Edit" Background="DarkBlue" Foreground="White" Click="SBEditGroup_Click"></MenuItem>
                 </MenuItem>
                 <!-- Should contain everything about feeds manipulations -->
                 <MenuItem Name="MFeeds" Header="_Feeds">
-                    <MenuItem Name="SBAddFeed" Header="_Add" Background="DarkBlue" Foreground="White"></MenuItem>
-                    <MenuItem Name="SBDelFeed" Header="_Remove" Background="DarkBlue" Foreground="White"></MenuItem>
-                    <MenuItem Name="SBEditFeed" Header="_Edit" Background="DarkBlue" Foreground="White"></MenuItem>
+                    <MenuItem Name="SBAddFeed" Header="_Add" Background="DarkBlue" Foreground="White" Click="SBAddFeed_Click"></MenuItem>
+                    <MenuItem Name="SBDelFeed" Header="_Remove" Background="DarkBlue" Foreground="White" Click="SBDelFeed_Click"></MenuItem>
+                    <MenuItem Name="SBEditFeed" Header="_Edit" Background="DarkBlue" Foreground="White" Click="SBEditFeed_Click"></MenuItem>
                 </MenuItem>
                 <!-- A simple exit button -->
                 <MenuItem Name="QuitApp" Header="_Quit" Click="QuitApp_Click">
                 </MenuItem>
             </Menu>
+            
             <!-- This contains the list of categories (changes rarely) -->
-            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Background="DarkBlue">
+            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" ItemsSource="{Binding MainPageVM.CategoryList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -55,7 +57,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <!-- This contains the sources list (changes moderately) -->
-            <ListView Name="FeedList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden">
+            <ListView Name="SourceList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden" ItemsSource="{Binding MainPageVM.SourceList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -70,9 +72,9 @@
                 </ListView.ItemTemplate>
             </ListView>
             <!-- This element displays the Feed content in a website page format -->
-            <WebBrowser Name="ItemContent" Grid.Column="2" Grid.Row="2" Visibility="Hidden"></WebBrowser>
+            <WebBrowser Name="FeedContent" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"></WebBrowser>
             <!-- This contains the Feeds list (changes often)   -->
-            <ListView Name="ItemsList" Grid.Column="2" Grid.Row="2">
+            <ListView Name="FeedList" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="DarkBlue" SelectionMode="Multiple" SelectionChanged="FeedList_SelectionChanged"  ItemsSource="{Binding FeedPageVM.FeedList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -90,11 +92,11 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
-
+            </ListView>    
+            <Button Name="GoToPrevious" Grid.Column="0" Grid.Row="2" Background="DarkBlue" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden">Categories</Button>
         </Grid>
         <!-- Grid for displaying login/register elements -->
-        <Grid Name="Credentials" Background="Green" Width="500" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible">
+        <Grid Name="Credentials" Background="Green" Width="500" Height="350" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50" />
@@ -107,7 +109,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Label Name="CredentialsTitel" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold" Content="Authentication"/>
+            <Label Name="CredentialsTitle" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold" Content="Authentication"/>
             <TextBox Name="EMail" Grid.Column="0" Grid.Row="1" MaxLines="1" MaxLength="256" FontSize="16" Text="{Binding Path=LoginPageVM.Email, Mode=TwoWay}" Foreground="Gray" Margin="5,0,0,0" Background="LightGreen"/>
             <Image Name="EMailImage" Grid.Column="1" Grid.Row="1" />
             <Label Name="EmailInfo" Grid.Column="0" Grid.Row="2" FontSize="16" Content="Please enter your login"/>
@@ -128,7 +130,7 @@
                 <Button Grid.Column="0" Grid.Row="0" Margin="15,5" FontSize="16" Name="ButtonReset" Click="ButtonReset_Click" Background="Chartreuse">Reset</Button>
                 <Button Grid.Column="1" Grid.Row="0" Margin="15,5" FontSize="16" Name="ButtonValidate" Click="ButtonValidate_Click"  Background="Chartreuse">OK</Button>
                 <Button Grid.Column="2" Grid.Row="0" Margin="15,5" FontSize="16" Name="ButtonCancel" Click="ButtonCancel_Click"  Background="Chartreuse">Cancel</Button>
-                <RadioButton Grid.Column="1" Grid.Row="1" Name="ButtonRegister" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Register?</RadioButton>
+                <CheckBox Grid.Column="1" Grid.Row="1" Name="ButtonRegister" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonRegister_Click">Register?</CheckBox>
                 <Label Name="CredentialsInfo" Grid.Row="2" Grid.ColumnSpan="3"/>
             </Grid>
         </Grid>
