@@ -149,6 +149,7 @@ namespace RSSAgregator.Shared.ViewModel
             var result = await ServiceManager.AddCategoryAsync(LoginManager.UserId, ToAddCategoryText);
             if (result)
             {
+                RssDataManager.SetCategoryList();
             }
         }
     }
