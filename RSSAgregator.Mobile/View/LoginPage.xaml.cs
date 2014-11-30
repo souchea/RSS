@@ -1,30 +1,15 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.System;
-using Windows.UI.Core;
-using Windows.UI.ViewManagement;
+﻿using System;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Ninject;
 using RSSAgregator.Mobile.Common;
-using RSSAgregator.Mobile.View;
 using RSSAgregator.Shared.ViewModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace RSSAgregator.Mobile
+namespace RSSAgregator.Mobile.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -32,6 +17,8 @@ namespace RSSAgregator.Mobile
     public sealed partial class LoginPage : Page
     {
         private NavigationHelper navigationHelper;
+
+        private ApplicationDataContainer _settings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
         public LoginPage()
         {
@@ -43,6 +30,12 @@ namespace RSSAgregator.Mobile
 
             DefaultViewModel = App.Kernel.Get<LoginPageViewModel>();
             DataContext = DefaultViewModel;
+            if (_settings.Values.Count != 0)
+            {
+                LoginTextBox.Text = _settings.Values.ContainsKey("Login") ? _settings.Values["Login"] as String : String.Empty;
+
+            }
+
         }
 
         /// <summary>
@@ -119,6 +112,7 @@ namespace RSSAgregator.Mobile
 
             if (worked)
             {
+                _settings.Values["Login"] = LoginTextBox.Text;
                 Frame.Navigate(typeof(MainPage));
             }
         }

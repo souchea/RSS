@@ -143,13 +143,33 @@ namespace RSSAgregator.Shared.ViewModel
             CategoryList = new ObservableCollection<CategoryDTO>(RssDataManager.CategoryList);
         }
 
+        private async Task<List<CategoryDTO>> RefreshCategoryList()
+        {
+            List<CategoryDTO> newList = await ServiceManager.GetCategoriesAsync(LoginManager.UserId);
+            CategoryList = new ObservableCollection<CategoryDTO>(newList);
+            return (newList);
+        }
+
+        public async void RefreshSourceList()
+        {
+            List<CategoryDTO> list = await RefreshCategoryList();
+            RssDataManager.StorageManager.StoreCategories(list);
+            List<SourceDTO> newList = new List<SourceDTO>();
+            foreach (CategoryDTO t in list)
+            {
+                newList.AddRange(t.Feeds);
+            }
+            SourceList = new ObservableCollection<SourceDTO>(newList);
+            RssDataManager.StorageManager.StoreSources(newList);
+
+        }
 
         public async void AddCategory()
         {
             var result = await ServiceManager.AddCategoryAsync(LoginManager.UserId, ToAddCategoryText);
             if (result)
             {
-
+                RssDataManager.StorageManager.StoreCategories(await RefreshCategoryList());
             }
         }
     }
