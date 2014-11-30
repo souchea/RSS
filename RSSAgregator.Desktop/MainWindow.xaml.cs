@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RSSAgregator.Shared.Model;
+using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.Common;
 using RSSAgregator.Shared.ViewModel;
 using Ninject;
@@ -154,6 +155,7 @@ namespace RSSAgregator.Desktop
                     CategoryChange.Visibility = System.Windows.Visibility.Hidden;
                     NavPrevious.Visibility = System.Windows.Visibility.Hidden;
                     NavNext.Visibility = System.Windows.Visibility.Hidden;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
@@ -198,7 +200,11 @@ namespace RSSAgregator.Desktop
                     NavNext.Visibility = System.Windows.Visibility.Visible;
                     CategoryList.Visibility = System.Windows.Visibility.Visible;
                     SourceList.Visibility = System.Windows.Visibility.Hidden;
+                    FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
+                    NavPrevious.Background = Brushes.DarkBlue;
+                    NavNext.Background = Brushes.DarkBlue;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = true;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
@@ -217,7 +223,9 @@ namespace RSSAgregator.Desktop
                     NavNext.Background = Brushes.Green;
                     CategoryList.Visibility = System.Windows.Visibility.Hidden;
                     SourceList.Visibility = System.Windows.Visibility.Visible;
+                    FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = true;
                     prevAppState = curAppState;
@@ -234,9 +242,13 @@ namespace RSSAgregator.Desktop
                     CategoryChange.Visibility = System.Windows.Visibility.Hidden;
                     NavPrevious.Visibility = System.Windows.Visibility.Visible;
                     NavNext.Visibility = System.Windows.Visibility.Visible;
+                    NavPrevious.Background = Brushes.DarkBlue;
+                    NavNext.Background = Brushes.DarkBlue;
                     CategoryList.Visibility = System.Windows.Visibility.Hidden;
                     SourceList.Visibility = System.Windows.Visibility.Visible;
+                    FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Visible;
+                    MLoad.IsEnabled = true;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
@@ -263,6 +275,15 @@ namespace RSSAgregator.Desktop
                 #endregion
                 #region State DelCategory
                 case AppState.DelCategory:
+                    prevAppState = curAppState;
+                    curAppState = state;
+                    return true;
+                #endregion
+                #region State AddFlux
+                case AppState.AddFlux:
+                    SubMainGrid.IsEnabled = false;
+                    CategoryChange.Visibility = System.Windows.Visibility.Visible;
+                    CategoryChangeTitle.Content = "Add Source";
                     prevAppState = curAppState;
                     curAppState = state;
                     return true;
@@ -321,35 +342,30 @@ namespace RSSAgregator.Desktop
         private void SBDelGroup_Click(object sender, RoutedEventArgs e)
         {
             ChangeState(AppState.DelCategory);
+            List<CategoryDTO> lst = new List<CategoryDTO>();
+            foreach (CategoryDTO c in CategoryList.SelectedItems)
+            {
+                lst.Add(c);
+            }
+            DefaultViewModel.MainPageVM.DeleteCategories(lst);
+            PreviousState();
         }
 
         private void SBAddFeed_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangeState(AppState.AddFlux);
         }
 
         private void SBDelFeed_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ChangeState(AppState.Category);
-            List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
-            if (items!= null && items.Count > 0)
+            ChangeState(AppState.DelFlux);
+            List<SourceDTO> lst = new List<SourceDTO>();
+            foreach (SourceDTO c in SourceList.SelectedItems)
             {
-                DefaultViewModel.SourcePageVM.SetCategoryList("");
+                lst.Add(c);
             }
-        }
-
-        private void SourceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-        private void FeedList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            DefaultViewModel.SourcePageVM.DeleteSources(lst);
+            PreviousState();
         }
 
         private void RegisterButtonsArea_KeyUp(object sender, KeyEventArgs e)
@@ -366,7 +382,15 @@ namespace RSSAgregator.Desktop
 
         private void CategoryChangeValidate_Click(object sender, RoutedEventArgs e)
         {
+            if (curAppState == AppState.AddCategory)
+            {
                 DefaultViewModel.MainPageVM.AddCategory();
+            }
+            else if (curAppState == AppState.AddFlux)
+            {
+                CategoryDTO c = CategoryList.SelectedItem as CategoryDTO;
+                DefaultViewModel.CategoryPageVM.SetNewSource(CategoryName.Text, c.Id);
+            }
                 PreviousState();
         }
 
@@ -383,7 +407,25 @@ namespace RSSAgregator.Desktop
 
         private void NavNext_Click(object sender, RoutedEventArgs e)
         {
-            NextState();
+            if (curAppState == AppState.Category && CategoryList.SelectedItem != null)
+            {
+                CategoryDTO c = CategoryList.SelectedItem as CategoryDTO;
+                DefaultViewModel.SourcePageVM.SetCategoryList(c.Name);
+                NextState();
+            }
+            else if (curAppState == AppState.Flux && SourceList.SelectedItem != null)
+            {
+                DefaultViewModel.FeedPageVM.SetFeedList(SourceList.SelectedItem as SourceDTO);
+                NextState();
+            }
+            else if (curAppState == AppState.Item && FeedList.SelectedItem != null)
+            {
+                FeedDTO f = FeedList.SelectedItem as FeedDTO;
+                FeedBody.Content = f.Content;
+                FeedTitle.Content = f.Title;
+                FeedDate.Content = "Publishing date : " + f.PublishDate.DateTime;
+                NextState();
+            }
         }
 
         private void SourceChangeValidate_Click(object sender, RoutedEventArgs e)
@@ -394,6 +436,20 @@ namespace RSSAgregator.Desktop
         private void SourceChangeCancel_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void FeedUri_Click(object sender, RoutedEventArgs e)
+        {
+            if (FeedList.SelectedItem != null)
+            {
+                FeedDTO f = FeedList.SelectedItem as FeedDTO;
+                System.Diagnostics.Process.Start(f.Id);
+            }
+        }
+
+        private void MLoad_Click(object sender, RoutedEventArgs e)
+        {
+            DefaultViewModel.FeedPageVM.GetMoreFeeds();
         }
     }
 }
