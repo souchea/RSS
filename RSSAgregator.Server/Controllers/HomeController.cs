@@ -14,17 +14,10 @@ namespace RSSAgregator.Server.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Team()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Team members";
+            ViewBag.TeamMembers = new List<string>() { "Aurelien", "lavien", "Jean-Baptiste", "Thomas", "Steeve" };
             return View();
         }
     }
