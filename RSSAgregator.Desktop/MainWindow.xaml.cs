@@ -155,6 +155,7 @@ namespace RSSAgregator.Desktop
                     CategoryChange.Visibility = System.Windows.Visibility.Hidden;
                     NavPrevious.Visibility = System.Windows.Visibility.Hidden;
                     NavNext.Visibility = System.Windows.Visibility.Hidden;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
@@ -201,6 +202,9 @@ namespace RSSAgregator.Desktop
                     SourceList.Visibility = System.Windows.Visibility.Hidden;
                     FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
+                    NavPrevious.Background = Brushes.DarkBlue;
+                    NavNext.Background = Brushes.DarkBlue;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = true;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
@@ -221,6 +225,7 @@ namespace RSSAgregator.Desktop
                     SourceList.Visibility = System.Windows.Visibility.Visible;
                     FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Hidden;
+                    MLoad.IsEnabled = false;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = true;
                     prevAppState = curAppState;
@@ -237,10 +242,13 @@ namespace RSSAgregator.Desktop
                     CategoryChange.Visibility = System.Windows.Visibility.Hidden;
                     NavPrevious.Visibility = System.Windows.Visibility.Visible;
                     NavNext.Visibility = System.Windows.Visibility.Visible;
+                    NavPrevious.Background = Brushes.DarkBlue;
+                    NavNext.Background = Brushes.DarkBlue;
                     CategoryList.Visibility = System.Windows.Visibility.Hidden;
                     SourceList.Visibility = System.Windows.Visibility.Visible;
                     FeedContent.Visibility = System.Windows.Visibility.Visible;
                     FeedList.Visibility = System.Windows.Visibility.Visible;
+                    MLoad.IsEnabled = true;
                     MGroups.IsEnabled = false;
                     MFeeds.IsEnabled = false;
                     prevAppState = curAppState;
@@ -350,26 +358,14 @@ namespace RSSAgregator.Desktop
 
         private void SBDelFeed_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ChangeState(AppState.Category);
-            List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
-            if (items!= null && items.Count > 0)
+            ChangeState(AppState.DelFlux);
+            List<SourceDTO> lst = new List<SourceDTO>();
+            foreach (SourceDTO c in SourceList.SelectedItems)
             {
-                DefaultViewModel.SourcePageVM.SetCategoryList("");
+                lst.Add(c);
             }
-        }
-
-        private void SourceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ChangeState(AppState.Flux);
-            if (SourceList.SelectedItem != null)
-            {
-                DefaultViewModel.FeedPageVM.SetFeedList(SourceList.SelectedItem as SourceDTO);
-            }
+            DefaultViewModel.SourcePageVM.DeleteSources(lst);
+            PreviousState();
         }
 
         private void RegisterButtonsArea_KeyUp(object sender, KeyEventArgs e)
@@ -449,6 +445,11 @@ namespace RSSAgregator.Desktop
                 FeedDTO f = FeedList.SelectedItem as FeedDTO;
                 System.Diagnostics.Process.Start(f.Id);
             }
+        }
+
+        private void MLoad_Click(object sender, RoutedEventArgs e)
+        {
+            DefaultViewModel.FeedPageVM.GetMoreFeeds();
         }
     }
 }
