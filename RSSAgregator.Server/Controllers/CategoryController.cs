@@ -8,11 +8,11 @@ using System.Web.Http;
 using System.Xml;
 using RSSAgregator.Database.DataContext;
 using RSSAgregator.Database.Manager;
+using RSSAgregator.Server.APIAttribute;
 using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
-    //[Authorize]
     public class CategoryController : ApiController
     {
         protected ICategoryManager CategoryManager { get; set; }

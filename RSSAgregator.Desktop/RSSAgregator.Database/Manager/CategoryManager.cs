@@ -33,7 +33,8 @@ namespace RSSAgregator.Database.Manager
         {
             using (var context = new RssAgregatorDataContext())
             {
-                context.FeedCategories.Remove(toDelete);
+                FeedCategory cat = (FeedCategory)context.FeedCategories.Where(b => b.Id == toDelete.Id).First();
+                context.FeedCategories.Remove(cat);
                 context.SaveChanges();
             }
         }
@@ -68,12 +69,12 @@ namespace RSSAgregator.Database.Manager
 
         public FeedCategory GetCategoryById(int id)
         {
-            using (var context = new RssAgregatorDataContext())
-            {
+            var context = new RssAgregatorDataContext();
+            
                 return (from category in context.FeedCategories
                         where category.Id == id
                         select category).SingleOrDefault();
-            }
+            
         }
     }
 }
