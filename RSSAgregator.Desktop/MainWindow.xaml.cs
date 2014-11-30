@@ -368,25 +368,6 @@ namespace RSSAgregator.Desktop
             PreviousState();
         }
 
-        private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ChangeState(AppState.Category);
-            List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
-            if (items!= null && items.Count > 0)
-            {
-                DefaultViewModel.SourcePageVM.SetCategoryList("");
-            }
-        }
-
-        private void SourceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ChangeState(AppState.Flux);
-            if (SourceList.SelectedItem != null)
-            {
-                DefaultViewModel.FeedPageVM.SetFeedList(SourceList.SelectedItem as SourceDTO);
-            }
-        }
-
         private void RegisterButtonsArea_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
