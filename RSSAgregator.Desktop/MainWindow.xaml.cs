@@ -43,8 +43,6 @@ namespace RSSAgregator.Desktop
             EditCategory
         }
 
-
-
         private string emailInfo = "Please enter your login";
         private string passwordInfo = "Please enter your password";
         private AppState curAppState = AppState.None;
@@ -55,18 +53,16 @@ namespace RSSAgregator.Desktop
         public MainWindow()
         {
             InitializeComponent();
-            //LoadLists();
-            //ObservableCollection<CategoryDTO> categories = new ObservableCollection<CategoryDTO>();
-            //ObservableCollection<SourceDTO> sources;
             DefaultViewModel = App.Kernel.Get<ViewModel.ViewModelContainer>();
             DefaultViewModel.MainPageVM = App.Kernel.Get<MainPageViewModel>();
             DefaultViewModel.LoginPageVM = App.Kernel.Get<LoginPageViewModel>();
+            DefaultViewModel.CategoryPageVM = App.Kernel.Get<CategoriesViewModel>();
+            DefaultViewModel.SourcePageVM = App.Kernel.Get<SourcePageViewModel>();
             DefaultViewModel.FeedPageVM = App.Kernel.Get<FeedPageViewModel>();
+            DefaultViewModel.FeedInfoVM = App.Kernel.Get<FeedViewerPageViewModel>();
             DataContext = DefaultViewModel;
 
             ChangeState(AppState.None);
-            //categories.Add(new CategoryDTO { Id = 0, Feeds = null, Name = "Test"});
-            //categories.Add(new CategoryDTO { Id = 1, Feeds = null, Name = "Test2" });
         }
 
         private void SMLogin_Click(object sender, RoutedEventArgs e)
@@ -113,9 +109,15 @@ namespace RSSAgregator.Desktop
             if (!check)
                 return;
             CredentialsInfo.Content = "Please wait...loging you in";
+<<<<<<< HEAD
+            DefaultViewModel.LoginPageVM.Email = "jean-baptiste.lechelon@epitech.eu";
+            Password.Password = "Epitech42#";
+            if ((ButtonRegister.IsChecked == true ? DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)).Result == true)
+=======
 
 
             if ((ButtonRegister.IsChecked == true ? await DefaultViewModel.LoginPageVM.RegisterAsync(Password.Password) : await DefaultViewModel.LoginPageVM.LoginAsync(Password.Password)))
+>>>>>>> origin/master
             {
                 ButtonReset_Click(null, null);
                 ChangeState(AppState.Category);
@@ -296,6 +298,20 @@ namespace RSSAgregator.Desktop
 
         }
 
+        private void CategoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangeState(AppState.Category);
+            List<CategoryDTO> items = CategoryList.SelectedItems as List<CategoryDTO>;
+            if (items.Count > 0)
+            {
+                //    DefaultViewModel.CategoryPageVM.SetNewSource(DefaultViewModel.CategoryPageVM.GetCompleteUrl(Url), item.Id);
+            }
+        }
+
+        private void SourceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
         private void FeedList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

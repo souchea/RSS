@@ -19,7 +19,6 @@ namespace RSSAgregator.Desktop.Manager
                 try
                 {
                     String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "categories.xml");
-                    //if (new FileInfo(path).Exists)
                     FileStream stream = File.OpenRead(path);
 
                     var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
