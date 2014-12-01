@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,8 +58,38 @@ namespace RSSAgregator.Database.Manager
         {
             var context = new RssAgregatorDataContext();
             return (from source in context.FeedSources
+                    where source.Id == id
+                    select source).SingleOrDefault();
+        }
+
+        public void AddView(int id)
+        {
+            var context = new RssAgregatorDataContext();
+            var newSource = (from source in context.FeedSources
                 where source.Id == id
                 select source).SingleOrDefault();
+            newSource.ViewedNumber += 1;
+            context.SaveChanges();
+        }
+
+        public void ChangeState(int id, string newState)
+        {
+            var context = new RssAgregatorDataContext();
+            var newSource = (from source in context.FeedSources
+                where source.Id == id
+                select source).SingleOrDefault();
+            newSource.ViewState = newState;
+            context.SaveChanges();
+        }
+
+        public void ChangeName(int id, string newName)
+        {
+            var context = new RssAgregatorDataContext();
+            var newSource = (from source in context.FeedSources
+                    where source.Id == id
+                    select source).SingleOrDefault();
+            newSource.Title = newName;
+            context.SaveChanges();
         }
     }
 }
