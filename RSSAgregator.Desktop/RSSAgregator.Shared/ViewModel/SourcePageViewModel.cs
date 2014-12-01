@@ -23,6 +23,18 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private string _sourceEmptyText;
+
+        public string SourceEmptyText
+        {
+            get { return _sourceEmptyText; }
+            set
+            {
+                _sourceEmptyText = value;
+                NotifyPropertyChanged("SourceEmptyText");
+            }
+        }
+
         private ObservableCollection<SourceDTO> _sourceList;
 
         public ObservableCollection<SourceDTO> SourceList
@@ -94,6 +106,8 @@ namespace RSSAgregator.Shared.ViewModel
                     SourceList.Add(t);
                 }
             }
+            if (!SourceList.Any())
+                SourceEmptyText = "Vous n'avez aucun flux dans cette categorie";
         }
     }
 }
