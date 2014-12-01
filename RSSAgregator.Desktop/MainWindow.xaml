@@ -39,9 +39,10 @@
                 <MenuItem Name="QuitApp" Header="_Quit" Click="QuitApp_Click">
                 </MenuItem>
             </Menu>
+            <Label Name="AsyncResultInfo" Grid.Column="2" HorizontalAlignment="Right" Foreground="White" FontSize="16"/>
             
             <!-- This contains the list of categories (changes rarely) -->
-            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Background="DarkBlue" ItemsSource="{Binding CategoryPageVM.CategoryList, Mode=TwoWay}" SelectionMode="Single">
+            <ListView Name="CategoryList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Background="DarkBlue" ItemsSource="{Binding MainPageVM.CategoryList, Mode=TwoWay}" SelectionMode="Single">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -57,7 +58,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <!-- This contains the sources list (changes moderately) -->
-            <ListView Name="SourceList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden" ItemsSource="{Binding MainPageVM.SourceList, Mode=TwoWay}" SelectionMode="Single">
+            <ListView Name="SourceList" Grid.Column="0" Grid.Row="1" Background="Green" Visibility="Hidden" ItemsSource="{Binding SourcePageVM.SourceList, Mode=TwoWay}" SelectionMode="Single">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

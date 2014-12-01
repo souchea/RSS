@@ -298,6 +298,12 @@ namespace RSSAgregator.Desktop
                     curAppState = state;
                     return true;
                 #endregion
+                #region State DelFlux
+                case AppState.DelFlux:
+                    prevAppState = curAppState;
+                    curAppState = state;
+                    return true;
+                #endregion
                 default:
                     return false;
             }
@@ -402,7 +408,7 @@ namespace RSSAgregator.Desktop
                 DefaultViewModel.CategoryPageVM.SetNewSource(CategoryName.Text, c.Id);
             }
             DefaultViewModel.MainPageVM.RefreshSourceList();
-                PreviousState();
+            PreviousState();
         }
 
         private void CategoryChangeCancel_Click(object sender, RoutedEventArgs e)
