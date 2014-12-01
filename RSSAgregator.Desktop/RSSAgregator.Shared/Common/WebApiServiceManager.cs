@@ -96,6 +96,46 @@ namespace RSSAgregator.Shared.Common
             }
         }
 
+        public async Task<List<FeedDTO>> GetFeedsFromDateAsync(int sourceId, DateTime date)
+        {
+            var toReturnFeedList = new List<FeedDTO>();
+            try
+            {
+                HttpResponseMessage response =
+                    await WebApiClient.GetAsync(String.Format("Source/GetItemsFromDate/{0}?nb={1}?year={2}&month={3}&day={4}&hour={5}&minute={6}",
+                                    sourceId, 1, date.Year, date.Month, date.Day, date.Hour, date.Minute));
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<List<FeedDTO>>();
+                }
+                return toReturnFeedList;
+            }
+            catch (Exception)
+            {
+                return toReturnFeedList;
+            }
+        }
+
+        public async Task<List<FeedDTO>> GetFeedsToDateAsync(int sourceId, int nb, DateTime date)
+        {
+            var toReturnFeedList = new List<FeedDTO>();
+            try
+            {
+                HttpResponseMessage response =
+                    await WebApiClient.GetAsync(String.Format("Source/GetItemsToDate/{0}?nb={1}?year={2}&month={3}&day={4}&hour={5}&minute={6}",
+                                    sourceId, 1, date.Year, date.Month, date.Day, date.Hour, date.Minute));
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<List<FeedDTO>>();
+                }
+                return toReturnFeedList;
+            }
+            catch (Exception)
+            {
+                return toReturnFeedList;
+            }
+        }
+
         public async Task<bool> DeleteCategory(int catId)
         {
             try
