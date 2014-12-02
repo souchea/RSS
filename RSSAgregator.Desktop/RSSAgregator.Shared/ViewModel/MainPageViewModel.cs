@@ -59,7 +59,13 @@ namespace RSSAgregator.Shared.ViewModel
             {
                 _sourceList = value;
                 NotifyPropertyChanged("SourceList");
+                NotifyPropertyChanged("MostViewedSourceList");
             }
+        }
+
+        public ObservableCollection<SourceDTO> MostViewedSourceList
+        {
+            get { return new ObservableCollection<SourceDTO>(SourceList.OrderBy(x => x.ViewedNumber)); }
         }
 
         private int _selectedSourceIndex;

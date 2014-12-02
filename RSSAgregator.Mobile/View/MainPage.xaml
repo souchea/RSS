@@ -48,10 +48,22 @@
             <HubSection Header="Most Viewed" IsHeaderInteractive="True"  
                 MinWidth="250">
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="Most viewed feeds will be there"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                    </StackPanel>
+                    <ListView ItemsSource="{Binding MostViewedSourceList}"
+                              SelectedItem="{Binding SelectedSourceIndex}"
+                              SelectionChanged="Source_OnTapped"
+                              Margin="0,0,0,139">
+                        <ListView.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </ListView.Template>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="25"
+                                           Text="{Binding Path=Title}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </DataTemplate>
             </HubSection>
 
@@ -80,14 +92,22 @@
 				</DataTemplate>				
             </HubSection>
 
-            <!--<HubSection Header="Account" IsHeaderInteractive="True" 
-                MinWidth="250">
+            <HubSection Header="Account"
+                        IsHeaderInteractive="True"
+                        MinWidth="250">
                 <DataTemplate>
                     <StackPanel>
-                        <Button Content="{Binding Account_ButtonText}" Click="Click_Account" ></Button>
+                        <TextBlock Text="Name" />
+                        <TextBlock Text="{Binding AccountName}" />
+                        <Button FontFamily="Global User Interface">
+                            Change Password
+                        </Button>
+                        <Button>
+                            Sign Out
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
-            </HubSection>-->  
+            </HubSection>
         </Hub>
     </Grid>
     <Page.BottomAppBar>

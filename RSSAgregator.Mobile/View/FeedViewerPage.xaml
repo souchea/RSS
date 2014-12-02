@@ -29,7 +29,8 @@
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,10,10,-1">
             <StackPanel Orientation="Vertical" Height="auto">
                 <ScrollViewer Height="auto" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Height="auto" Width="auto"/>
+                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Height="auto" Width="auto"
+                               FontSize="24" />
                 </ScrollViewer>
             </StackPanel>
         </Grid>
