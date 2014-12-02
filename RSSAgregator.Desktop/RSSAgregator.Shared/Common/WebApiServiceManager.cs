@@ -102,7 +102,7 @@ namespace RSSAgregator.Shared.Common
             try
             {
                 HttpResponseMessage response =
-                    await WebApiClient.GetAsync(String.Format("Source/GetItemsFromDate/{0}?nb={1}?year={2}&month={3}&day={4}&hour={5}&minute={6}",
+                    await WebApiClient.GetAsync(String.Format("Source/GetItemsFromDate/{0}?nb={1}&year={2}&month={3}&day={4}&hour={5}&minute={6}",
                                     sourceId, 1, date.Year, date.Month, date.Day, date.Hour, date.Minute));
                 if (response.IsSuccessStatusCode)
                 {
@@ -122,7 +122,7 @@ namespace RSSAgregator.Shared.Common
             try
             {
                 HttpResponseMessage response =
-                    await WebApiClient.GetAsync(String.Format("Source/GetItemsToDate/{0}?nb={1}?year={2}&month={3}&day={4}&hour={5}&minute={6}",
+                    await WebApiClient.GetAsync(String.Format("Source/GetItemsToDate/{0}?nb={1}&year={2}&month={3}&day={4}&hour={5}&minute={6}",
                                     sourceId, 1, date.Year, date.Month, date.Day, date.Hour, date.Minute));
                 if (response.IsSuccessStatusCode)
                 {
