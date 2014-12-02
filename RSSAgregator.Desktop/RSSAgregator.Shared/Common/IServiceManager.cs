@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using RSSAgregator.Shared.Model;
@@ -17,6 +18,8 @@ namespace RSSAgregator.Shared.Common
         Task<bool> AddSourceAsync(string userId, int catId, string url);
 
         Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb);
+
+        Task<List<FeedDTO>> GetFeedsToDateAsync(int sourceId, int nb, DateTime date);
 
         Task<bool> DeleteCategory(int catId);
 

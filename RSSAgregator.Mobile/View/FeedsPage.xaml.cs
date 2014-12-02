@@ -42,19 +42,7 @@ namespace RSSAgregator.Mobile.View
 
             DefaultViewModel = App.Kernel.Get<FeedPageViewModel>();
             DataContext = DefaultViewModel;
-
-            if (DefaultViewModel.FeedList != null)
-            {
-                DefaultViewModel.FeedList.CollectionChanged -= _feedList_CollectionChanged;
-            }
-
-           /* DefaultViewModel.FeedList = new GeneratorIncrementalLoadingClass<FeedDTO>(100, (count) =>
-            {
-                return (DefaultViewModel.GetMoreFeeds());
-            });*/
-            //DefaultViewModel.FeedList.CollectionChanged += _feedList_CollectionChanged;
-
-            DefaultViewModel.FeedUpdate = String.Empty;
+            DefaultViewModel.FeedUpdate = "Défilez vers le bas pour obtenir plus de flux";
         }
 
 
@@ -135,6 +123,26 @@ namespace RSSAgregator.Mobile.View
             {
                 if (t.Title == send.Text)
                     Frame.Navigate(typeof (FeedViewerPage), t);
+            }
+        }
+
+        private async void MyscrollbarScrollViewer_OnViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            var verticalOffsetValue = ScrollViewer1.VerticalOffset;
+            var maxVerticalOffsetValue = ScrollViewer1.ExtentHeight - ScrollViewer1.ViewportHeight;
+            if (maxVerticalOffsetValue < 0 || verticalOffsetValue == maxVerticalOffsetValue)
+            {
+                FeedCollectionChangeStatus.Visibility = Visibility.Collapsed;
+                ProgressRing.Visibility = Visibility.Visible;
+                ProgressRing.IsActive = true;
+                bool more = await DefaultViewModel.GetMoreFeeds();
+                if (more == false)
+                {
+                    DefaultViewModel.FeedUpdate = "Il n'y a plus de flux :(";
+                }
+                ProgressRing.IsActive = false;
+                ProgressRing.Visibility = Visibility.Collapsed;
+                FeedCollectionChangeStatus.Visibility = Visibility.Visible;
             }
         }
     }

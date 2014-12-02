@@ -127,7 +127,7 @@ namespace RSSAgregator.Shared.ViewModel
             var list = catNameList.OfType<CategoryDTO>().ToList();
             foreach (CategoryDTO t in list)
             {
-                bool sucess = await ServiceManager.DeleteCategory(t.Id);
+                bool sucess = ServiceManager.DeleteCategory(t.Id).Result;
                 CategoryList.Remove(t);
             }
             RssDataManager.StorageManager.StoreCategories(CategoryList.ToList());

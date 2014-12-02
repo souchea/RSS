@@ -30,8 +30,8 @@
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,5,10,-1">
-            <StackPanel Orientation="Vertical" Margin="0,0" Width="auto" Height="auto">
-                <ScrollViewer Height="401" Name="ScrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,85" Width="auto" Height="auto">
+                <ScrollViewer VerticalScrollMode="Enabled" ViewChanged="MyscrollbarScrollViewer_OnViewChanged" IsScrollInertiaEnabled="True" ManipulationMode="System" Height="302" Name="ScrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
                     <ListView  ItemsSource="{Binding FeedList}"
                       Margin="0,0,0,-1">
                         <ListView.Template>
@@ -47,8 +47,9 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
-                <TextBlock x:Name="FeedCollectionChangeStatus" Text="{Binding FeedUpdate}"/>
             </StackPanel>
+            <TextBlock x:Name="FeedCollectionChangeStatus" Text="{Binding FeedUpdate}" Style="{ThemeResource TitleTextBlockStyle}" TextAlignment="Center" Visibility="Visible" Foreground="White" Margin="0,422,0,10"/>
+            <ProgressRing x:Name="ProgressRing" Visibility="Collapsed" Background="#FF0D468B" Margin="1,410,-1,17"/>
         </Grid>
     </Grid>
 </Page>

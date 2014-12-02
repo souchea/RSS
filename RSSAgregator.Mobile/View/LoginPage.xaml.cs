@@ -108,11 +108,13 @@ namespace RSSAgregator.Mobile.View
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            ProgressRingLogin.IsActive = true;
             var worked = await DefaultViewModel.LoginAsync(Password.Password);
 
             if (worked)
             {
                 _settings.Values["Login"] = LoginTextBox.Text;
+                ProgressRingLogin.IsActive = false;
                 Frame.Navigate(typeof(MainPage));
             }
         }
