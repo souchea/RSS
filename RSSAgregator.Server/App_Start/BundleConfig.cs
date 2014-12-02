@@ -23,8 +23,14 @@ namespace RSSAgregator.Server
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/menu").Include(
+                      "~/Scripts/gnmenu.js",
+                      "~/Scripts/classie.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/demo.css",
+                      "~/Content/component.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

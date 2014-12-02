@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.gn-menu-main > li:last-child {
+ float: inherit; 
+ border-right: inherit; 
+ border-left:inherit; 
+}
+
+.container {
+    background-color: #f7f7f7;
+}
