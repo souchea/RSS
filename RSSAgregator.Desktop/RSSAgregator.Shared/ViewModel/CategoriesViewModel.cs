@@ -36,22 +36,28 @@ namespace RSSAgregator.Shared.ViewModel
         {
             RssDataManager = dataManager;
             LoginManager = loginManager;
-            SetCategoryList(null, null);
 
             RssDataManager.CategoryChanged += SetCategoryList;
+            GetCategoryList();
         }
 
         public string GetCompleteUrl(string url)
         {
-            if (!url.Contains("http://www."))
+            if (!url.Contains("http://"))
             {
-                url = url.Insert(0, "http://www.");
+                url = url.Insert(0, "http://");
             }
             return (url);
         }
 
         private void SetCategoryList(object sender, EventArgs e)
         {
+            CategoryList = new ObservableCollection<CategoryDTO>(RssDataManager.CategoryList);
+        }
+
+        private void GetCategoryList()
+        {
+            RssDataManager.SetCategoryList();
             CategoryList = new ObservableCollection<CategoryDTO>(RssDataManager.CategoryList);
         }
 

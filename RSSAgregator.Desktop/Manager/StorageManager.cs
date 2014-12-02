@@ -56,6 +56,7 @@ namespace RSSAgregator.Desktop.Manager
                 //FileStream stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
                 var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
                 serializer.WriteObject(stream, toStore);
+                stream.Close();
             }
 
             public void StoreSources(List<SourceDTO> toStore)
@@ -65,6 +66,7 @@ namespace RSSAgregator.Desktop.Manager
                 FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, 4096, true);
                 var serializer = new DataContractSerializer(typeof(List<SourceDTO>));
                 serializer.WriteObject(stream, toStore);
+                stream.Close();
             }
         #endregion
     }

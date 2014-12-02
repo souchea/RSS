@@ -13,6 +13,8 @@ using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
+    //[Authorize]
+    //[Scope("IsLogged")]
     public class CategoryController : ApiController
     {
         protected ICategoryManager CategoryManager { get; set; }

@@ -18,8 +18,8 @@ namespace RSSAgregator.Server
 
             config.Routes.MapHttpRoute(
                 name: "Add",
-                routeTemplate: "api/{controller}/Add/{userid}/{param}",
-                defaults: new {action= "Add" }
+                routeTemplate: "api/Category/Add/{userid}/{param}",
+                defaults: new {action= "Add", controller= "Category" }
             );
 
            

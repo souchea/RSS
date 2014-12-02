@@ -25,14 +25,15 @@
 
         <!-- Panneau Titre -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="RSS Feed Aggregator" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="{Binding SourceNameText}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock Text="RSS Feed Aggregator" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,-0.167,0"/>
+            <TextBlock Text="{Binding SourceNameText}" Margin="0,-6.5,-0.167,0" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock Text="{Binding SourceEmptyText}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,0"/>
         </StackPanel>
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,9,10,0">
             <ScrollViewer Name="scrollViewer1" VerticalScrollBarVisibility="Auto">
-                <q:MultiSelectListView x:Name="SelectSourceList" ItemsSource="{Binding SourceList}" SelectionModeChanged="SelectList_SelectionModeChanged" Height="385">
+                <q:MultiSelectListView x:Name="SelectSourceList" ItemsSource="{Binding SourceList}" SelectionModeChanged="SelectList_SelectionModeChanged" Height="448">
                     <ListView.Template>
                         <ControlTemplate>
                             <ItemsPresenter />

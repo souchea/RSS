@@ -109,7 +109,8 @@ namespace RSSAgregator.Mobile.View
 
         private void Source_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(FeedsPage), sender);
+            SourceDTO item = SelectSourceList.SelectedItem as SourceDTO;
+            Frame.Navigate(typeof(FeedsPage), item);
         }
 
         private void SelectList_SelectionModeChanged(object sender, RoutedEventArgs e)

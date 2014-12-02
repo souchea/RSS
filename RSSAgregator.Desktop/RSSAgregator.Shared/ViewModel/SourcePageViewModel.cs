@@ -23,6 +23,18 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private string _sourceEmptyText;
+
+        public string SourceEmptyText
+        {
+            get { return _sourceEmptyText; }
+            set
+            {
+                _sourceEmptyText = value;
+                NotifyPropertyChanged("SourceEmptyText");
+            }
+        }
+
         private ObservableCollection<SourceDTO> _sourceList;
 
         public ObservableCollection<SourceDTO> SourceList
@@ -53,12 +65,15 @@ namespace RSSAgregator.Shared.ViewModel
 
         private IDataManager DataManager { get; set; }
 
+        private ILoginManager LoginManager { get; set; }
+
         #endregion
 
-        public SourcePageViewModel(IServiceManager serviceManager, IDataManager dataManager)
+        public SourcePageViewModel(IServiceManager serviceManager, IDataManager dataManager, ILoginManager loginManager)
         {
             ServiceManager = serviceManager;
             DataManager = dataManager;
+            LoginManager = loginManager;
 
             SourceList = new ObservableCollection<SourceDTO>();
         }
@@ -66,7 +81,7 @@ namespace RSSAgregator.Shared.ViewModel
         public async void SetCategoryList(string catId)
         {
             SourceNameText = catId;
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync("599de3d2-811f-42fa-8544-a7b0975d3baf"));
+            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(LoginManager.UserId));
             SetSourceList(catId);
         }
 
@@ -91,6 +106,8 @@ namespace RSSAgregator.Shared.ViewModel
                     SourceList.Add(t);
                 }
             }
+            if (!SourceList.Any())
+                SourceEmptyText = "Vous n'avez aucun flux dans cette categorie";
         }
     }
 }
