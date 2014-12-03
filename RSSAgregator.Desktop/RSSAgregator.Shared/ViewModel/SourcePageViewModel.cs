@@ -4,8 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.Common;
-using RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.ViewModel
 {
@@ -93,7 +93,7 @@ namespace RSSAgregator.Shared.ViewModel
                 bool sucess = await ServiceManager.DeleteSource(t.Id);
                 SourceList.Remove(t);
             }
-            DataManager.StorageManager.StoreSources(SourceList.ToList());
+            DataManager.StorageManager.StoreSources(LoginManager.UserId, SourceList.ToList());
         }
 
         private void SetSourceList(string catId)

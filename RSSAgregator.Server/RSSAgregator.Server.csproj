@@ -249,9 +249,6 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CategoryDTO.cs" />
-    <Compile Include="Models\FeedItemDTO.cs" />
-    <Compile Include="Models\SourceDTO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -372,6 +369,10 @@
     <ProjectReference Include="..\RSSAgregator.Desktop\RSSAgregator.Database\RSSAgregator.Database.csproj">
       <Project>{deb10c0c-6df0-4d0c-8153-51c758c0275b}</Project>
       <Name>RSSAgregator.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RSSAgregator.Desktop\RSSAgregator.Models\RSSAgregator.Models.csproj">
+      <Project>{fd882b18-5344-497a-9d9d-96d7a90817d0}</Project>
+      <Name>RSSAgregator.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

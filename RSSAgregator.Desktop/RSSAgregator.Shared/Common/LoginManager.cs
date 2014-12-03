@@ -59,10 +59,16 @@ namespace RSSAgregator.Shared.Common
             var success = await ServiceManager.GetTokenRegisterAsync(username, password);
             if (success)
             {
-                IsLogged = true;
-                OnUserChanged();
+                var successLogin = await ServiceManager.GetTokenLoginAsync(username, password);
+                if (successLogin != null)
+                {
+                    UserId = successLogin;
+                    IsLogged = true;
+                    OnUserChanged();
+                    return true;
+                }
             }
-            return success;
+            return false;
         }
 
 

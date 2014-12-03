@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Desktop", "RSSAgregator.Desktop.csproj", "{F0BD63E0-4A90-4B3F-94D7-E670C45A76EC}"
 EndProject
@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{087DBC
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Wpf", "..\RSSAgregator.Wpf\RSSAgregator.Wpf.csproj", "{C7C76F44-9290-4892-8B88-CE5155FB4467}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSSAgregator.Models", "RSSAgregator.Models\RSSAgregator.Models.csproj", "{FD882B18-5344-497A-9D9D-96D7A90817D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +129,22 @@ Global
 		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|ARM.ActiveCfg = Release|Any CPU
 		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19}.Release|x86.ActiveCfg = Release|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C7C76F44-9290-4892-8B88-CE5155FB4467}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FD882B18-5344-497A-9D9D-96D7A90817D0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,5 +159,7 @@ Global
 		{DEB10C0C-6DF0-4D0C-8153-51C758C0275B} = {46C11D31-9352-403E-A3D2-0D2347350250}
 		{670DB2EB-557B-4C7C-94A2-CD1ECB69B340} = {46C11D31-9352-403E-A3D2-0D2347350250}
 		{C2DB2FED-ACB4-4632-9196-E7FC8C37EC19} = {46C11D31-9352-403E-A3D2-0D2347350250}
+		{C7C76F44-9290-4892-8B88-CE5155FB4467} = {46C11D31-9352-403E-A3D2-0D2347350250}
+		{FD882B18-5344-497A-9D9D-96D7A90817D0} = {46C11D31-9352-403E-A3D2-0D2347350250}
 	EndGlobalSection
 EndGlobal

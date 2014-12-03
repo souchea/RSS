@@ -9,12 +9,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using RSSAgregator.Mobile.Common;
-using RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.ViewModel;
 using Windows.Storage;
 using Windows.Web.Syndication;
 using Ninject;
 using QKit;
+using RSSAgregator.Models;
 
 namespace RSSAgregator.Mobile.View
 {
@@ -98,7 +98,7 @@ namespace RSSAgregator.Mobile.View
 
         private void Source_OnTapped(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            var selected = selectionChangedEventArgs.AddedItems[0] as Shared.Model.SourceDTO;
+            var selected = selectionChangedEventArgs.AddedItems[0] as SourceDTO;
             //int selected = DefaultViewModel.SelectedSourceIndex;
             Frame.Navigate(typeof(FeedsPage), selected);
         }

@@ -10,5 +10,7 @@ namespace RSSAgregator.Database.Manager
         List<FeedSource> GetAllSources();
         List<FeedSource> GetSourcesNumber(int number = 5);
         FeedSource GetSourceById(int id);
+
+        void ReadSource(int id);
     }
 }

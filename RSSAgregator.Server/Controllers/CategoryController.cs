@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Xml;
 using RSSAgregator.Database.DataContext;
 using RSSAgregator.Database.Manager;
+using RSSAgregator.Models;
 using RSSAgregator.Server.APIAttribute;
 using RSSAgregator.Server.Models;
 

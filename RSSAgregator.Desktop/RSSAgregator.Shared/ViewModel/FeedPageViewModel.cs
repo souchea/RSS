@@ -4,9 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.Common;
-using RSSAgregator.Shared.Model;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.ViewModel
 {
@@ -48,6 +47,8 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private SourceDTO _currentDto = new SourceDTO();
+
         private IServiceManager ServiceManager { get; set; }
 
         public FeedPageViewModel(IServiceManager serviceManager)
@@ -56,18 +57,27 @@ namespace RSSAgregator.Shared.ViewModel
             FeedList = new ObservableCollection<FeedDTO>();
         }
 
-        public List<FeedDTO> GetMoreFeeds()
+        public async Task<bool> GetMoreFeeds()
         {
-            List<FeedDTO> newFeeds = new List<FeedDTO>();
-           // newFeeds = ServiceManager.GetOldFeeds(FeedList[FeedList.Count - 1].PublishDate, 10);
-            return (newFeeds);
+            List<FeedDTO> newFeed = await ServiceManager.GetFeedsToDateAsync(_currentDto.Id, 10, FeedList.Last().PublishDate.DateTime);
+            foreach (FeedDTO t in newFeed)
+            {
+                FeedList.Add(t);
+            }
+            if (newFeed.Any())
+            {
+                return (true);
+            }
+            return (false);
         }
 
         public async void SetFeedList(SourceDTO source)
         {
             FeedName = source.Title;
+            _currentDto = source;
             var feeds = await ServiceManager.GetFeedsAsync(source.Id, 10);
             FeedList = new ObservableCollection<FeedDTO>(feeds);
+            ServiceManager.SendReadAsync(source.Id);
         }
     }
 }

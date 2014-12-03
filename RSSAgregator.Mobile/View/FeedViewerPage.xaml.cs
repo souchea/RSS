@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.Connectivity;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -16,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 using Ninject;
 using RSSAgregator.Mobile.Common;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Mobile.View
@@ -39,6 +41,7 @@ namespace RSSAgregator.Mobile.View
 
             DefaultViewModel = App.Kernel.Get<FeedViewerPageViewModel>();
             DataContext = DefaultViewModel;
+            DefaultViewModel.Connection = IsConnection();
         }
 
         /// <summary>
@@ -47,6 +50,23 @@ namespace RSSAgregator.Mobile.View
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
+        }
+
+        private bool IsConnection()
+        {
+            ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            if (internetConnectionProfile != null)
+            {
+                if (internetConnectionProfile.IsWlanConnectionProfile)
+                {
+                    return (true);
+                }
+                else if (internetConnectionProfile.IsWwanConnectionProfile)
+                {
+                    return (false);
+                }
+            }
+            return (false);
         }
 
         /// <summary>
@@ -98,6 +118,11 @@ namespace RSSAgregator.Mobile.View
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        private async void LinkFeed_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri(DefaultViewModel.FeedId));
         }
     }
 }
