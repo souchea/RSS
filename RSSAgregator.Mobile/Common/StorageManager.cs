@@ -78,7 +78,9 @@ namespace RSSAgregator.Mobile.Common
         {
             var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
 
-            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(String.Format(@"{0}/categories.xml", userId), CreationCollisionOption.ReplaceExisting);
+            var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync(String.Format("{0}", userId));
+
+            var file = await folder.CreateFileAsync(String.Format("categories.xml"), CreationCollisionOption.ReplaceExisting);
 
             using (var fileStream = await file.OpenStreamForWriteAsync())
             {
@@ -92,7 +94,11 @@ namespace RSSAgregator.Mobile.Common
 
             try
             {
-                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(String.Format(@"{0}/sources.xml", userId), CreationCollisionOption.ReplaceExisting);
+                var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync(String.Format("{0}", userId));
+
+                var file = await folder.CreateFileAsync(String.Format("sources.xml"), CreationCollisionOption.ReplaceExisting);
+                
+                //var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(String.Format(@"{0}/sources.xml", userId), CreationCollisionOption.ReplaceExisting);
 
                 using (var fileStream = await file.OpenStreamForWriteAsync())
                 {
