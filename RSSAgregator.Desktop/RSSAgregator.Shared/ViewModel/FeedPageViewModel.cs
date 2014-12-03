@@ -4,9 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.Common;
-using RSSAgregator.Shared.Model;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.ViewModel
 {
@@ -60,17 +59,16 @@ namespace RSSAgregator.Shared.ViewModel
 
         public async Task<bool> GetMoreFeeds()
         {
-            List<FeedDTO> newFeed = await ServiceManager.GetFeedsToDateAsync(_currentDto.Id, 10, FeedList[FeedList.Count - 1].PublishDate.DateTime);
+            List<FeedDTO> newFeed = await ServiceManager.GetFeedsToDateAsync(_currentDto.Id, 10, FeedList.Last().PublishDate.DateTime);
             foreach (FeedDTO t in newFeed)
             {
                 FeedList.Add(t);
             }
             if (newFeed.Any())
-                return (true);
-            else
             {
-                return (false);
+                return (true);
             }
+            return (false);
         }
 
         public async void SetFeedList(SourceDTO source)
@@ -79,6 +77,7 @@ namespace RSSAgregator.Shared.ViewModel
             _currentDto = source;
             var feeds = await ServiceManager.GetFeedsAsync(source.Id, 10);
             FeedList = new ObservableCollection<FeedDTO>(feeds);
+            ServiceManager.SendReadAsync(source.Id);
         }
     }
 }

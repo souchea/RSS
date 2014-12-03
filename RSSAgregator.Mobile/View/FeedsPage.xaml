@@ -1,55 +1,81 @@
-﻿<Page
-    x:Class="RSSAgregator.Mobile.View.FeedsPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:RSSAgregator.Mobile.View"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="#FF0D468B">
+﻿<Page x:Class="RSSAgregator.Mobile.View.FeedsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:RSSAgregator.Mobile.View"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="#FF0D468B">
 
     <Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
-                <EntranceThemeTransition/>
+                <EntranceThemeTransition />
             </TransitionCollection>
         </Grid.ChildrenTransitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="75" />
         </Grid.RowDefinitions>
 
         <!-- Panneau Titre -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="RSS Feed Aggregator" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="{Binding FeedName}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
-        </StackPanel>
+        <TextBlock Text="RSS Feed Aggregator"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   Margin="0,12,0,0" />
+        <TextBlock Text="{Binding FeedName}"
+                   Style="{ThemeResource HeaderTextBlockStyle}"
+                   CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"
+                   Margin="1,0,0,0"
+                   Height="Auto"
+                   Grid.Row="1" />
 
         <!--TODO: le contenu doit être placé dans la grille suivante-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,5,10,-1">
-            <StackPanel Orientation="Vertical" Margin="0,0,0,85" Width="auto" Height="auto">
-                <ScrollViewer VerticalScrollMode="Enabled" ViewChanged="MyscrollbarScrollViewer_OnViewChanged" IsScrollInertiaEnabled="True" ManipulationMode="System" Height="302" Name="ScrollViewer1" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
-                    <ListView  ItemsSource="{Binding FeedList}"
-                      Margin="0,0,0,-1">
-                        <ListView.Template>
-                            <ControlTemplate>
-                                <ItemsPresenter />
-                            </ControlTemplate>
-                        </ListView.Template>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="25"
-                                           Text="{Binding Path=Title}" Tapped="Feed_OnTapped"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </ScrollViewer>
-            </StackPanel>
-            <TextBlock x:Name="FeedCollectionChangeStatus" Text="{Binding FeedUpdate}" Style="{ThemeResource TitleTextBlockStyle}" TextAlignment="Center" Visibility="Visible" Foreground="White" Margin="0,422,0,10"/>
-            <ProgressRing x:Name="ProgressRing" Visibility="Collapsed" Background="#FF0D468B" Margin="1,410,-1,17"/>
-        </Grid>
+
+        <ScrollViewer VerticalScrollMode="Enabled"
+                      ViewChanged="MyscrollbarScrollViewer_OnViewChanged"
+                      IsScrollInertiaEnabled="True"
+                      ManipulationMode="System"
+                      Name="ScrollViewer1"
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="10,73,10,0"
+                      Grid.Row="1"
+                      Grid.RowSpan="2"
+                      BorderBrush="#FFFB0B0B"
+                      BorderThickness="0,0,0,0">
+            <ListView  ItemsSource="{Binding FeedList}"
+                       Height="Auto">
+                <ListView.Template>
+                    <ControlTemplate>
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="25"
+                                   Text="{Binding Path=Title}"
+                                   Tapped="Feed_OnTapped" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+        <TextBlock x:Name="FeedCollectionChangeStatus"
+                   Text="{Binding FeedUpdate}"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   TextAlignment="Center"
+                   Visibility="Visible"
+                   Foreground="White"
+                   Margin="0,4.5"
+                   Grid.Row="3" />
+        <ProgressRing x:Name="ProgressRing"
+                      Visibility="Collapsed"
+                      Background="#FF0D468B"
+                      Margin="1,239.5,-1,-222.5"
+                      Grid.Row="3" />
+
     </Grid>
 </Page>

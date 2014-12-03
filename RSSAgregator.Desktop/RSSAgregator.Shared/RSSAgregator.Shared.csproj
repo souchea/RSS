@@ -45,10 +45,6 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\RssDataManager.cs" />
     <Compile Include="Common\WebApiServiceManager.cs" />
-    <Compile Include="Model\CategoryDTO.cs" />
-    <Compile Include="Model\FeedDTO.cs" />
-    <Compile Include="Model\SourceDTO.cs" />
-    <Compile Include="Model\TokenResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CategoriesViewModel.cs" />
@@ -83,6 +79,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RSSAgregator.Models\RSSAgregator.Models.csproj">
+      <Project>{fd882b18-5344-497a-9d9d-96d7a90817d0}</Project>
+      <Name>RSSAgregator.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

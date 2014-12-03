@@ -5,7 +5,7 @@ using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 
 namespace RSSAgregator.Shared.ViewModel
 {
@@ -52,13 +52,13 @@ namespace RSSAgregator.Shared.ViewModel
             FeedName = feed.Title;
             FeedDate = feed.PublishDate.DateTime.ToString();
             FeedSummary = feed.Summary;
-            
+
             SaveFeed(feed);
         }
 
         private async void SaveFeed(FeedDTO feed)
         {
-            
+
         }
     }
 }

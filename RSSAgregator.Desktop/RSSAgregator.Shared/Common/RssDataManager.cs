@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
-using RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 
 namespace RSSAgregator.Shared.Common
 {
@@ -52,7 +52,7 @@ namespace RSSAgregator.Shared.Common
 
         public async void SetCategoryList(object sender, EventArgs eventArgs)
         {
-            var cat = await StorageManager.GetStoredCategories();
+            var cat = await StorageManager.GetStoredCategories(LoginManager.UserId);
             if (cat != null)
                 CategoryList = cat;
             if (CategoryChanged != null)
@@ -64,7 +64,7 @@ namespace RSSAgregator.Shared.Common
             {
                 var onlineCategories = await ServiceManager.GetCategoriesAsync(LoginManager.UserId);
                 CategoryList = onlineCategories;
-                StorageManager.StoreCategories(onlineCategories);
+                StorageManager.StoreCategories(LoginManager.UserId, onlineCategories);
                 if (CategoryChanged != null)
                 {
                     CategoryChanged(this, new EventArgs());
@@ -83,7 +83,7 @@ namespace RSSAgregator.Shared.Common
 
         public async void SetSourceList()
         {
-            SourceList = await StorageManager.GetStoredSources();
+            SourceList = await StorageManager.GetStoredSources(LoginManager.UserId);
             if (SourceChanged != null)
             {
                 SourceChanged(this, new EventArgs());
@@ -93,7 +93,7 @@ namespace RSSAgregator.Shared.Common
             {
                 SourceList = CategoryList.SelectMany(category => category.Feeds).ToList(); ;
                 
-                StorageManager.StoreSources(SourceList);
+                StorageManager.StoreSources(LoginManager.UserId, SourceList);
                 if (SourceChanged != null)
                 {
                     SourceChanged(this, new EventArgs());

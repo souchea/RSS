@@ -23,14 +23,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="5,0,0,0">
-            <TextBlock Text="{Binding FeedName}" Style="{ThemeResource TitleTextBlockStyle}" Margin="10,10,0,0"/>
+            <TextBlock Text="{Binding FeedName}"
+                       Style="{ThemeResource TitleTextBlockStyle}"
+                       Margin="10,10,10,0"
+                       TextWrapping="Wrap"
+                       FontSize="36"
+                       LineStackingStrategy="MaxHeight"
+                       TextAlignment="Justify" />
             <TextBlock Text="{Binding FeedDate}" Style="{ThemeResource TitleTextBlockStyle}" Margin="10,12,0,0"/>
         </StackPanel>
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,10,10,-1">
             <StackPanel Orientation="Vertical" Height="auto">
                 <ScrollViewer Height="auto" VerticalAlignment="Bottom" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="WrapWholeWords" Height="auto" Width="auto"
-                               FontSize="24" />
+                    <TextBlock Text="{Binding FeedSummary}"  Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="Wrap"  Height="auto" Width="auto"
+                               FontSize="24"
+                               TextAlignment="Justify"
+                               FontWeight="Normal" />
                 </ScrollViewer>
             </StackPanel>
         </Grid>

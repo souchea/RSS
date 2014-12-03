@@ -16,10 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 
-// Pour en savoir plus sur le modèle d'élément Page de base, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
 using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Mobile.View

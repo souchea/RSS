@@ -62,8 +62,8 @@ namespace RSSAgregator.Server.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ICategoryManager>().To<CategoryManager>();
-            kernel.Bind<ISourceManager>().To<SourceManager>();
+            kernel.Bind<ICategoryManager>().To<CategoryManager>().InSingletonScope();
+            kernel.Bind<ISourceManager>().To<SourceManager>().InSingletonScope();
         }        
     }
 }

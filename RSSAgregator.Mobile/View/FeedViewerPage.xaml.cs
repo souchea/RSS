@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 using Ninject;
 using RSSAgregator.Mobile.Common;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.ViewModel;
 
 namespace RSSAgregator.Mobile.View

@@ -10,30 +10,36 @@ namespace RSSAgregator.Database.Manager
 {
     public class SourceManager : ISourceManager
     {
+        private RssAgregatorDataContext Context { get; set; }
+
+        public SourceManager()
+        {
+            Context = new RssAgregatorDataContext();
+        }
+
+        ~SourceManager()
+        {
+            Context.Dispose();
+        }
+
         public void AddSource(FeedSource toAdd)
         {
             try
             {
-            using (var context = new RssAgregatorDataContext())
-            {
-                context.FeedSources.Add(toAdd);
-                context.SaveChanges();
-            }
+                Context.FeedSources.Add(toAdd);
+                Context.SaveChanges();
+
             }
             catch (Exception ex)
             {
-                
                 throw;
             }
         }
 
         public void DeleteSource(FeedSource toDelete)
         {
-            using (var context = new RssAgregatorDataContext())
-            {
-                context.FeedSources.Remove(toDelete);
-                context.SaveChanges();
-            }
+            Context.FeedSources.Remove(toDelete);
+            Context.SaveChanges();
         }
 
         public List<FeedSource> GetAllSources()
@@ -47,49 +53,43 @@ namespace RSSAgregator.Database.Manager
 
         public List<FeedSource> GetSourcesNumber(int number = 5)
         {
-            using (var context = new RssAgregatorDataContext())
-            {
-                return (from source in context.FeedSources
-                    select source).Take(number).ToList();
-            }
+            return (from source in Context.FeedSources
+                select source).Take(number).ToList();
+
         }
 
         public FeedSource GetSourceById(int id)
         {
-            var context = new RssAgregatorDataContext();
-            return (from source in context.FeedSources
-                    where source.Id == id
-                    select source).SingleOrDefault();
+            return (from source in Context.FeedSources
+                where source.Id == id
+                select source).SingleOrDefault();
         }
 
-        public void AddView(int id)
+        public void ReadSource(int id)
         {
-            var context = new RssAgregatorDataContext();
-            var newSource = (from source in context.FeedSources
+            var newSource = (from source in Context.FeedSources
                 where source.Id == id
                 select source).SingleOrDefault();
             newSource.ViewedNumber += 1;
-            context.SaveChanges();
+            Context.SaveChanges();
         }
 
         public void ChangeState(int id, string newState)
         {
-            var context = new RssAgregatorDataContext();
-            var newSource = (from source in context.FeedSources
+            var newSource = (from source in Context.FeedSources
                 where source.Id == id
                 select source).SingleOrDefault();
             newSource.ViewState = newState;
-            context.SaveChanges();
+            Context.SaveChanges();
         }
 
         public void ChangeName(int id, string newName)
         {
-            var context = new RssAgregatorDataContext();
-            var newSource = (from source in context.FeedSources
-                    where source.Id == id
-                    select source).SingleOrDefault();
+            var newSource = (from source in Context.FeedSources
+                where source.Id == id
+                select source).SingleOrDefault();
             newSource.Title = newName;
-            context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

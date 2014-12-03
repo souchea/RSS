@@ -5,8 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using RSSAgregator.Shared.Model;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 
 namespace RSSAgregator.Shared.Common
 {
@@ -180,8 +179,7 @@ namespace RSSAgregator.Shared.Common
             {
                 HttpResponseMessage response =
                     await
-                        WebApiClient.PostAsync(String.Format("Source/Read/{0}", sourceId),
-                            null);
+                        WebApiClient.GetAsync(String.Format("Source/Read/{0}", sourceId));
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -217,11 +215,11 @@ namespace RSSAgregator.Shared.Common
         public async Task<bool> GetTokenRegisterAsync(string username, string password)
         {
             var values = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("grant_type", "client_credentials"),
-                    new KeyValuePair<string, string>("client_id", "self"),
-                    new KeyValuePair<string, string>("client_secret", "self")
-                };
+            {
+                new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                new KeyValuePair<string, string>("client_id", "self"),
+                new KeyValuePair<string, string>("client_secret", "self")
+            };
 
             var content = new FormUrlEncodedContent(values);
 
@@ -237,13 +235,13 @@ namespace RSSAgregator.Shared.Common
                     SetToken(token1.access_token);
 
                     var values2 = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("grant_type", "password"),
-                    new KeyValuePair<string, string>("client_id", "self"),
-                    new KeyValuePair<string, string>("client_secret", "self"),
-                    new KeyValuePair<string, string>("username", username),
-                    new KeyValuePair<string, string>("password", password)
-                };
+                    {
+                        new KeyValuePair<string, string>("grant_type", "password"),
+                        new KeyValuePair<string, string>("client_id", "self"),
+                        new KeyValuePair<string, string>("client_secret", "self"),
+                        new KeyValuePair<string, string>("email", username),
+                        new KeyValuePair<string, string>("password", password)
+                    };
 
                     var content2 = new FormUrlEncodedContent(values2);
 

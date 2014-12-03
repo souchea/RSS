@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using RSSAgregator.Shared.Model;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 
 namespace RSSAgregator.Shared.Common
 {

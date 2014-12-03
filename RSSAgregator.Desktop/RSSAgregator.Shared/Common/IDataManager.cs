@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ninject;
-using RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 
 namespace RSSAgregator.Shared.Common
 {

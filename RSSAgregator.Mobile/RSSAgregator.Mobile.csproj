@@ -201,6 +201,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RSSAgregator.Desktop\RSSAgregator.Models\RSSAgregator.Models.csproj">
+      <Project>{fd882b18-5344-497a-9d9d-96d7a90817d0}</Project>
+      <Name>RSSAgregator.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RSSAgregator.Desktop\RSSAgregator.Shared\RSSAgregator.Shared.csproj">
       <Project>{670db2eb-557b-4c7c-94a2-cd1ecb69b340}</Project>
       <Name>RSSAgregator.Shared</Name>

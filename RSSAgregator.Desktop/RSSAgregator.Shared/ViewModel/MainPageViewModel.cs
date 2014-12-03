@@ -7,8 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.Common;
-using RSSAgregator.Shared.Model;
 
 namespace RSSAgregator.Shared.ViewModel
 {
@@ -136,7 +136,7 @@ namespace RSSAgregator.Shared.ViewModel
                 bool sucess = ServiceManager.DeleteCategory(t.Id).Result;
                 CategoryList.Remove(t);
             }
-            RssDataManager.StorageManager.StoreCategories(CategoryList.ToList());
+            RssDataManager.StorageManager.StoreCategories(LoginManager.UserId, CategoryList.ToList());
         }
 
         private void SetSourceList(object sender, EventArgs e)
@@ -164,7 +164,7 @@ namespace RSSAgregator.Shared.ViewModel
                 newList.AddRange(t.Feeds);
             }
             SourceList = new ObservableCollection<SourceDTO>(newList);
-            RssDataManager.StorageManager.StoreSources(newList);
+            RssDataManager.StorageManager.StoreSources(LoginManager.UserId, newList);
 
         }
 
@@ -173,7 +173,7 @@ namespace RSSAgregator.Shared.ViewModel
             var result = await ServiceManager.AddCategoryAsync(LoginManager.UserId, ToAddCategoryText);
             if (result)
             {
-                RssDataManager.StorageManager.StoreCategories(await RefreshCategoryList());
+                RssDataManager.StorageManager.StoreCategories(LoginManager.UserId, await RefreshCategoryList());
             }
         }
     }

@@ -9,6 +9,7 @@ using System.Web.Mvc.Html;
 using System.Xml;
 using RSSAgregator.Database.DataContext;
 using RSSAgregator.Database.Manager;
+using RSSAgregator.Models;
 using RSSAgregator.Server.APIAttribute;
 using RSSAgregator.Server.Models;
 
@@ -38,7 +39,6 @@ namespace RSSAgregator.Server.Controllers
                 Url = url,
                 UserId = id,
                 Title = GetTitleFromUrl(url),
-                //FeedCategory = CategoryManager.GetCategoryById(catId),
                 ViewedNumber = 0,
                 ViewState = "none"
             };
@@ -152,20 +152,16 @@ namespace RSSAgregator.Server.Controllers
             return feedList.Take(nb);
         }
 
-        [HttpPost]
+        [HttpGet]
         public void Read(int id)
         {
-            var source = SourceManager.GetSourceById(id);
-
-            // ajoute 1 view a la source
+            SourceManager.ReadSource(id);
         }
 
         [HttpPost]
         public void SetState(int id, string state)
         {
             var source = SourceManager.GetSourceById(id);
-
-            // set le viewState de la source
         }
 
 
