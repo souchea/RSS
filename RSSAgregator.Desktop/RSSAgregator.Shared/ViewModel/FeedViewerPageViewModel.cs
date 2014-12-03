@@ -11,6 +11,18 @@ namespace RSSAgregator.Shared.ViewModel
 {
     public class FeedViewerPageViewModel : BaseViewModel
     {
+        private bool _connection;
+
+        public bool Connection
+        {
+            get { return _connection; }
+            set
+            {
+                _connection = value;
+                NotifyPropertyChanged("Connection");
+            }
+        }
+
         private string _feedName;
 
         public string FeedName
@@ -47,11 +59,24 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
+        private string _feedId;
+
+        public string FeedId
+        {
+            get { return _feedId; }
+            set
+            {
+                _feedId = value;
+                NotifyPropertyChanged("FeedId");
+            }
+        }
+
         public async void SetViewerPage(FeedDTO feed)
         {
             FeedName = feed.Title;
             FeedDate = feed.PublishDate.DateTime.ToString();
             FeedSummary = feed.Summary;
+            FeedId = feed.Id;
 
             SaveFeed(feed);
         }

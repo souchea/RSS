@@ -43,4 +43,9 @@
             </StackPanel>
         </Grid>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="CommandBar" ClosedDisplayMode="Minimal">
+            <AppBarButton Label="Liens" Icon="Link" Click="LinkFeed_Click" IsEnabled="{Binding Connection}"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
