@@ -86,8 +86,8 @@ namespace RSSAgregator.Shared.ViewModel
 
             foreach (SourceDTO t in cat.Feeds)
             {
-                SourceList.Add(t);
-            }
+                    SourceList.Add(t);
+                }
             if (!SourceList.Any())
                 SourceEmptyText = "Vous n'avez aucun flux dans cette categorie";
         }
