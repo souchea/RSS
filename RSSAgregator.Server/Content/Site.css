@@ -24,11 +24,15 @@ textarea {
 }
 
 .gn-menu-main > li:last-child {
- float: inherit; 
+ float: left; 
  border-right: inherit; 
  border-left:inherit; 
 }
 
 .container {
     background-color: #f7f7f7;
+}
+
+.gn-menu-main {
+    border-bottom: 1px solid #000;
 }
