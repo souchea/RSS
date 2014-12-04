@@ -78,7 +78,7 @@ namespace RSSAgregator.Shared.Common
 
         public async Task<bool> RenameCategory(int catId, string newName)
         {
-            try
+            /*try
             {
                 HttpResponseMessage response =
                     await
@@ -90,9 +90,9 @@ namespace RSSAgregator.Shared.Common
                 return false;
             }
             catch (Exception)
-            {
+            {*/
                 return false;
-            }
+            //}
         }
 
         public async Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb = 20)
