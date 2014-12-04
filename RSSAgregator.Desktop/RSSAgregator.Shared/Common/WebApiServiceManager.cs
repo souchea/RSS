@@ -76,7 +76,26 @@ namespace RSSAgregator.Shared.Common
             }
         }
 
-        public async Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb = 10)
+        public async Task<bool> RenameCategory(int catId, string newName)
+        {
+            try
+            {
+                HttpResponseMessage response =
+                    await
+                        WebApiClient.Rename(String.Format("Category/Put/{0}/{1}", catId, newName), null);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<FeedDTO>> GetFeedsAsync(int sourceId, int nb = 20)
         {
             var toReturnFeedList = new List<FeedDTO>();
             try

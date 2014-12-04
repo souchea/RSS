@@ -142,6 +142,20 @@ namespace RSSAgregator.Mobile.View
                 ProgressRing.Visibility = Visibility.Collapsed;
                 FeedCollectionChangeStatus.Visibility = Visibility.Visible;
             }
+            else if (verticalOffsetValue == 0 || verticalOffsetValue < 0)
+            {
+                FeedCollectionChangeStatus.Visibility = Visibility.Collapsed;
+                ProgressRing.Visibility = Visibility.Visible;
+                ProgressRing.IsActive = true;
+                bool more = await DefaultViewModel.GetNewFeeds();
+                if (more == false)
+                {
+                    DefaultViewModel.FeedUpdate = "Il n'y a pas de nouveaux flux :(";
+                }
+                ProgressRing.IsActive = false;
+                ProgressRing.Visibility = Visibility.Collapsed;
+                FeedCollectionChangeStatus.Visibility = Visibility.Visible;         
+            }
         }
     }
 }

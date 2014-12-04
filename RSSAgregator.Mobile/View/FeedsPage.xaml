@@ -42,7 +42,7 @@
                       ManipulationMode="System"
                       Name="ScrollViewer1"
                       VerticalScrollBarVisibility="Auto"
-                      Margin="10,73,10,0"
+                      Margin="10,73,10,71"
                       Grid.Row="1"
                       Grid.RowSpan="2"
                       BorderBrush="#FFFB0B0B"

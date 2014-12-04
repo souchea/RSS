@@ -47,17 +47,7 @@ namespace RSSAgregator.Shared.ViewModel
             }
         }
 
-        private ObservableCollection<CategoryDTO> _categoryList;
-
-        public ObservableCollection<CategoryDTO> CategoryList
-        {
-            get { return _categoryList; }
-            set
-            {
-                _categoryList = value;
-                NotifyPropertyChanged("CategoryList");
-            }
-        }
+        private CategoryDTO _currentCategoryDto;
 
         #region Dependencies
 
@@ -78,13 +68,6 @@ namespace RSSAgregator.Shared.ViewModel
             SourceList = new ObservableCollection<SourceDTO>();
         }
 
-        public async void SetCategoryList(string catId)
-        {
-            SourceNameText = catId;
-            CategoryList = new ObservableCollection<CategoryDTO>(await ServiceManager.GetCategoriesAsync(LoginManager.UserId));
-            SetSourceList(catId);
-        }
-
         public async void DeleteSources(IEnumerable<object> sourcesNameList)
         {
             var list = sourcesNameList.OfType<SourceDTO>().ToList();
@@ -96,18 +79,22 @@ namespace RSSAgregator.Shared.ViewModel
             DataManager.StorageManager.StoreSources(LoginManager.UserId, SourceList.ToList());
         }
 
-        private void SetSourceList(string catId)
+        public void SetSourceList(CategoryDTO cat)
         {
-            foreach (CategoryDTO t1 in CategoryList)
+            SourceNameText = cat.Name;
+            _currentCategoryDto = cat;
+
+            foreach (SourceDTO t in cat.Feeds)
             {
-                if (t1.Name != catId) continue;
-                foreach (SourceDTO t in t1.Feeds)
-                {
-                    SourceList.Add(t);
-                }
+                SourceList.Add(t);
             }
             if (!SourceList.Any())
                 SourceEmptyText = "Vous n'avez aucun flux dans cette categorie";
+        }
+
+        public void RenameCat(string newName)
+        {
+            ServiceManager.RenameCategory(_currentCategoryDto.Id, newName);
         }
     }
 }

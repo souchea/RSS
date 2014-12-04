@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using Windows.Storage;
+using Ninject;
 using RSSAgregator.Mobile.Common;
 using System;
 using System.Collections.Generic;
@@ -96,8 +97,8 @@ namespace RSSAgregator.Mobile.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            TextBlock text = e.Parameter as TextBlock;
-            if (text != null) DefaultViewModel.SetCategoryList(text.Text);
+            CategoryDTO cat = e.Parameter as CategoryDTO;
+            if (cat != null) DefaultViewModel.SetSourceList(cat);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -141,6 +142,20 @@ namespace RSSAgregator.Mobile.View
             DefaultViewModel.DeleteSources(sourceList);
             SelectSourceList.SelectionMode = ListViewSelectionMode.None;
             CommandBar.Visibility = Visibility.Collapsed;
+        }
+
+        private async void RenameAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialogResult result = await RenameCat.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+                string newName = RssFeedRenameTextBox.Text;
+                DefaultViewModel.RenameCat(newName);
+                /*int i = DefaultViewModel.Feeds.Count;
+                DefaultViewModel.Feeds.Add(await newFeed);*/
+            }
         }
     }
 
