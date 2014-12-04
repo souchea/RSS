@@ -422,7 +422,7 @@ namespace RSSAgregator.Desktop
             if (curAppState == AppState.Category && CategoryList.SelectedItem != null)
             {
                 CategoryDTO c = CategoryList.SelectedItem as CategoryDTO;
-                DefaultViewModel.SourcePageVM.SetCategoryList(c.Name);
+                DefaultViewModel.SourcePageVM.SetSourceList(c);
                 NextState();
             }
             else if (curAppState == AppState.Flux && SourceList.SelectedItem != null)
