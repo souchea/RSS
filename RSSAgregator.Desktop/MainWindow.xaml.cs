@@ -422,7 +422,7 @@ namespace RSSAgregator.Desktop
             if (curAppState == AppState.Category && CategoryList.SelectedItem != null)
             {
                 CategoryDTO c = CategoryList.SelectedItem as CategoryDTO;
-                DefaultViewModel.SourcePageVM.SetCategoryList(c.Name);
+                DefaultViewModel.SourcePageVM.SetSourceList(c);
                 NextState();
             }
             else if (curAppState == AppState.Flux && SourceList.SelectedItem != null)
@@ -455,7 +455,8 @@ namespace RSSAgregator.Desktop
             if (FeedList.SelectedItem != null && curAppState == AppState.ItemContent)
             {
                 FeedDTO f = FeedList.SelectedItem as FeedDTO;
-                System.Diagnostics.Process.Start(f.Id);
+                if (f.Id != String.Empty)
+                    System.Diagnostics.Process.Start(f.Id);
             }
         }
 

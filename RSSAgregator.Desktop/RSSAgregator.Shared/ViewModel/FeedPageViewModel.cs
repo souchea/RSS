@@ -71,13 +71,29 @@ namespace RSSAgregator.Shared.ViewModel
             return (false);
         }
 
+        public async Task<bool> GetNewFeeds()
+        {
+            List<FeedDTO> newFeed = await ServiceManager.GetFeedsToDateAsync(_currentDto.Id, 10, FeedList.First().PublishDate.DateTime);
+            newFeed.AddRange(FeedList);
+            FeedList.Clear();
+            foreach (FeedDTO t in newFeed)
+            {
+                FeedList.Add(t);
+            }
+            if (newFeed.Any())
+            {
+                return (true);
+            }
+            return (false);
+        }
+
         public async void SetFeedList(SourceDTO source)
         {
             FeedName = source.Title;
             _currentDto = source;
-            var feeds = await ServiceManager.GetFeedsAsync(source.Id, 10);
+            var feeds = await ServiceManager.GetFeedsAsync(source.Id, 20);
             FeedList = new ObservableCollection<FeedDTO>(feeds);
-            ServiceManager.SendReadAsync(source.Id);
+            await ServiceManager.SendReadAsync(source.Id);
         }
     }
 }

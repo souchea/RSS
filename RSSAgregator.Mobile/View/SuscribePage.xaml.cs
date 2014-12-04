@@ -116,6 +116,10 @@ namespace RSSAgregator.Mobile.View
             {
                 Frame.Navigate(typeof(MainPage));
             }
+            else
+            {
+                ContentDialogResult result = await Register.ShowAsync();
+            }
         }
     }
 }

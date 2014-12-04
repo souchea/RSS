@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using RSSAgregator.Models;
+using RSSAgregator.Shared.Common;
 
 namespace RSSAgregator.Shared.ViewModel
 {

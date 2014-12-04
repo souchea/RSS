@@ -22,7 +22,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        <ContentDialog x:Name="RenameCat" 
+           PrimaryButtonText="Renomner" IsPrimaryButtonEnabled="True"
+           SecondaryButtonText="Annuler" FullSizeDesired ="False">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Entrer le nouveau nom de la categorie."/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <StackPanel>
+                <TextBox x:Name="RssFeedRenameTextBox"></TextBox>
+            </StackPanel>
+        </ContentDialog>
         <!-- Panneau Titre -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <TextBlock Text="RSS Feed Aggregator" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,-0.167,0"/>
@@ -63,8 +76,11 @@
                           Label="Delete"
                           Visibility="Collapsed"
                           Click="DeleteAppBarButton_Click" />
-            <CommandBar.SecondaryCommands>
-            </CommandBar.SecondaryCommands>
+            <AppBarButton x:Name="RenameAppBarButton"
+                          Icon="Edit"
+                          Label="Renomer"
+                          Visibility="Visible"
+                          Click="RenameAppBarButton_Click" />
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

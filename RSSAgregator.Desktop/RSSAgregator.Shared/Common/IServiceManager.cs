@@ -31,5 +31,7 @@ namespace RSSAgregator.Shared.Common
         Task<bool> GetTokenRegisterAsync(string username, string password);
 
         Task<string> GetTokenLoginAsync(string username, string password);
+
+        Task<bool> RenameCategory(int catId, string newName);
     }
 }

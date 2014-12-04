@@ -91,9 +91,12 @@ namespace RSSAgregator.Mobile.View
             Frame.Navigate(typeof (Categories), feedUriString);
         }
 
+
+
         private async void CategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SourceListPage), sender);
+            CategoryDTO item = CategoriesListView.SelectedItem as CategoryDTO;
+            Frame.Navigate(typeof(SourceListPage), item);
         }
 
         private void Source_OnTapped(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
