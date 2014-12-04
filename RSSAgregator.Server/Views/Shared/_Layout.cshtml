@@ -1,7 +1,8 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+
+@{
     ViewBag.ApplicationName = "RSS Feed Agregator";
 }
-
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -13,35 +14,53 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="container" style="margin-top: 40px; border: 1px solid black;">
+<body class="demo-2">
+    <div class="container" style="margin-top: 40px; border: 1px solid rgba(0,0,0,.6); box-shadow: 0 1px 1px rgba(0,0,0,.1)">
         <ul id="gn-menu" class="gn-menu-main">
             <li class="gn-trigger">
                 <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
                 <nav class="gn-menu-wrapper">
                     <div class="gn-scroller">
                         <ul class="gn-menu">
-                            <li class="gn-search-item">
-                                <input placeholder="Search" type="search" class="gn-search">
-                                <a class="gn-icon gn-icon-search"><span>Search</span></a>
-                            </li>
-                            <li>
-                                <a class="gn-icon gn-icon-download">Downloads</a>
-                                <ul class="gn-submenu">
-                                    <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
-                                    <li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
-                                </ul>
-                            </li>
-                            <li><a class="gn-icon gn-icon-cog">Settings</a></li>
-                            <li><a class="gn-icon gn-icon-help">Help</a></li>
-                            <li>
-                                <a class="gn-icon gn-icon-archive">Archives</a>
-                                <ul class="gn-submenu">
-                                    <li><a class="gn-icon gn-icon-article">Articles</a></li>
-                                    <li><a class="gn-icon gn-icon-pictures">Images</a></li>
-                                    <li><a class="gn-icon gn-icon-videos">Videos</a></li>
-                                </ul>
-                            </li>
+                            @if (Request.IsAuthenticated)
+                            {
+
+                                @*<li>
+                                        <a class="gn-icon gn-icon-download">Feed sources (5)</a>
+                                        <ul class="gn-submenu">
+                                            @foreach (var source in ViewBag.UserFeedSources) {
+                                                <li><a class="gn-icon gn-icon-download">@source.Title</a></li>
+                                            }
+                                        </ul>
+                                    </li>*@
+                                
+                                if (ViewBag.UserCategories != null)
+                                {
+                                    <li>
+                                        <a class="gn-icon gn-icon-archive">Categories (@ViewBag.UserCategories.Count)</a>
+                                        <ul class="gn-submenu">
+                                            @foreach (var category in ViewBag.UserCategories) {
+                                                <li><a class="gn-icon gn-icon-article">@category.Title</a></li>                                                
+                                            }
+                                        </ul>
+                                    </li>
+                                    
+                                    using (Html.BeginForm("Add category", "Home", FormMethod.Post, new { id = "addCategoryForm" }))
+                                    {
+                                        <li>
+                                            @Html.AntiForgeryToken()
+                                            <input type="text" name="category_name" value="">
+                                            <input type="hidden" name="type" value="add_category">
+                                            <input type="submit" value="Add" />
+                                        </li>
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                <a class="gn-icon gn-icon-help">(Login is required)</a>
+                            }
                         </ul>
                     </div><!-- /gn-scroller -->
                 </nav>
@@ -49,18 +68,17 @@
             <li>@Html.ActionLink((string)ViewBag.ApplicationName, "Index", "Home")</li>
             <li>@Html.ActionLink("Team", "Team", "Home")</li>
             @Html.Partial("_LoginPartial")
-            @*<li><a href="http://tympanus.net/codrops">Login</a></li>*@
         </ul>
         @RenderBody()
     </div><!-- /container -->
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/menu")
+    @Scripts.Render("~/bundles/grid")
     @RenderSection("scripts", required: false)
 
-    <script>
-        new gnMenu(document.getElementById('gn-menu'));
-    </script>
+    <script> new gnMenu(document.getElementById('gn-menu')); </script>
+    <script> new grid3D(document.getElementById('grid3d')); </script>
+
 </body>
 </html>

@@ -262,7 +262,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\component.css" />
-    <Content Include="Content\demo.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\ecoicons\ecoicons.dev.svg" />
@@ -272,6 +271,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\1.jpg" />
+    <Content Include="img\2.jpg" />
+    <Content Include="img\3.jpg" />
+    <Content Include="img\4.jpg" />
+    <Content Include="img\5.jpg" />
+    <Content Include="img\6.jpg" />
+    <Content Include="img\7.jpg" />
+    <Content Include="img\8.jpg" />
+    <Content Include="img\9.jpg" />
+    <Content Include="img\sloth.png" />
+    <Content Include="img\preloader.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -309,6 +319,8 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\gnmenu.js" />
+    <Content Include="Scripts\grid3d.js" />
+    <Content Include="Scripts\helper.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />

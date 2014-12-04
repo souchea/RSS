@@ -17,6 +17,7 @@ namespace RSSAgregator.Server
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr.custom",
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
@@ -27,9 +28,14 @@ namespace RSSAgregator.Server
                       "~/Scripts/gnmenu.js",
                       "~/Scripts/classie.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/grid").Include(
+                      "~/Scripts/classie.js",
+
+                      "~/Scripts/helper.js",
+                      "~/Scripts/grid3d.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/demo.css",
                       "~/Content/component.css",
                       "~/Content/site.css"));
 

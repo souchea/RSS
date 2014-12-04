@@ -22,8 +22,6 @@ namespace RSSAgregator.Server
                 defaults: new {action= "Add", controller= "Category" }
             );
 
-           
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",

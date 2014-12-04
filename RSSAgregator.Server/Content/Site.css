@@ -1,6 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #3498db;
+    background-color: #3498BF;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -24,9 +27,7 @@ textarea {
 }
 
 .gn-menu-main > li:last-child {
- float: left; 
- border-right: inherit; 
- border-left:inherit; 
+    border-left: 1px solid rgba(0,0,0,0.04);
 }
 
 .container {
@@ -34,5 +35,52 @@ textarea {
 }
 
 .gn-menu-main {
-    border-bottom: 1px solid #000;
+    background: -moz-linear-gradient(left,rgba(54,186,194,0.96) 0,rgba(60,211,173,0.96) 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,rgba(54,186,194,0.96)),color-stop(100%,rgba(60,211,173,0.96)));
+    background: -webkit-linear-gradient(left,rgba(54,186,194,0.96) 0,rgba(60,211,173,0.96) 100%);
+    background: -o-linear-gradient(left,rgba(54,186,194,0.96) 0,rgba(60,211,173,0.96) 100%);
+    background: -ms-linear-gradient(left,rgba(54,186,194,0.96) 0,rgba(60,211,173,0.96) 100%);
+    background: linear-gradient(to right,rgba(54,186,194,0.96) 0,rgba(60,211,173,0.96) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f536bac2',endColorstr='#f53cd3ad',GradientType=1);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.gn-menu-main > li {
+    border-right: 1px solid rgba(0,0,0,0.04);
+}
+
+.gn-menu-main > li > a {
+    padding: 0 30px;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 18px;
+    font-weight: initial;
+    text-transform: none;
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+.container {
+	overflow: hidden;
+}
+
+a {
+	color: rgba(0,0,0,0.4);
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover, a:focus {
+	/*color: blue;*/
+}
+
+section {
+	padding: 0em 3% 4em;
+	text-align: center;
+	font-size: 1.5em;
 }
