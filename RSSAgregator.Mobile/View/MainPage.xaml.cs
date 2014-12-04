@@ -137,5 +137,10 @@ namespace RSSAgregator.Mobile.View
             DefaultViewModel.RefreshSourceList();
             CategoriesListView.SelectionMode = ListViewSelectionMode.None;
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginPage));
+        }
     }
 }

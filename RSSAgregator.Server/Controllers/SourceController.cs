@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.ServiceModel.Syndication;
 using System.Web.Http;
-using System.Web.Mvc.Html;
 using System.Xml;
 using RSSAgregator.Database.DataContext;
 using RSSAgregator.Database.Manager;
 using RSSAgregator.Models;
-using RSSAgregator.Server.APIAttribute;
-using RSSAgregator.Server.Models;
 
 namespace RSSAgregator.Server.Controllers
 {
-
+    //[Authorize]
     public class SourceController : ApiController
     {
         protected ISourceManager SourceManager { get; set; }
@@ -27,8 +22,9 @@ namespace RSSAgregator.Server.Controllers
             SourceManager = sourceManager;
             CategoryManager = categoryManager;
         }
-
+        
         [HttpPost]
+        //[Scope("isLogged")]
         public int Add(string id, [FromUri]string url, [FromUri]int catId)
         {
             var newSource = new FeedSource
@@ -56,6 +52,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpDelete]
+        //[Scope("isLogged")]
         public void Delete(int id)
         {
             var toDelete = SourceManager.GetSourceById(id);
@@ -63,6 +60,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
+        //[Scope("isLogged")]
         public IEnumerable<FeedItemDTO> GetItems(int id, int nb)
         {
             var source = SourceManager.GetSourceById(id);
@@ -90,6 +88,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
+        //[Scope("isLogged")]
         public IEnumerable<FeedItemDTO> GetItemsFromDate(int id, int year, int month, int day, int hour, int minute)
         {
             var source = SourceManager.GetSourceById(id);
@@ -121,6 +120,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
+        //[Scope("isLogged")]
         public IEnumerable<FeedItemDTO> GetItemsToDate(int id, int nb, int year, int month, int day, int hour, int minute)
         {
             var source = SourceManager.GetSourceById(id);
@@ -133,7 +133,7 @@ namespace RSSAgregator.Server.Controllers
             var feedItems = (from feedItemDto in feed.Items
                 where feedItemDto.PublishDate.Date < new DateTime(year, month, day, hour, minute, 0)
                 orderby feedItemDto.PublishDate descending 
-                             select feedItemDto);
+                 select feedItemDto);
 
             foreach (var feedItem in feedItems)
             {
@@ -153,18 +153,17 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
+        //[Scope("isLogged")]
         public void Read(int id)
         {
             SourceManager.ReadSource(id);
         }
 
         [HttpPost]
+        //[Scope("isLogged")]
         public void SetState(int id, string state)
         {
             var source = SourceManager.GetSourceById(id);
         }
-
-
-
     }
 }

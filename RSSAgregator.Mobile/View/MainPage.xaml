@@ -97,12 +97,12 @@
                         MinWidth="250">
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="Name" />
-                        <TextBlock Text="{Binding AccountName}" />
+                        <!--<TextBlock Text="Name" />
+                        <TextBlock Text="{Binding AccountName}" />-->
                         <Button FontFamily="Global User Interface">
                             Change Password
                         </Button>
-                        <Button>
+                        <Button Click="ButtonBase_OnClick">
                             Sign Out
                         </Button>
                     </StackPanel>

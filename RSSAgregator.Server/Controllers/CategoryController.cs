@@ -15,7 +15,6 @@ using RSSAgregator.Server.Models;
 namespace RSSAgregator.Server.Controllers
 {
     //[Authorize]
-    //[Scope("IsLogged")]
     public class CategoryController : ApiController
     {
         protected ICategoryManager CategoryManager { get; set; }
@@ -29,6 +28,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpGet]
+        //[Scope("isLogged")]
         public List<CategoryDTO> Get(string id)
         {
             var categories = CategoryManager.GetByUserId(id);
@@ -49,6 +49,7 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPost]
+        //[Scope("isLogged")]
         public int Add(string userId, string param)
         {
             var toCreateCategory = new FeedCategory
@@ -64,12 +65,14 @@ namespace RSSAgregator.Server.Controllers
         }
 
         [HttpPut]
+        //[Scope("isLogged")]
         public void Rename(int id, string name)
         {
             CategoryManager.RenameModel(id, name);
         }
 
         [HttpDelete]
+        //[Scope("isLogged")]
         public void Delete(int id)
         {
             var categoryToDelete = CategoryManager.GetCategoryById(id);
