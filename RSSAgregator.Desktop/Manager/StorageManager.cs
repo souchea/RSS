@@ -14,7 +14,7 @@ namespace RSSAgregator.Desktop.Manager
     {
         #region IStorageManager Members
 
-            public async Task<List<CategoryDTO>> GetStoredCategories()
+        public async Task<List<CategoryDTO>> GetStoredCategories(string userId)
             {
                 try
                 {
@@ -30,16 +30,14 @@ namespace RSSAgregator.Desktop.Manager
                 }
             }
 
-            public async Task<List<SourceDTO>> GetStoredSources()
+        public async Task<List<SourceDTO>> GetStoredSources(string userId)
             {
                 try
                 {
                     String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "sources.xml");
                     FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Write, 4096, true);
-                    //FileStream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Write); ;
 
                     var serializer = new DataContractSerializer(typeof(List<SourceDTO>));
-
                     return serializer.ReadObject(stream) as List<SourceDTO>;
                 }
                 catch (Exception)
@@ -48,18 +46,18 @@ namespace RSSAgregator.Desktop.Manager
                 }
             }
 
-            public void StoreCategories(List<CategoryDTO> toStore)
+        public void StoreCategories(string userId, List<CategoryDTO> toStore)
             {
                 String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "categories.xml");
                 new FileInfo(path).Directory.Create();
                 FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, 4096, true);
-                //FileStream stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
+
                 var serializer = new DataContractSerializer(typeof(List<CategoryDTO>));
                 serializer.WriteObject(stream, toStore);
                 stream.Close();
             }
 
-            public void StoreSources(List<SourceDTO> toStore)
+        public void StoreSources(string userId, List<SourceDTO> toStore)
             {
                 String path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RSSAgregator", "sources.xml");
                 new FileInfo(path).Directory.Create();

@@ -98,6 +98,7 @@ namespace RSSAgregator.Shared.ViewModel
 
         private void SetSourceList(string catId)
         {
+            SourceList.Clear();
             foreach (CategoryDTO t1 in CategoryList)
             {
                 if (t1.Name != catId) continue;

@@ -14,8 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RSSAgregator.Shared.Model;
-using RSSAgregator.Shared.Model.RSSAgregator.Shared.Model;
+using RSSAgregator.Models;
 using RSSAgregator.Shared.Common;
 using RSSAgregator.Shared.ViewModel;
 using Ninject;
@@ -339,15 +338,9 @@ namespace RSSAgregator.Desktop
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
             if (ButtonRegister.IsChecked == true)
-            {
                 ChangeState(AppState.Register);
-                curAppState = AppState.Register;
-            }
             else
-            {
                 ChangeState(AppState.Login);
-                curAppState = AppState.Login;
-            }
         }
 
         private void SBAddGroup_Click(object sender, RoutedEventArgs e)
@@ -419,6 +412,8 @@ namespace RSSAgregator.Desktop
 
         private void NavPrevious_Click(object sender, RoutedEventArgs e)
         {
+            if (curAppState == AppState.ItemContent)
+                PreviousState();
             PreviousState();
         }
 
@@ -467,6 +462,11 @@ namespace RSSAgregator.Desktop
         private void MLoad_Click(object sender, RoutedEventArgs e)
         {
             DefaultViewModel.FeedPageVM.GetMoreFeeds();
+        }
+
+        private void FeedList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavNext_Click(null, null);
         }
     }
 }
