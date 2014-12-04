@@ -455,7 +455,8 @@ namespace RSSAgregator.Desktop
             if (FeedList.SelectedItem != null && curAppState == AppState.ItemContent)
             {
                 FeedDTO f = FeedList.SelectedItem as FeedDTO;
-                System.Diagnostics.Process.Start(f.Id);
+                if (f.Id != String.Empty)
+                    System.Diagnostics.Process.Start(f.Id);
             }
         }
 

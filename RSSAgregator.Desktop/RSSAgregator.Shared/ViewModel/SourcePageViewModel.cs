@@ -83,7 +83,7 @@ namespace RSSAgregator.Shared.ViewModel
         {
             SourceNameText = cat.Name;
             _currentCategoryDto = cat;
-
+            SourceList.Clear();
             foreach (SourceDTO t in cat.Feeds)
             {
                     SourceList.Add(t);
