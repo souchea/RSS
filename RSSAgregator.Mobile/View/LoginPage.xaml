@@ -20,6 +20,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <ContentDialog x:Name="Login" 
+          PrimaryButtonText="Ok" FullSizeDesired ="False">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Erreur de login"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+        </ContentDialog>
+        
         <!-- Title Panel -->
         <StackPanel Grid.Row="0"
                     Margin="19,0,0,0">

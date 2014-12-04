@@ -117,6 +117,11 @@ namespace RSSAgregator.Mobile.View
                 ProgressRingLogin.IsActive = false;
                 Frame.Navigate(typeof(MainPage));
             }
+            else
+            {
+                ProgressRingLogin.IsActive = false;
+                ContentDialogResult result = await Login.ShowAsync();
+            }
         }
 
         private void ButtonBase_OnClick2(object sender, RoutedEventArgs e)
