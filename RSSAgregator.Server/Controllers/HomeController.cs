@@ -17,7 +17,7 @@ namespace RSSAgregator.Server.Controllers
         public ActionResult Team()
         {
             ViewBag.Message = "Team members";
-            ViewBag.TeamMembers = new List<string>() { "Aurelien", "lavien", "Jean-Baptiste", "Thomas", "Steeve" };
+            ViewBag.TeamMembers = new List<string>() { "Aurelien (souche_a)", "Flavien (di-bel_f)", "Jean-Baptiste (lechel_j)", "Thomas (tomase_n)", "Steeve (pommie_b)" };
             return View();
         }
     }

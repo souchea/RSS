@@ -265,6 +265,10 @@
     <Content Include="Content\demo.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\ecoicons\ecoicons.dev.svg" />
+    <Content Include="fonts\ecoicons\ecoicons.svg" />
+    <Content Include="fonts\ecoicons\license.txt" />
+    <Content Include="fonts\ecoicons\Read Me.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -295,6 +299,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\ecoicons\ecoicons.eot" />
+    <Content Include="fonts\ecoicons\ecoicons.ttf" />
+    <Content Include="fonts\ecoicons\ecoicons.woff" />
     <None Include="Properties\PublishProfiles\rssagregator %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\rssagregator.pubxml" />
     <None Include="Properties\PublishProfiles\RSSAgregatorServer.pubxml" />
